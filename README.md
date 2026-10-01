@@ -38,6 +38,14 @@ Open http://localhost:5050.
 
 You get an email whenever someone requests access (once email is set up).
 
+## Passwords (no email needed)
+
+- **Forgot password:** people click "Forgot password?" on the login page. The request shows up in
+  **Admin → People** with a badge. Click **Reset password** to get a temporary password, give it to them,
+  and they pick a new one when they log in. You can also reset anyone from their row in People.
+- **You forgot yours (owner):** `.venv/bin/python app.py reset-password YOUR_EMAIL`
+- **Wrong guesses:** after 5 wrong passwords in a row, that account's logins pause for 10 minutes.
+
 ## Email setup
 
 Copy `.env.example` to `.env`, fill in SMTP details, restart. With Gmail you need an
