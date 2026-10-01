@@ -103,11 +103,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
   position: absolute; right: 24px; top: 60px; width: 290px; z-index: 60;
   background: var(--card-solid); border: 1px solid var(--border); border-radius: 16px;
   padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  max-height: calc(100vh - 80px); overflow-y: auto;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 .panel[hidden] { display: none; }
 .panel h4 { font-size: 0.9rem; }
 .panel p.hint { font-size: 0.75rem; color: var(--muted); }
+.panel-section { margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
 .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 
 /* ── layout ── */

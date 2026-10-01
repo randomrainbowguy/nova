@@ -112,6 +112,63 @@
     applyCloak();
   });
 
+  /* ── panic key: one key press leaves the site for a safe page ── */
+  const PANIC_DEFAULT = "https://canvas.instructure.com";
+  const panic = JSON.parse(store.get("nova_panic") || "null");
+  let choosingKey = false;
+  const keyName = (k) => (k === " " ? "Space" : k.length === 1 ? k.toUpperCase() : k);
+  function goPanic() {
+    // replace() so the Back button can't bring someone straight back here
+    window.top.location.replace(panic.url || PANIC_DEFAULT);
+  }
+  function onPanicKey(e) {
+    if (!panic || choosingKey || e.key !== panic.key || e.repeat) return;
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) && panic.key.length === 1) return;
+    e.preventDefault();
+    goPanic();
+  }
+  if (panic) {
+    window.addEventListener("keydown", onPanicKey, true);
+    // Games we host run in a same-site frame, so the key works while playing them too.
+    // (Games embedded from other sites can't be listened to - click outside the game first.)
+    const hook = (frame) => {
+      try { frame.contentWindow.addEventListener("keydown", onPanicKey, true); } catch (err) {}
+    };
+    document.querySelectorAll("iframe").forEach((f) => { hook(f); f.addEventListener("load", () => hook(f)); });
+  }
+  const panicBtn = document.getElementById("panic-key");
+  const panicUrl = document.getElementById("panic-url");
+  if (panicBtn) {
+    let chosen = panic?.key || "";
+    const label = () => { panicBtn.textContent = chosen ? `Panic key: ${keyName(chosen)}` : "Click, then press a key"; };
+    label();
+    panicUrl.value = panic?.url || "";
+    panicBtn.addEventListener("click", () => {
+      panicBtn.textContent = "Press any key…";
+      choosingKey = true;
+      const grab = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        choosingKey = false;
+        if (e.key !== "Escape") chosen = e.key;
+        label();
+      };
+      document.addEventListener("keydown", grab, { capture: true, once: true });
+    });
+    document.getElementById("panic-save").addEventListener("click", () => {
+      if (!chosen) { panicBtn.textContent = "Pick a key first"; return; }
+      let url = panicUrl.value.trim() || PANIC_DEFAULT;
+      if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+      store.set("nova_panic", JSON.stringify({ key: chosen, url }));
+      location.reload();
+    });
+    document.getElementById("panic-off").addEventListener("click", () => {
+      store.del("nova_panic");
+      location.reload();
+    });
+  }
+
   /* ── popover panels ── */
   function closePanels() { document.querySelectorAll(".panel").forEach((p) => (p.hidden = true)); }
   document.querySelectorAll("[data-panel]").forEach((btn) => {

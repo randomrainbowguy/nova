@@ -57,6 +57,7 @@
     <h4>Tab cloak</h4>
     <p class="hint">Change this tab's title and icon. Stays on across pages.</p>
     <div class="preset-grid">
+      <button class="btn ghost small" data-cloak-title="Dashboard" data-cloak-icon="https://canvas.instructure.com/favicon.ico">Canvas</button>
       <button class="btn ghost small" data-cloak-title="Google Docs" data-cloak-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">Google Docs</button>
       <button class="btn ghost small" data-cloak-title="Google Classroom" data-cloak-icon="https://ssl.gstatic.com/classroom/favicon.png">Classroom</button>
       <button class="btn ghost small" data-cloak-title="Khan Academy" data-cloak-icon="https://cdn.kastatic.org/images/favicon.ico">Khan Academy</button>
@@ -66,6 +67,15 @@
     <input class="input" id="cloak-icon" placeholder="Icon URL (optional)">
     <button class="btn" id="cloak-apply">Apply</button>
     <button class="btn ghost" id="cloak-reset">Reset</button>
+
+    <h4 class="panel-section">Panic key</h4>
+    <p class="hint">Press it anywhere on the site to instantly leave for another page. Back won't bring you here.</p>
+    <button class="btn ghost" id="panic-key">Click, then press a key</button>
+    <input class="input" id="panic-url" placeholder="Go to (e.g. canvas.instructure.com)">
+    <div class="preset-grid">
+      <button class="btn small" id="panic-save">Save</button>
+      <button class="btn ghost small" id="panic-off">Turn off</button>
+    </div>
   </div>
 
   <div class="panel" id="me-panel" hidden>
