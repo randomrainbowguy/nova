@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Updates · {{ site_name }}{% endblock %}
+{% block content %}
+<main class="page medium">
+  <div class="page-head"><div><h1>Updates</h1><p>New games, polls and announcements. <a href="{{ url_for('account') }}">Email settings</a></p></div></div>
+  <div class="card">
+    {% for n in notes %}
+    <div class="note{{ ' unread' if n.id > seen }}">
+      <span class="dot"></span>
+      <div style="flex:1">
+        <h3>{% if n.audience == 'pro' %}<span class="status pro">{{ 'Sneak peek' if n.kind == 'peek' else 'Pro' }}</span> {% endif %}{% if n.link %}<a href="{{ n.link }}">{{ n.title }}</a>{% else %}{{ n.title }}{% endif %}</h3>
+        {% if n.body %}<p>{{ n.body }}</p>{% endif %}
+        <p class="small">{{ n.created_at }} UTC</p>
+      </div>
+      {% if can('announce') %}
+      <form method="post" action="{{ url_for('admin_notification_delete', note_id=n.id) }}">
+        <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+        <button class="btn bad small" data-confirm="Delete this update?">Delete</button>
+      </form>
+      {% endif %}
+    </div>
+    {% else %}
+    <p class="muted">Nothing yet.</p>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

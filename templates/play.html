@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ game.name }} · {{ site_name }}{% endblock %}
+{% block body %}
+<div class="player">
+  <div class="player-bar">
+    <a class="btn ghost small" href="{{ url_for('index') }}">← Back</a>
+    <h2>{{ game.name }}</h2>
+    {% if raw %}
+    <button class="btn ghost small" id="open-tab">Open in new tab</button>
+    {% else %}
+    <a class="btn ghost small" href="{{ src }}" target="_blank" rel="noopener">Open in new tab</a>
+    {% endif %}
+    <button class="btn small" id="fullscreen">Fullscreen</button>
+  </div>
+  {% if raw %}
+  <div class="player-status" id="game-status"><div class="spinner"></div><p>Loading {{ game.name }}…</p></div>
+  <iframe id="game-frame" data-raw-src="{{ src }}" allow="fullscreen; autoplay; gamepad; clipboard-write" allowfullscreen hidden></iframe>
+  {% else %}
+  <iframe id="game-frame" src="{{ src }}" allow="fullscreen; autoplay; gamepad; clipboard-write" allowfullscreen></iframe>
+  {% endif %}
+</div>
+{% endblock %}

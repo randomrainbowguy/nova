@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Account · {{ site_name }}{% endblock %}
+{% block content %}
+<main class="page medium">
+  <div class="page-head"><div><h1>Account</h1><p>Signed in as {{ me.name }} · {{ me.email }}</p></div></div>
+  <form class="card form" method="post">
+    <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+    <input type="hidden" name="action" value="email_prefs">
+    <h2>Your details</h2>
+    <label>Name <input class="input" name="name" value="{{ me.name }}" maxlength="40" required></label>
+    <label>Email (you log in with this) <input class="input" name="email" type="email" value="{{ me.email }}" required></label>
+    <label class="check"><input type="checkbox" name="email_opt_in" {{ 'checked' if me.email_opt_in }}> Email me about new games, polls and announcements</label>
+    <button class="btn">Save</button>
+  </form>
+  <form class="card form" method="post">
+    <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+    <input type="hidden" name="action" value="password">
+    {% if me.must_change_pw %}<p class="flash ok">You're using a temporary password. Pick a new one to keep going.</p>{% endif %}
+    <h2>Change password</h2>
+    <div class="row">
+      <label>{{ 'Temporary password' if me.must_change_pw else 'Current' }} <input class="input" name="current" type="password" required autocomplete="current-password"></label>
+      <label>New <input class="input" name="new" type="password" minlength="6" required autocomplete="new-password"></label>
+    </div>
+    <p class="pw-note">💡 Save this password somewhere safe, like your notes app, so you won't forget it.</p>
+    <button class="btn">Change password</button>
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }}{% endblock %}
+{% block content %}
+<main class="page narrow">
+  <div class="card form">
+    {% if me.status == 'banned' %}
+      <h2>You've been banned</h2>
+      <p class="muted">{{ me.ban_reason or 'The admin has removed your access.' }}</p>
+    {% else %}
+      <h2>Waiting for approval</h2>
+      <p class="muted">Hi {{ me.name }}! Your request is in. You'll get an email at <b>{{ me.email }}</b> once the admin lets you in.</p>
+      <a class="btn ghost" href="{{ url_for('waiting') }}">Check again</a>
+    {% endif %}
+    <form method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+      <button class="btn ghost full">Log out</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

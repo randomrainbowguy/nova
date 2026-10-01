@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Log in · {{ site_name }}{% endblock %}
+{% block content %}
+<main class="page narrow">
+  <div class="page-head"><div><h1>✦ {{ site_name }}</h1><p>Log in to play.</p></div></div>
+  <form class="card form" method="post">
+    <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+    <label>Email <input class="input" name="email" type="text" value="{{ login_id }}" required autofocus autocomplete="email"></label>
+    <label>Password <input class="input" name="password" type="password" required autocomplete="current-password"></label>
+    <button class="btn full">Log in</button>
+    <p class="muted small"><a href="{{ url_for('forgot') }}">Forgot password?</a> · No account? <a href="{{ url_for('signup') }}">Request access</a></p>
+  </form>
+</main>
+{% endblock %}

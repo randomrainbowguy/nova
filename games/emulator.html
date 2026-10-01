@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EmulatorJS</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #101014; color: #e6e6ea;
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  #setup { padding: 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;
+    border-bottom: 1px solid #26262e; background: #16161c; }
+  h1 { font-size: 16px; margin: 0 12px 0 0; align-self: center; letter-spacing: .5px; }
+  label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: #9a9aa8; }
+  select, input[type=file], button {
+    background: #202028; color: #e6e6ea; border: 1px solid #33333d;
+    border-radius: 6px; padding: 8px 10px; font: inherit; }
+  button { background: #3d6fe0; border-color: #3d6fe0; cursor: pointer; font-weight: 600; }
+  button:hover { background: #4d7cf0; }
+  button:disabled { background: #33333d; border-color: #33333d; color: #77778a; cursor: default; }
+  #wrap { flex: 1; min-height: 0; background: #000; }
+  #game { width: 100%; height: 100%; }
+  .hint { width: 100%; color: #6e6e80; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div id="setup">
+  <h1>EmulatorJS</h1>
+  <label>System
+    <select id="core">
+      <option value="nes">NES / Famicom</option>
+      <option value="snes">SNES</option>
+      <option value="n64">Nintendo 64</option>
+      <option value="gb">Game Boy / Color</option>
+      <option value="gba">Game Boy Advance</option>
+      <option value="nds">Nintendo DS</option>
+      <option value="segaMS">Sega Master System</option>
+      <option value="segaMD">Sega Genesis / Mega Drive</option>
+      <option value="segaGG">Game Gear</option>
+      <option value="segaCD">Sega CD</option>
+      <option value="sega32x">Sega 32X</option>
+      <option value="segaSaturn">Sega Saturn</option>
+      <option value="psx">PlayStation</option>
+      <option value="psp">PSP</option>
+      <option value="atari2600">Atari 2600</option>
+      <option value="atari7800">Atari 7800</option>
+      <option value="lynx">Atari Lynx</option>
+      <option value="jaguar">Atari Jaguar</option>
+      <option value="pce">PC Engine / TurboGrafx-16</option>
+      <option value="ws">WonderSwan</option>
+      <option value="vb">Virtual Boy</option>
+      <option value="3do">3DO</option>
+      <option value="arcade">Arcade</option>
+      <option value="mame2003">MAME 2003</option>
+      <option value="coleco">ColecoVision</option>
+    </select>
+  </label>
+
+  <label>ROM file
+    <input type="file" id="rom">
+  </label>
+
+  <label>BIOS (optional)
+    <input type="file" id="bios">
+  </label>
+
+  <button id="start" disabled>Start</button>
+  <div class="hint">Pick a ROM from your computer. The system is auto-detected from the file extension &mdash; change it if it guesses wrong. Nothing is uploaded; the ROM stays in your browser.</div>
+</div>
+
+<div id="wrap"><div id="game"></div></div>
+
+<script>
+(function () {
+  var romInput   = document.getElementById('rom');
+  var biosInput  = document.getElementById('bios');
+  var coreSelect = document.getElementById('core');
+  var startBtn   = document.getElementById('start');
+  var setup      = document.getElementById('setup');
+
+  var byExt = {
+    nes: 'nes', fds: 'nes', unf: 'nes', unif: 'nes',
+    sfc: 'snes', smc: 'snes', fig: 'snes', swc: 'snes',
+    z64: 'n64', n64: 'n64', v64: 'n64',
+    gb: 'gb', gbc: 'gb',
+    gba: 'gba', srl: 'gba',
+    nds: 'nds', dsi: 'nds', ids: 'nds',
+    sms: 'segaMS',
+    md: 'segaMD', gen: 'segaMD', smd: 'segaMD',
+    gg: 'segaGG',
+    '32x': 'sega32x',
+    cue: 'psx', pbp: 'psx', chd: 'psx', ecm: 'psx', mds: 'psx', exe: 'psx',
+    iso: 'psx', img: 'psx',
+    cso: 'psp',
+    a26: 'atari2600',
+    a78: 'atari7800',
+    lnx: 'lynx',
+    j64: 'jaguar', jag: 'jaguar',
+    pce: 'pce', sgx: 'pce',
+    ws: 'ws', wsc: 'ws',
+    vb: 'vb', vboy: 'vb',
+    col: 'coleco',
+    zip: null, '7z': null
+  };
+
+  romInput.addEventListener('change', function () {
+    var f = romInput.files[0];
+    startBtn.disabled = !f;
+    if (!f) return;
+    var ext = f.name.split('.').pop().toLowerCase();
+    var guess = byExt[ext];
+    if (guess) coreSelect.value = guess;
+  });
+
+  startBtn.addEventListener('click', function () {
+    var file = romInput.files[0];
+    if (!file) return;
+
+    window.EJS_player     = '#game';
+    window.EJS_core       = coreSelect.value;
+    window.EJS_gameName   = file.name.replace(/\.[^.]+$/, '');
+    window.EJS_gameUrl    = URL.createObjectURL(file);
+    window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+    window.EJS_color      = '#3d6fe0';
+    window.EJS_startOnLoaded = true;
+
+    if (biosInput.files[0]) {
+      window.EJS_biosUrl = URL.createObjectURL(biosInput.files[0]);
+    }
+
+    setup.style.display = 'none';
+
+    var s = document.createElement('script');
+    s.src = window.EJS_pathtodata + 'loader.js';
+    document.body.appendChild(s);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="page narrow">
+  <div class="card form">
+    <h2>{{ title }}</h2>
+    <p class="muted">{{ text }}</p>
+    <a class="btn ghost" href="{{ url_for('index') }}">Back home</a>
+  </div>
+</main>
+{% endblock %}
