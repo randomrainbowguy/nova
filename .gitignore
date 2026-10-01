@@ -6,3 +6,4 @@ nova.db
 server.log
 *.bak*
 .DS_Store
+nova-data*.txt

@@ -22,6 +22,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.environ.get("NOVA_DB", os.path.join(BASE_DIR, "nova.db"))
 GAMES_DIR = os.path.join(BASE_DIR, "games")
+# Hosts that won't take a .db upload: `app.py export-data` writes the database as text,
+# and a site with no database yet rebuilds it from that file on start.
+DATA_FILE = os.path.join(BASE_DIR, "nova-data.txt")
 SECRET_FILE = os.path.join(BASE_DIR, ".secret_key")
 ALLOWED_UPLOADS = {".html", ".htm"}
 
@@ -205,7 +208,34 @@ def close_db(_exc):
         conn.close()
 
 
+def restore_from_text():
+    if os.path.exists(DB_PATH) or not os.path.exists(DATA_FILE):
+        return
+    with open(DATA_FILE, encoding="utf-8") as f:
+        dump = f.read()
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        conn.executescript(dump)
+    except sqlite3.Error:
+        conn.close()
+        os.remove(DB_PATH)
+        raise
+    conn.close()
+    os.replace(DATA_FILE, DATA_FILE.replace(".txt", ".restored.txt"))  # so it's only used once
+    print(f"Restored the database from {os.path.basename(DATA_FILE)}.", flush=True)
+
+
+def cli_export_data():
+    conn = sqlite3.connect(DB_PATH)
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        for line in conn.iterdump():
+            f.write(line + "\n")
+    conn.close()
+    print(f"Wrote {DATA_FILE} - upload it next to app.py. It has everyone's emails and password hashes, keep it private.")
+
+
 def init_db():
+    restore_from_text()
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA)
     cols = {r[1] for r in conn.execute("PRAGMA table_info(users)")}
@@ -1780,6 +1810,10 @@ def cli_reset_password(username):
     conn.commit()
     print(f"Temporary password for {username}: {temp}")
 
+
+if __name__ == "__main__" and sys.argv[1:] == ["export-data"]:
+    cli_export_data()
+    sys.exit()
 
 if __name__ == "__main__" and len(sys.argv) == 3 and sys.argv[1] == "reset-password":
     cli_reset_password(sys.argv[2])
