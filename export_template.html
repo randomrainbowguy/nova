@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{SITE}} Games</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0d17; --card: #151827; --card-hover: #1c2034; --border: rgba(255,255,255,0.08);
+    --text: #eef0f8; --muted: #9aa1b8; --accent: #8b5cf6; --accent2: #22d3ee;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    font-family: Manrope, system-ui, -apple-system, sans-serif;
+  }
+  header {
+    position: sticky; top: 0; z-index: 5; padding: 16px max(16px, calc((100vw - 1200px) / 2));
+    background: rgba(11, 13, 23, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  h1 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-right: auto; }
+  h1 span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  #search {
+    flex: 1 1 260px; max-width: 420px; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--card); color: var(--text); font: inherit; outline: none;
+  }
+  #search:focus { border-color: var(--accent); }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; }
+  .chip {
+    padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border); background: transparent;
+    color: var(--muted); font: inherit; font-size: 0.78rem; font-weight: 700; cursor: pointer;
+  }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  main { padding: 20px max(16px, calc((100vw - 1200px) / 2)) 40px; }
+  #count { color: var(--muted); font-size: 0.85rem; margin-bottom: 14px; }
+  #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .game {
+    display: flex; flex-direction: column; text-align: left; padding: 0; overflow: hidden; cursor: pointer;
+    border-radius: 14px; border: 1px solid var(--border); background: var(--card); color: var(--text); font: inherit;
+    transition: transform 0.15s, background 0.15s, border-color 0.15s;
+  }
+  .game:hover, .game:focus-visible { transform: translateY(-3px); background: var(--card-hover); border-color: var(--accent); outline: none; }
+  .cover { aspect-ratio: 1; width: 100%; background: linear-gradient(135deg, #24204a, #123a48); display: grid; place-items: center; font-size: 2rem; font-weight: 800; color: rgba(255,255,255,0.5); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .name { padding: 9px 10px 11px; font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
+  .empty { color: var(--muted); text-align: center; padding: 50px 0; }
+
+  #player { position: fixed; inset: 0; z-index: 10; background: #000; display: flex; flex-direction: column; }
+  #player[hidden] { display: none; }
+  .bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .bar h2 { flex: 1; font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn {
+    padding: 7px 14px; border-radius: 9px; border: 1px solid var(--border); background: transparent;
+    color: var(--text); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+  .btn:hover { background: var(--card-hover); }
+  .btn.main { background: var(--accent); border-color: var(--accent); }
+  #frame { flex: 1; width: 100%; border: 0; background: #000; }
+  #status { position: absolute; inset: 52px 0 0; display: grid; place-items: center; color: var(--muted); text-align: center; padding: 20px; }
+  #status[hidden] { display: none; }
+  @media (max-width: 520px) { #newtab { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1><span>✦</span> {{SITE}} Games</h1>
+  <input id="search" type="search" placeholder="Search games…" autocomplete="off">
+  <div class="chips" id="chips"></div>
+</header>
+<main>
+  <p id="count"></p>
+  <div id="grid"></div>
+</main>
+
+<div id="player" hidden>
+  <div class="bar">
+    <button class="btn" id="back">← Back</button>
+    <h2 id="title"></h2>
+    <button class="btn" id="newtab">Open in new tab</button>
+    <button class="btn main" id="full">Fullscreen</button>
+  </div>
+  <iframe id="frame" allow="fullscreen; autoplay; gamepad; clipboard-write" allowfullscreen></iframe>
+  <div id="status" hidden></div>
+</div>
+
+<script>
+const GAMES = {{DATA}};
+
+const grid = document.getElementById("grid");
+const search = document.getElementById("search");
+const chips = document.getElementById("chips");
+const count = document.getElementById("count");
+let genre = "";
+
+// Genre chips, most common first (only genres that a few games share).
+const tally = {};
+GAMES.forEach((g) => g.g.forEach((x) => (tally[x] = (tally[x] || 0) + 1)));
+const genres = Object.keys(tally).filter((x) => tally[x] >= 2).sort((a, b) => tally[b] - tally[a]);
+if (genres.length) {
+  ["All", ...genres].forEach((name) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (name === "All" ? " on" : "");
+    b.textContent = name;
+    b.onclick = () => {
+      genre = name === "All" ? "" : name;
+      chips.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c === b));
+      render();
+    };
+    chips.appendChild(b);
+  });
+}
+
+// Build every card once, then show/hide them while searching.
+const cards = GAMES.map((g, i) => {
+  const b = document.createElement("button");
+  b.className = "game";
+  const cover = document.createElement("div");
+  cover.className = "cover";
+  cover.textContent = g.n.charAt(0).toUpperCase();
+  if (g.i) {
+    const img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = "";
+    img.src = g.i;
+    img.onload = () => { cover.textContent = ""; cover.appendChild(img); };
+  }
+  const name = document.createElement("div");
+  name.className = "name";
+  name.textContent = g.n;
+  b.append(cover, name);
+  b.onclick = () => play(i);
+  grid.appendChild(b);
+  return b;
+});
+const empty = document.createElement("p");
+empty.className = "empty";
+empty.textContent = "No games match that.";
+grid.after(empty);
+
+function render() {
+  const q = search.value.trim().toLowerCase();
+  let shown = 0;
+  GAMES.forEach((g, i) => {
+    const ok = (!q || g.n.toLowerCase().includes(q)) && (!genre || g.g.includes(genre));
+    cards[i].hidden = !ok;
+    if (ok) shown++;
+  });
+  count.textContent = `${shown} game${shown === 1 ? "" : "s"}`;
+  empty.hidden = shown > 0;
+}
+search.addEventListener("input", render);
+render();
+
+// ── player ──
+const player = document.getElementById("player");
+const frame = document.getElementById("frame");
+const statusEl = document.getElementById("status");
+let current = null, blobUrl = null;
+
+function setStatus(text) { statusEl.textContent = text; statusEl.hidden = !text; }
+
+async function sourceFor(g) {
+  if (g.u) return g.u;
+  let html = g.h;
+  if (g.r) {
+    // Raw GitHub files come back as plain text: download, point relative paths home, run.
+    const r = await fetch(g.r);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const base = `<base href="${g.r.slice(0, g.r.lastIndexOf("/") + 1)}">`;
+    html = await r.text();
+    html = /<head[^>]*>/i.test(html) ? html.replace(/<head([^>]*)>/i, `<head$1>${base}`) : base + html;
+  }
+  if (blobUrl) URL.revokeObjectURL(blobUrl);
+  blobUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+  return blobUrl;
+}
+
+async function play(i, fromHistory) {
+  current = GAMES[i];
+  document.getElementById("title").textContent = current.n;
+  document.title = current.n;
+  player.hidden = false;
+  frame.removeAttribute("src");
+  setStatus(`Loading ${current.n}…`);
+  if (!fromHistory) history.pushState({ game: i }, "", "#" + encodeURIComponent(current.n));
+  try {
+    const src = await sourceFor(current);
+    if (current !== GAMES[i]) return;  // picked another game while this one loaded
+    frame.src = src;
+    frame.onload = () => setStatus("");
+    frame.focus();
+  } catch (err) {
+    setStatus(`Couldn't load this game (${err.message}). The link may be broken or blocked on this network.`);
+  }
+}
+
+function closePlayer() {
+  player.hidden = true;
+  frame.removeAttribute("src");
+  current = null;
+  document.title = "{{SITE}} Games";
+}
+document.getElementById("back").onclick = () => history.back();
+window.addEventListener("popstate", (e) => (e.state && e.state.game != null ? play(e.state.game, true) : closePlayer()));
+document.getElementById("full").onclick = () => frame.requestFullscreen && frame.requestFullscreen();
+document.getElementById("newtab").onclick = async () => {
+  if (!current) return;
+  if (current.u) return void window.open(current.u, "_blank", "noopener");
+  window.open(await sourceFor(current), "_blank");
+};
+</script>
+</body>
+</html>
