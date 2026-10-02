@@ -976,7 +976,7 @@ def play(game_id):
     return render_template("play.html", game=game, src=game["url"])
 
 
-RAW_HOSTS = ("raw.githubusercontent.com", "gist.githubusercontent.com")
+RAW_HOSTS = ("raw.githubusercontent.com", "gist.githubusercontent.com", "cdn.jsdelivr.net")
 GITHUB_BLOB = re.compile(r"^https?://github\.com/([^/]+)/([^/]+)/(?:blob|raw)/(.+?)(?:\?.*)?$")
 
 

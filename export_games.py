@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.environ.get("NOVA_DB", os.path.join(BASE_DIR, "nova.db"))
 GITHUB_BLOB = re.compile(r"^https?://github\.com/([^/]+)/([^/]+)/(?:blob|raw)/(.+?)(?:\?.*)?$")
-RAW_HOSTS = ("raw.githubusercontent.com", "gist.githubusercontent.com")
+RAW_HOSTS = ("raw.githubusercontent.com", "gist.githubusercontent.com", "cdn.jsdelivr.net")
 
 
 def raw_github(url):
