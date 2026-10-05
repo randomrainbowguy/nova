@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{SITE}} Games</title>
+<title>{{SITE}}</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+{{ANALYTICS}}<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0b0d17; --card: #151827; --card-hover: #1c2034; --border: rgba(255,255,255,0.08);
     --text: #eef0f8; --muted: #9aa1b8; --accent: #8b5cf6; --accent2: #22d3ee;
   }
   * { box-sizing: border-box; margin: 0; }
+  [hidden] { display: none !important; }
   body {
     background: var(--bg); color: var(--text); min-height: 100vh;
     font-family: Manrope, system-ui, -apple-system, sans-serif;
@@ -62,17 +63,81 @@
   #status { position: absolute; inset: 52px 0 0; display: grid; place-items: center; color: var(--muted); text-align: center; padding: 20px; }
   #status[hidden] { display: none; }
   @media (max-width: 520px) { #newtab { display: none; } }
+
+  .tabs { display: flex; gap: 4px; }
+  .tab { padding: 7px 14px; border-radius: 9px; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+  .tab.on { background: var(--card); color: var(--text); }
+  .icon-btn { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--card); color: var(--text); cursor: pointer; display: grid; place-items: center; }
+  .icon-btn.on { border-color: var(--accent); color: var(--accent); }
+  .panel {
+    position: fixed; right: 16px; top: 70px; z-index: 20; width: 290px; max-height: calc(100vh - 90px); overflow-y: auto;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
+    display: flex; flex-direction: column; gap: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  }
+  .panel[hidden] { display: none; }
+  .panel h4 { font-size: 0.9rem; }
+  .panel h4 + h4, .panel .section { margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .hint { font-size: 0.75rem; color: var(--muted); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .input { width: 100%; padding: 9px 12px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 0.85rem; outline: none; }
+  .input:focus { border-color: var(--accent); }
+  #movies { max-width: 640px; }
+  #movies h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
+  #movies .note { color: var(--muted); margin: 6px 0 18px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  a.btn { display: inline-block; text-decoration: none; margin-top: 12px; }
 </style>
 </head>
 <body>
 <header>
-  <h1><span>✦</span> {{SITE}} Games</h1>
+  <h1><span>✦</span> {{SITE}}</h1>
+  <nav class="tabs">
+    <button class="tab on" data-view="games">Games</button>
+    <button class="tab" data-view="movies">Movies</button>
+  </nav>
   <input id="search" type="search" placeholder="Search games…" autocomplete="off">
+  <button class="icon-btn" id="cloak-btn" title="Tab cloak &amp; panic key" aria-label="Tab cloak and panic key">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+  </button>
   <div class="chips" id="chips"></div>
 </header>
+
+<div class="panel" id="panel" hidden>
+  <h4>Tab cloak</h4>
+  <p class="hint">Change this tab's title and icon. Remembered next time.</p>
+  <div class="grid2">
+    <button class="btn" data-cloak-title="Dashboard" data-cloak-icon="https://canvas.instructure.com/favicon.ico">Canvas</button>
+    <button class="btn" data-cloak-title="Google Docs" data-cloak-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">Google Docs</button>
+    <button class="btn" data-cloak-title="Google Classroom" data-cloak-icon="https://ssl.gstatic.com/classroom/favicon.png">Classroom</button>
+    <button class="btn" data-cloak-title="Khan Academy" data-cloak-icon="https://cdn.kastatic.org/images/favicon.ico">Khan Academy</button>
+  </div>
+  <input class="input" id="cloak-title" placeholder="Tab title">
+  <input class="input" id="cloak-icon" placeholder="Icon URL (optional)">
+  <div class="grid2">
+    <button class="btn main" id="cloak-apply">Apply</button>
+    <button class="btn" id="cloak-reset">Reset</button>
+  </div>
+
+  <h4 class="section">Panic key</h4>
+  <p class="hint">Press it to instantly leave for another page. Back won't bring you here.</p>
+  <button class="btn" id="panic-key">Click, then press a key</button>
+  <input class="input" id="panic-url" placeholder="Go to (e.g. canvas.instructure.com)">
+  <div class="grid2">
+    <button class="btn main" id="panic-save">Save</button>
+    <button class="btn" id="panic-off">Turn off</button>
+  </div>
+</div>
+
 <main>
-  <p id="count"></p>
-  <div id="grid"></div>
+  <section id="games-view">
+    <p id="count"></p>
+    <div id="grid"></div>
+  </section>
+  <section id="movies" hidden>
+    <h2>Movies</h2>
+    <p class="note">Heads up: not all the links work, but most of them do.</p>
+    <div class="card" id="movies-body"></div>
+  </section>
 </main>
 
 <div id="player" hidden>
@@ -88,6 +153,118 @@
 
 <script>
 const GAMES = {{DATA}};
+const MOVIES_DOC = {{MOVIES_DOC}};
+const SITE = {{SITE_JSON}};
+const track = (name, params) => { try { window.gtag && gtag("event", name, params); } catch (e) {} };
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+};
+
+// ── tab cloak ──
+let pageTitle = SITE;
+const originalIcon = document.querySelector("link[rel='icon']").href;
+function setIcon(url) {
+  document.querySelectorAll("link[rel='icon']").forEach((l) => l.remove());
+  const link = document.createElement("link");
+  link.rel = "icon";
+  link.href = url;
+  document.head.appendChild(link);
+}
+function setTitle(t) {
+  pageTitle = t;
+  const cloak = store.get("nova_cloak");
+  document.title = (cloak && cloak.title) || t;
+}
+function applyCloak() {
+  const cloak = store.get("nova_cloak");
+  setTitle(pageTitle);
+  setIcon((cloak && cloak.icon) || originalIcon);
+  document.getElementById("cloak-btn").classList.toggle("on", !!cloak);
+}
+applyCloak();
+const panel = document.getElementById("panel");
+document.getElementById("cloak-btn").onclick = (e) => { e.stopPropagation(); panel.hidden = !panel.hidden; };
+document.addEventListener("click", (e) => { if (!e.target.closest(".panel")) panel.hidden = true; });
+const titleIn = document.getElementById("cloak-title"), iconIn = document.getElementById("cloak-icon");
+document.querySelectorAll("[data-cloak-title]").forEach((b) => {
+  b.onclick = () => { titleIn.value = b.dataset.cloakTitle; iconIn.value = b.dataset.cloakIcon; };
+});
+document.getElementById("cloak-apply").onclick = () => {
+  const title = titleIn.value.trim(), icon = iconIn.value.trim();
+  if (!title && !icon) return;
+  store.set("nova_cloak", { title, icon });
+  applyCloak();
+  panel.hidden = true;
+};
+document.getElementById("cloak-reset").onclick = () => {
+  store.del("nova_cloak");
+  titleIn.value = iconIn.value = "";
+  applyCloak();
+};
+
+// ── panic key ──
+const PANIC_DEFAULT = "https://canvas.instructure.com";
+const panic = store.get("nova_panic");
+let choosingKey = false;
+const keyName = (k) => (k === " " ? "Space" : k.length === 1 ? k.toUpperCase() : k);
+function onPanicKey(e) {
+  if (!panic || choosingKey || e.key !== panic.key || e.repeat) return;
+  const t = e.target;
+  if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) && panic.key.length === 1) return;
+  e.preventDefault();
+  location.replace(panic.url || PANIC_DEFAULT);  // replace(): Back can't return here
+}
+window.addEventListener("keydown", onPanicKey, true);
+// Games loaded through the downloader run in a same-site frame, so listen there too.
+function hookFrame(f) { try { f.contentWindow.addEventListener("keydown", onPanicKey, true); } catch (e) {} }
+const panicBtn = document.getElementById("panic-key"), panicUrl = document.getElementById("panic-url");
+let chosen = panic ? panic.key : "";
+const panicLabel = () => { panicBtn.textContent = chosen ? `Panic key: ${keyName(chosen)}` : "Click, then press a key"; };
+panicLabel();
+panicUrl.value = panic ? panic.url : "";
+panicBtn.onclick = () => {
+  panicBtn.textContent = "Press any key…";
+  choosingKey = true;
+  document.addEventListener("keydown", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    choosingKey = false;
+    if (e.key !== "Escape") chosen = e.key;
+    panicLabel();
+  }, { capture: true, once: true });
+};
+document.getElementById("panic-save").onclick = () => {
+  if (!chosen) { panicBtn.textContent = "Pick a key first"; return; }
+  let url = panicUrl.value.trim() || PANIC_DEFAULT;
+  if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+  store.set("nova_panic", { key: chosen, url });
+  location.reload();
+};
+document.getElementById("panic-off").onclick = () => { store.del("nova_panic"); location.reload(); };
+
+// ── Games / Movies tabs ──
+const moviesBody = document.getElementById("movies-body");
+if (MOVIES_DOC) {
+  moviesBody.innerHTML = '<p>The full movie list is in this doc:</p><a class="btn main" target="_blank" rel="noopener">Open the movies list</a>';
+  const a = moviesBody.querySelector("a");
+  a.href = MOVIES_DOC;
+  a.onclick = () => track("open_movies_doc");
+} else {
+  moviesBody.innerHTML = '<p class="hint">The movie list is coming soon. Check back later!</p>';
+}
+document.querySelectorAll(".tab").forEach((t) => {
+  t.onclick = () => {
+    const movies = t.dataset.view === "movies";
+    document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("on", x === t));
+    document.getElementById("games-view").hidden = movies;
+    document.getElementById("movies").hidden = !movies;
+    document.getElementById("search").hidden = movies;
+    document.getElementById("chips").hidden = movies;
+    track("page_view", { page_title: movies ? "Movies" : "Games", page_location: location.href.split("#")[0] + (movies ? "#movies" : "") });
+  };
+});
 
 const grid = document.getElementById("grid");
 const search = document.getElementById("search");
@@ -181,7 +358,8 @@ async function sourceFor(g) {
 async function play(i, fromHistory) {
   current = GAMES[i];
   document.getElementById("title").textContent = current.n;
-  document.title = current.n;
+  setTitle(current.n);
+  track("play_game", { game_name: current.n });
   player.hidden = false;
   frame.removeAttribute("src");
   setStatus(`Loading ${current.n}…`);
@@ -190,7 +368,7 @@ async function play(i, fromHistory) {
     const src = await sourceFor(current);
     if (current !== GAMES[i]) return;  // picked another game while this one loaded
     frame.src = src;
-    frame.onload = () => setStatus("");
+    frame.onload = () => { setStatus(""); hookFrame(frame); };
     frame.focus();
   } catch (err) {
     setStatus(`Couldn't load this game (${err.message}). The link may be broken or blocked on this network.`);
@@ -201,7 +379,7 @@ function closePlayer() {
   player.hidden = true;
   frame.removeAttribute("src");
   current = null;
-  document.title = "{{SITE}} Games";
+  setTitle(SITE);
 }
 document.getElementById("back").onclick = () => history.back();
 window.addEventListener("popstate", (e) => (e.state && e.state.game != null ? play(e.state.game, true) : closePlayer()));
