@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="__BASE__../public/static/style.css">
+<link rel="stylesheet" href="__BASE__hub.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="logo" href="#" data-view="games">✦ Nova</a>
+  <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <nav class="nav" id="nav">
+    <button class="active" data-view="games">Games</button>
+    <button data-view="movies">Movies</button>
+  </nav>
+  <div class="top-actions">
+    <button class="icon-btn" id="cloak-btn" data-panel="cloak-panel" title="Tab cloak & panic key" aria-label="Tab cloak"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    <button class="icon-btn" data-panel="theme-panel" title="Themes" aria-label="Themes"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18c1.7 0 2-1.3 1.2-2.3-.8-1-.4-2.7 1.3-2.7H17a4 4 0 0 0 4-4c0-5-4-9-9-9z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg></button>
+  </div>
+</header>
+
+<div class="panel" id="cloak-panel" hidden>
+  <h4>Tab cloak</h4>
+  <p class="hint">Change this tab's title and icon. Remembered next time.</p>
+  <div class="preset-grid">
+    <button class="btn ghost small" data-cloak-title="Dashboard" data-cloak-icon="https://canvas.instructure.com/favicon.ico">Canvas</button>
+    <button class="btn ghost small" data-cloak-title="Google Docs" data-cloak-icon="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico">Google Docs</button>
+    <button class="btn ghost small" data-cloak-title="Google Classroom" data-cloak-icon="https://ssl.gstatic.com/classroom/favicon.png">Classroom</button>
+    <button class="btn ghost small" data-cloak-title="Khan Academy" data-cloak-icon="https://cdn.kastatic.org/images/favicon.ico">Khan Academy</button>
+    <button class="btn ghost small" data-cloak-title="Wikipedia" data-cloak-icon="https://en.wikipedia.org/favicon.ico">Wikipedia</button>
+  </div>
+  <input class="input" id="cloak-title" placeholder="Tab title">
+  <input class="input" id="cloak-icon" placeholder="Icon URL (optional)">
+  <div class="preset-grid">
+    <button class="btn small" id="cloak-apply">Apply</button>
+    <button class="btn ghost small" id="cloak-reset">Reset</button>
+  </div>
+  <h4 class="panel-section">Panic key</h4>
+  <p class="hint">Press it anytime to instantly leave for another page.</p>
+  <button class="btn ghost" id="panic-key">Click, then press a key</button>
+  <input class="input" id="panic-url" placeholder="Go to (e.g. canvas.instructure.com)">
+  <div class="preset-grid">
+    <button class="btn small" id="panic-save">Save</button>
+    <button class="btn ghost small" id="panic-off">Turn off</button>
+  </div>
+</div>
+
+<div class="panel" id="theme-panel" hidden>
+  <h4>Theme</h4>
+  <div class="preset-grid">
+    <button class="pill" data-set-theme="nova">Nova</button>
+    <button class="pill" data-set-theme="neon">Neon</button>
+    <button class="pill" data-set-theme="rootbeer">Root Beer</button>
+    <button class="pill" data-set-theme="hacker">Hacker</button>
+  </div>
+  <div class="label">Premium looks</div>
+  <div class="pp-swatches">
+    <button class="pp-swatch" data-set-theme="aurora"><i class="sw-aurora"></i>Aurora<small>Teal &amp; indigo</small></button>
+    <button class="pp-swatch" data-set-theme="sunset"><i class="sw-sunset"></i>Sunset<small>Orange &amp; pink</small></button>
+    <button class="pp-swatch" data-set-theme="gold"><i class="sw-gold"></i>Midnight Gold<small>Black &amp; gold</small></button>
+  </div>
+</div>
+
+<!-- ═════════ GAMES ═════════ -->
+<main class="page home-v2" id="view-games">
+  <section class="hv-hero">
+    <div class="hv-hello">
+      <span class="pp-eyebrow">★ Nova</span>
+      <h1>What are we<br><span class="hv-name">playing</span> today?</h1>
+      <label class="hv-search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search games…" autocomplete="off" aria-label="Search games">
+        <kbd>/</kbd>
+      </label>
+      <div class="hv-chips">
+        <span class="hv-chip"><b id="game-count">0</b> games</span>
+        <span class="hv-chip gold">★ No ads, no sign-up</span>
+        <button class="hv-chip" data-view="movies" style="cursor:pointer">🎬 Movies</button>
+      </div>
+    </div>
+    <a class="hv-feature" id="featured" hidden></a>
+  </section>
+
+  <section class="hv-section" id="trending-wrap">
+    <div class="hv-head"><h2>Trending</h2><span class="muted small">What everyone's playing right now</span></div>
+    <div class="hv-rail" id="trending"></div>
+  </section>
+
+  <section class="hv-section">
+    <div class="hv-head"><h2>Your favorites</h2><span class="muted small">Tap ★ on any game to pin it</span></div>
+    <div class="hv-favs" id="favs"></div>
+  </section>
+
+  <section class="hv-section">
+    <div class="hv-head hv-libhead">
+      <div><h2>All games</h2><span class="muted small" id="lib-count"></span></div>
+      <div class="hv-seg" role="group" aria-label="Sort games">
+        <button class="pill active" data-sort="popular">Popular</button>
+        <button class="pill" data-sort="az">A–Z</button>
+        <button class="pill" data-sort="new">Newest</button>
+      </div>
+    </div>
+    <div class="hv-genres" id="genres"></div>
+    <div class="hv-grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>No games match that search.</div>
+    <div class="load-more" id="more-wrap" hidden><button class="btn-soft" id="more">Show more games</button></div>
+  </section>
+
+  <section class="pp-final hub-foot">
+    <span class="pp-eyebrow">★ Nova</span>
+    <h2 class="pp-h2">Can't find a game?</h2>
+    <p class="pp-sub" style="margin:0 auto">Try another search, or switch genres above. New games get added all the time.</p>
+  </section>
+</main>
+
+<!-- ═════════ MOVIES ═════════ -->
+<main class="page medium" id="view-movies" hidden>
+  <div class="page-head"><div><span class="pp-eyebrow hv-eyebrow">🎬 Movies</span><h1>Movie night</h1><p>Heads up: not every link works, but most of them do.</p></div></div>
+  <div class="card feature-card">
+    <div class="feature-ico">🍿</div>
+    <div><h2>The full movie list</h2><p class="muted">Everything is in one doc. Open it and pick something.</p></div>
+    <a class="btn" id="movies-link" target="_blank" rel="noopener">Open the movies list ↗</a>
+  </div>
+</main>
+
+<!-- ═════════ PLAYER ═════════ -->
+<div id="player" hidden>
+  <div class="player">
+    <div class="player-bar">
+      <button class="btn ghost small" id="player-back">← Back</button>
+      <h2 id="player-title"></h2>
+      <button class="btn ghost small" id="open-tab">Open in new tab</button>
+      <button class="btn small" id="fullscreen">Fullscreen</button>
+    </div>
+    <div class="player-status" id="game-status"><div class="spinner"></div><p id="game-status-text">Loading…</p></div>
+    <iframe id="game-frame" allow="fullscreen; autoplay; gamepad; clipboard-write" allowfullscreen hidden></iframe>
+  </div>
+</div>
+
+<canvas id="matrix" aria-hidden="true"></canvas>
+
+<script src="__BASE__config.js"></script>
+<script src="__BASE__../public/static/game-sanitize.js"></script>
+<script src="__BASE__hub.js"></script>
+</body>
+</html>

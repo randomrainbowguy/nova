@@ -1,0 +1,14 @@
+/* ── single-file additions ── */
+.nav button { position: relative; padding: 7px 12px; border-radius: 999px; border: 0; background: none; cursor: pointer;
+  font-size: 0.85rem; font-weight: 600; color: var(--muted); transition: background var(--fast), color var(--fast); }
+.nav button:hover { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+.nav button.active { color: #fff; background: linear-gradient(135deg, var(--accent1), var(--accent2)); }
+:root[data-theme="hacker"] .nav button.active, :root[data-theme="gold"] .nav button.active { color: var(--on-accent); }
+@media (max-width: 860px) { .nav button { padding: 11px 14px; border-radius: 12px; font-size: 0.95rem; text-align: left; } }
+#player { position: fixed; inset: 0; z-index: 200; background: var(--card-solid); }
+#player .player { height: 100%; }
+.hv-card .hv-art { cursor: pointer; }
+.hv-trend, .fav-item, .hv-feature { cursor: pointer; }
+.hub-foot { margin: 64px 0 8px; text-align: center; }
+.hv-grid .hv-card[hidden] { display: none; }
+.load-more { display: flex; justify-content: center; margin-top: 24px; }
