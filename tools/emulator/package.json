@@ -1,0 +1,13 @@
+{
+  "name": "nova-emulator-tools",
+  "private": true,
+  "type": "module",
+  "description": "Local test harness for public/emulator (EmulatorJS, self-hosted)",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "test": "node test.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
+}

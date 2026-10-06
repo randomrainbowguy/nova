@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emulator</title>
+<meta name="description" content="Play your own ROMs in the browser with EmulatorJS. Everything runs locally; nothing is uploaded.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0d14;
+    --panel: #121522;
+    --panel-2: #181c2c;
+    --line: #23283c;
+    --text: #e8e9f1;
+    --muted: #8a8fa8;
+    --accent: #7c5cff;
+    --accent-2: #9a80ff;
+    --danger: #ff6b81;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font: 15px/1.5 Manrope, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased; }
+  body { overflow: hidden; }
+  [hidden] { display: none !important; }
+
+  /* ---------- setup screen ---------- */
+  #setup { height: 100%; overflow-y: auto; display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(124,92,255,.18), transparent 60%),
+      radial-gradient(700px 500px at 110% 110%, rgba(124,92,255,.10), transparent 60%),
+      var(--bg); }
+  .card { width: 100%; max-width: 640px; background: rgba(18,21,34,.85); border: 1px solid var(--line);
+    border-radius: 20px; padding: 28px; box-shadow: 0 30px 80px rgba(0,0,0,.45); backdrop-filter: blur(8px); }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .logo { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--accent), #4b2fd6); box-shadow: 0 8px 24px rgba(124,92,255,.35); }
+  .logo svg { width: 22px; height: 22px; }
+  h1 { font-size: 22px; font-weight: 800; margin: 0; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 22px; font-size: 14px; }
+
+  #drop { position: relative; border: 2px dashed #2e3450; border-radius: 16px; padding: 30px 18px;
+    text-align: center; cursor: pointer; transition: border-color .15s, background .15s; background: var(--panel); }
+  #drop:hover, #drop:focus-visible { border-color: var(--accent); outline: none; }
+  #drop.over { border-color: var(--accent); background: rgba(124,92,255,.08); }
+  #drop .big { font-weight: 700; font-size: 16px; margin: 10px 0 4px; }
+  #drop .small { color: var(--muted); font-size: 13px; }
+  #drop .icon { width: 44px; height: 44px; margin: 0 auto; color: var(--accent-2); }
+  #drop.has-file { border-style: solid; border-color: #34395a; }
+  .file-name { font-weight: 700; word-break: break-all; }
+  .file-meta { color: var(--muted); font-size: 13px; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } .card { padding: 20px; } }
+  label.field { display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 600;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  select, .file-btn { appearance: none; -webkit-appearance: none; width: 100%; background: var(--panel-2);
+    color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px;
+    font: 500 14px Manrope, system-ui, sans-serif; text-transform: none; letter-spacing: 0; }
+  select { background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 34px; }
+  select:focus, .file-btn:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .file-btn { cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+  .file-btn input { display: none; }
+  .lh { display: flex; align-items: center; gap: 6px; min-height: 18px; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 10px;
+    background: rgba(124,92,255,.18); color: var(--accent-2); vertical-align: middle; }
+
+  #start { margin-top: 22px; width: 100%; border: 0; border-radius: 12px; padding: 14px 18px; cursor: pointer;
+    font: 800 15px Manrope, system-ui, sans-serif; color: #fff;
+    background: linear-gradient(135deg, var(--accent), #5b3df0); box-shadow: 0 10px 30px rgba(124,92,255,.35);
+    transition: transform .08s, filter .15s, opacity .15s; }
+  #start:hover:not(:disabled) { filter: brightness(1.1); }
+  #start:active:not(:disabled) { transform: translateY(1px); }
+  #start:disabled { opacity: .4; cursor: default; box-shadow: none; }
+  .msg { min-height: 20px; margin-top: 12px; font-size: 13px; color: var(--muted); text-align: center; }
+  .msg.err { color: var(--danger); }
+  .foot { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.6; }
+  .foot b { color: var(--text); font-weight: 600; }
+
+  /* ---------- player ---------- */
+  #stage { position: fixed; inset: 0; background: #000; }
+  #game { width: 100%; height: 100%; }
+  #back { position: fixed; top: 10px; left: 10px; z-index: 50; display: flex; align-items: center; gap: 6px;
+    padding: 7px 12px 7px 9px; border-radius: 99px; border: 1px solid rgba(255,255,255,.12);
+    background: rgba(11,13,20,.7); color: var(--text); font: 600 13px Manrope, system-ui, sans-serif;
+    cursor: pointer; backdrop-filter: blur(6px); opacity: 0; transition: opacity .25s; }
+  #back svg { width: 16px; height: 16px; }
+  #stage.show-ui #back, #back:hover, #back:focus-visible { opacity: 1; }
+</style>
+</head>
+<body>
+
+<main id="setup">
+  <div class="card">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r="1" fill="#fff"/><circle cx="18" cy="13.5" r="1" fill="#fff"/></svg>
+      </div>
+      <h1>Emulator</h1>
+    </div>
+    <p class="sub">Play a game file from your computer. It runs entirely in your browser &mdash; nothing is uploaded.</p>
+
+    <div id="drop" tabindex="0" role="button" aria-label="Choose a ROM file or drop one here">
+      <div id="dropEmpty">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4m0 0l-4 4m4-4l4 4"/><path d="M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+        <div class="big">Drop a ROM here or click to browse</div>
+        <div class="small">.nes .sfc .gb .gbc .gba .n64 .nds .md .sms .gg .pce .a26 .a78 .cue/.chd .zip &hellip;</div>
+      </div>
+      <div id="dropFile" hidden>
+        <div class="file-name" id="fileName"></div>
+        <div class="file-meta" id="fileMeta"></div>
+        <div class="small" style="margin-top:8px">Click or drop to choose a different file</div>
+      </div>
+    </div>
+    <input type="file" id="rom" hidden>
+
+    <div class="row">
+      <label class="field"><span class="lh">System <span id="detected" hidden></span></span>
+        <select id="core">
+          <option value="">Choose a system&hellip;</option>
+          <optgroup label="Nintendo">
+            <option value="nes">NES / Famicom</option>
+            <option value="snes">Super Nintendo</option>
+            <option value="n64">Nintendo 64</option>
+            <option value="gb">Game Boy / Game Boy Color</option>
+            <option value="gba">Game Boy Advance</option>
+            <option value="nds">Nintendo DS</option>
+            <option value="vb">Virtual Boy</option>
+          </optgroup>
+          <optgroup label="Sega">
+            <option value="segaMS">Master System</option>
+            <option value="segaMD">Genesis / Mega Drive</option>
+            <option value="segaGG">Game Gear</option>
+            <option value="segaCD">Sega CD / Mega CD (BIOS)</option>
+            <option value="sega32x">Sega 32X</option>
+            <option value="segaSaturn">Saturn (BIOS recommended)</option>
+          </optgroup>
+          <optgroup label="Sony">
+            <option value="psx">PlayStation</option>
+          </optgroup>
+          <optgroup label="Atari">
+            <option value="atari2600">Atari 2600</option>
+            <option value="atari5200">Atari 5200 (BIOS)</option>
+            <option value="atari7800">Atari 7800</option>
+            <option value="lynx">Atari Lynx (BIOS)</option>
+            <option value="jaguar">Atari Jaguar</option>
+          </optgroup>
+          <optgroup label="NEC">
+            <option value="pce">PC Engine / TurboGrafx-16</option>
+            <option value="pcfx">PC-FX (BIOS)</option>
+          </optgroup>
+          <optgroup label="Other">
+            <option value="ws">WonderSwan / Color</option>
+            <option value="ngp">Neo Geo Pocket / Color</option>
+            <option value="coleco">ColecoVision (BIOS)</option>
+            <option value="3do">3DO (BIOS)</option>
+          </optgroup>
+          <optgroup label="Arcade">
+            <option value="arcade">Arcade (FinalBurn Neo)</option>
+            <option value="mame2003">Arcade (MAME 2003)</option>
+            <option value="mame2003_plus">Arcade (MAME 2003-Plus)</option>
+          </optgroup>
+        </select>
+      </label>
+      <label class="field"><span class="lh">BIOS <span class="tag">optional</span></span>
+        <span class="file-btn" id="biosBtn" tabindex="0">None &mdash; choose file&hellip;<input type="file" id="bios"></span>
+      </label>
+    </div>
+
+    <button id="start" disabled>Start game</button>
+    <div class="msg" id="msg" role="status"></div>
+
+    <div class="foot">
+      <b>Saves:</b> in-game saves are kept in this browser automatically. Use the menu bar at the bottom of the
+      player for save states, controls, gamepads, fullscreen and settings.
+      Only use ROMs you have the right to play.
+    </div>
+  </div>
+</main>
+
+<div id="stage" hidden>
+  <button id="back" type="button" title="Load a different game">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    New game
+  </button>
+  <div id="game"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // If served as ".../emulator" (no trailing slash), relative "data/" would resolve one level too high.
+  if (!/\/$|\.html?$/.test(location.pathname)) {
+    try { history.replaceState(null, '', location.pathname + '/' + location.search + location.hash); } catch (e) {}
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var drop = $('drop'), romInput = $('rom'), biosInput = $('bios'), coreSel = $('core');
+  var startBtn = $('start'), msg = $('msg'), detected = $('detected');
+  var romFile = null, biosFile = null;
+
+  // File extension -> EmulatorJS system. Ambiguous ones (bin, iso, zip, 7z, img) are left to the user.
+  var byExt = {
+    nes: 'nes', fds: 'nes', unf: 'nes', unif: 'nes',
+    sfc: 'snes', smc: 'snes', fig: 'snes', swc: 'snes', bs: 'snes',
+    z64: 'n64', n64: 'n64', v64: 'n64',
+    gb: 'gb', gbc: 'gb', dmg: 'gb', sgb: 'gb',
+    gba: 'gba', agb: 'gba',
+    nds: 'nds', dsi: 'nds', ids: 'nds', srl: 'nds',
+    vb: 'vb', vboy: 'vb',
+    sms: 'segaMS',
+    md: 'segaMD', gen: 'segaMD', smd: 'segaMD', '68k': 'segaMD', sgd: 'segaMD',
+    gg: 'segaGG',
+    '32x': 'sega32x',
+    cue: 'psx', pbp: 'psx', chd: 'psx', ecm: 'psx', mds: 'psx', ccd: 'psx', m3u: 'psx', exe: 'psx',
+    a26: 'atari2600',
+    a52: 'atari5200',
+    a78: 'atari7800',
+    lnx: 'lynx', lyx: 'lynx',
+    j64: 'jaguar', jag: 'jaguar',
+    pce: 'pce', sgx: 'pce',
+    ws: 'ws', wsc: 'ws',
+    ngp: 'ngp', ngc: 'ngp',
+    col: 'coleco', cv: 'coleco'
+  };
+  var names = {};
+  Array.prototype.forEach.call(coreSel.options, function (o) { if (o.value) names[o.value] = o.textContent; });
+
+  function fmtSize(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(1) + ' MB';
+  }
+  function setMsg(text, isErr) { msg.textContent = text || ''; msg.classList.toggle('err', !!isErr); }
+  function refresh() { startBtn.disabled = !(romFile && coreSel.value); }
+
+  function setRom(file) {
+    if (!file) return;
+    romFile = file;
+    var ext = (file.name.split('.').pop() || '').toLowerCase();
+    $('dropEmpty').hidden = true; $('dropFile').hidden = false; drop.classList.add('has-file');
+    $('fileName').textContent = file.name;
+    $('fileMeta').textContent = fmtSize(file.size);
+    var guess = byExt[ext];
+    if (guess) {
+      coreSel.value = guess;
+      detected.hidden = false; detected.className = 'tag'; detected.textContent = 'auto-detected';
+      setMsg('Detected ' + names[guess] + '. Press Start, or pick another system.');
+    } else {
+      detected.hidden = true;
+      setMsg(coreSel.value ? 'Check the system is right, then press Start.'
+                           : 'Could not tell the system from ".' + ext + '" — please choose one.');
+    }
+    refresh();
+    if (!startBtn.disabled) startBtn.focus();
+  }
+
+  drop.addEventListener('click', function () { romInput.click(); });
+  drop.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); romInput.click(); }
+  });
+  romInput.addEventListener('change', function () { setRom(romInput.files[0]); });
+
+  // Accept drops anywhere on the setup screen.
+  var setupEl = $('setup'), depth = 0;
+  setupEl.addEventListener('dragenter', function (e) { e.preventDefault(); depth++; drop.classList.add('over'); });
+  setupEl.addEventListener('dragleave', function () { if (--depth <= 0) { depth = 0; drop.classList.remove('over'); } });
+  setupEl.addEventListener('dragover', function (e) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; });
+  setupEl.addEventListener('drop', function (e) {
+    e.preventDefault(); depth = 0; drop.classList.remove('over');
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) setRom(e.dataTransfer.files[0]);
+  });
+  // Don't let a stray drop navigate the page away.
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) { e.preventDefault(); });
+
+  coreSel.addEventListener('change', function () {
+    detected.hidden = true;
+    try { localStorage.setItem('emu.lastCore', coreSel.value); } catch (e) {}
+    refresh();
+  });
+  $('biosBtn').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); biosInput.click(); }
+  });
+  biosInput.addEventListener('change', function () {
+    biosFile = biosInput.files[0] || null;
+    $('biosBtn').firstChild.textContent = biosFile ? biosFile.name : 'None — choose file…';
+  });
+
+  // Optional preselect: /emulator/?system=gba
+  var params = new URLSearchParams(location.search);
+  var pre = params.get('system') || params.get('core');
+  if (pre && names[pre]) coreSel.value = pre;
+  else { try { var last = localStorage.getItem('emu.lastCore'); if (last && names[last]) coreSel.value = last; } catch (e) {} }
+
+  var started = false;
+  function start() {
+    if (started || !romFile || !coreSel.value) return;
+    started = true;
+
+    window.EJS_player       = '#game';
+    window.EJS_core         = coreSel.value;
+    window.EJS_gameName     = romFile.name.replace(/\.[^.]+$/, '') || 'game';  // also the key for browser saves
+    window.EJS_gameUrl      = URL.createObjectURL(romFile);
+    if (biosFile) window.EJS_biosUrl = URL.createObjectURL(biosFile);
+    window.EJS_pathtodata   = 'data/';      // self-hosted, relative to this page
+    window.EJS_startOnLoaded = true;
+    window.EJS_color        = '#7c5cff';
+    window.EJS_backgroundColor = '#000000';
+    window.EJS_threads      = false;        // no SharedArrayBuffer / COOP+COEP needed; only non-threaded cores are shipped
+    window.EJS_onGameStart  = function () { document.body.setAttribute('data-emu', 'running'); };
+
+    $('setup').hidden = true;
+    $('stage').hidden = false;
+    document.title = window.EJS_gameName + ' — Emulator';
+
+    var s = document.createElement('script');
+    s.src = 'data/loader.js';
+    s.onerror = function () { alert('Could not load the emulator files.'); location.reload(); };
+    document.body.appendChild(s);
+  }
+  startBtn.addEventListener('click', start);
+
+  // Back button: EmulatorJS cannot be torn down cleanly, so reload for a fresh instance.
+  $('back').addEventListener('click', function () {
+    if (confirm('Leave this game? Unsaved progress (anything not in a save state or in-game save) will be lost.')) location.reload();
+  });
+  var stage = $('stage'), hideTimer = null;
+  function poke() {
+    stage.classList.add('show-ui');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () { stage.classList.remove('show-ui'); }, 2500);
+  }
+  stage.addEventListener('mousemove', poke);
+  stage.addEventListener('touchstart', poke, { passive: true });
+})();
+</script>
+</body>
+</html>

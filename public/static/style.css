@@ -1050,3 +1050,5 @@ body.is-chat { overflow: hidden; }
 .player-bar .btn.ghost { color: var(--text); }
 @media (max-width: 600px) { .player-bar { flex-wrap: wrap; } .player-bar h2 { order: -1; flex-basis: 100%; } }
 .poll-label { overflow-wrap: anywhere; }
+.two-col > .card + .card, .two-col > .card + section, .two-col > * + * { margin-top: 0; }
+.filter-row { align-items: center; }
