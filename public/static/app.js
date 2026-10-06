@@ -297,7 +297,7 @@
         const a = document.createElement("a");
         a.className = "fav-item";
         a.href = c.dataset.play;
-        if (c.dataset.image) a.style.backgroundImage = `url("${c.dataset.image}")`;
+        if (c.dataset.image) a.style.backgroundImage = `url("${c.dataset.image.replace(/["\\\n]/g, encodeURIComponent)}")`;
         const span = document.createElement("span");
         span.textContent = c.dataset.name;
         a.appendChild(span);

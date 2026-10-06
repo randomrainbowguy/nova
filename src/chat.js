@@ -19,6 +19,17 @@ export class ChatRoom {
   }
 
   async fetch(request) {
+    // The Worker tells us when someone loses access (banned, deleted, Pro removed): drop their sockets.
+    const kick = request.headers.get("X-Chat-Kick");
+    if (kick) {
+      for (const ws of this.state.getWebSockets()) {
+        if (ws.deserializeAttachment()?.id === Number(kick)) {
+          try { ws.send(JSON.stringify({ type: "error", text: "You don't have access to Pro chat anymore." })); ws.close(4003, "No access"); } catch { /* closed */ }
+        }
+      }
+      this.broadcastPresence();
+      return new Response("ok");
+    }
     if (request.headers.get("Upgrade") !== "websocket") return new Response("Expected a WebSocket", { status: 426 });
     const who = JSON.parse(request.headers.get("X-Chat-User") || "null");
     if (!who) return new Response("Forbidden", { status: 403 });
@@ -57,15 +68,17 @@ export class ChatRoom {
     try { msg = JSON.parse(raw); } catch { return; }
     const reply = (m) => { try { ws.send(JSON.stringify(m)); } catch { /* closed */ } };
 
-    if (msg.type === "ping") return reply({ type: "pong" });
-
-    // Re-check the account on every action: Pro can be removed, people can be banned or muted.
+    // Re-check the account on every action (and at least once a minute while someone only listens):
+    // Pro can be removed, people can be banned or muted.
+    if (msg.type === "ping" && Date.now() - (who.checked || 0) < 60000) return reply({ type: "pong" });
     const row = await this.env.DB.prepare("SELECT * FROM users WHERE id = ?").bind(who.id).first();
     const u = withRoles(row);
     if (!u || u.status !== "approved" || !u.is_pro) {
       reply({ type: "error", text: "You don't have access to Pro chat anymore." });
       return ws.close(4003, "No access");
     }
+    ws.serializeAttachment({ ...who, name: u.name, checked: Date.now() });
+    if (msg.type === "ping") return reply({ type: "pong" });
 
     if (msg.type === "send") {
       const body = String(msg.body || "").replace(/\r\n?/g, "\n").replace(/\n{3,}/g, "\n\n").trim().slice(0, MAX_LEN);

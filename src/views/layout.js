@@ -1,6 +1,6 @@
 import { html, raw } from "hono/html";
 import { PRO_THEMES, ROLES } from "../lib/core.js";
-import { plural, truncate } from "../lib/util.js";
+import { plural, truncate, safeLink } from "../lib/util.js";
 
 // Bump when public/static files change so browsers fetch the new copy.
 export const ASSET_VERSION = "20261006";
@@ -114,7 +114,7 @@ function popupsBlock(g) {
           <div class="popup-label">${label}</div>
           <div class="popup-title">${title}</div>
           ${n.body && n.kind !== "poll" ? html`<div class="popup-text">${truncate(n.body, 110)}</div>` : ""}
-          ${n.link ? html`<a class="btn small" href="${n.link}">${POPUP_CTA[n.kind] || "Open"}</a>` : ""}
+          ${safeLink(n.link) ? html`<a class="btn small" href="${safeLink(n.link)}">${POPUP_CTA[n.kind] || "Open"}</a>` : ""}
         </div>
         <button class="popup-close" aria-label="Dismiss">×</button>
       </div>`;

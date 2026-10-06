@@ -1,7 +1,7 @@
 import { html, raw } from "hono/html";
 import { csrfField } from "./layout.js";
 import { PRO_THEMES } from "../lib/core.js";
-import { g, plural } from "../lib/util.js";
+import { g, plural, safeLink, cssUrl } from "../lib/util.js";
 
 const THEME_NOTES = { aurora: "Teal & indigo", sunset: "Orange & pink", gold: "Black & gold" };
 const pad3 = (n) => String(n).padStart(3, "0");
@@ -44,7 +44,7 @@ function memberView(c, me, d, site) {
       ${d.early_games.length ? html`
       <div class="pp-early-list">
         ${d.early_games.map((gm) => html`
-        <a class="pp-early" href="/play/${gm.id}" ${gm.image ? html`style="background-image:url('${gm.image}')"` : ""}>
+        <a class="pp-early" href="/play/${gm.id}" ${gm.image ? html`style="background-image:url('${cssUrl(gm.image)}')"` : ""}>
           <small>Public ${gm.early_until.slice(5, 10)}</small><span>${gm.name}</span>
         </a>`)}
       </div>` : html`<p class="muted small">No games in early access right now. New ones show up here days before everyone else gets them.</p>`}
@@ -82,7 +82,7 @@ function memberView(c, me, d, site) {
       <h2>🔮 Sneak peeks</h2>
       ${d.peeks.length ? d.peeks.map((n) => html`
       <div class="req">
-        <div><b>${n.link ? html`<a href="${n.link}">${n.title}</a>` : n.title}</b>${n.body ? html`<br><span class="muted small">${n.body}</span>` : ""}</div>
+        <div><b>${safeLink(n.link) ? html`<a href="${safeLink(n.link)}">${n.title}</a>` : n.title}</b>${n.body ? html`<br><span class="muted small">${n.body}</span>` : ""}</div>
         <span class="muted small" style="white-space:nowrap">${n.created_at.slice(5, 10)}</span>
       </div>`) : html`<p class="muted small">Nothing yet. When something new is in the works, you'll hear about it here first.</p>`}
       <div class="label" style="margin-top:18px">Pro extras</div>

@@ -1,6 +1,6 @@
 import { html, raw } from "hono/html";
 import { csrfField, asset } from "./layout.js";
-import { plural, timeAgo } from "../lib/util.js";
+import { plural, timeAgo, safeLink } from "../lib/util.js";
 
 const art = (game, cls = "") => html`
   <span class="hv-noart ${cls}" style="--h: ${(game.id * 47) % 360}">${(game.name || "?").slice(0, 1)}</span>
@@ -246,7 +246,7 @@ export function notificationsPage(c, notes, seen, canDelete) {
           ${n.body ? html`<p>${n.body}</p>` : ""}
         </div>
         <div class="up-actions">
-          ${n.link ? html`<a class="btn small" href="${n.link}">${k.cta} →</a>` : ""}
+          ${safeLink(n.link) ? html`<a class="btn small" href="${safeLink(n.link)}">${k.cta} →</a>` : ""}
           ${canDelete ? html`
           <form method="post" action="/admin/notification/${n.id}/delete">
             ${csrfField(c)}<button class="icon-btn danger" data-confirm="Delete this update?" title="Delete" aria-label="Delete update">✕</button>

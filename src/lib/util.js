@@ -35,7 +35,11 @@ export function randomInt(max) {
 /** "12.0" -> "12", "4.5" -> "4.5" (Python's '%g'). */
 export const g = (n) => String(Number(Number(n).toFixed(2)));
 
+// Browsers drop tabs/newlines and treat "\\" like "/" in URLs, so "/\t/evil.com" would become "//evil.com".
+const UNSAFE_URL_CHARS = /[\u0000-\u001f\u007f\\]/;
+
 export function safeNext(nxt) {
+  if (UNSAFE_URL_CHARS.test(nxt || "")) return "/";
   return nxt && nxt.startsWith("/") && !nxt.startsWith("//") && !nxt.startsWith("/\\") ? nxt : "/";
 }
 
@@ -46,8 +50,12 @@ export function isHttpUrl(v) {
 /** Only allow links that can't run script: http(s) or site-relative. */
 export function safeLink(v) {
   v = String(v || "").trim();
+  if (UNSAFE_URL_CHARS.test(v)) return "";
   return isHttpUrl(v) || (v.startsWith("/") && !v.startsWith("//")) ? v : "";
 }
+
+/** A URL that's safe inside CSS url('...'). */
+export const cssUrl = (v) => safeLink(v).replace(/['"()\s]/g, (ch) => "%" + ch.charCodeAt(0).toString(16).padStart(2, "0"));
 
 export function timeAgo(ts) {
   if (!ts) return "";

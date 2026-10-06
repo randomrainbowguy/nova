@@ -125,8 +125,13 @@
       clearInterval(pingTimer);
       pingTimer = setInterval(() => send({ type: "ping" }), 25000);
       // Catch up on anything sent while we were away.
-      const last = Math.max(0, ...shown.keys());
-      fetch(`/chat/history?after=${last}`).then((r) => r.ok ? r.json() : null).then((d) => d && d.messages.forEach((m) => add(m)));
+      const ids = [...shown.keys()];
+      const last = Math.max(0, ...ids), first = ids.length ? Math.min(...ids) : 0;
+      fetch(`/chat/history?after=${last}&since=${first}`).then((r) => r.ok ? r.json() : null).then((d) => {
+        if (!d) return;
+        d.messages.forEach((m) => add(m));
+        (d.deleted || []).forEach(remove);
+      });
     };
     ws.onmessage = (e) => {
       let m;
@@ -143,11 +148,23 @@
     };
     ws.onclose = (e) => {
       clearInterval(pingTimer);
-      if (e.code === 4003) { setConn("off"); connText.textContent = "No access"; return; }
       setConn("off");
+      if (e.code === 4003) return noAccess();
       retry = Math.min(retry + 1, 6);
-      setTimeout(connect, 500 * 2 ** retry);
+      // A refused upgrade looks like a network error (1006), so ask the server whether we still have access.
+      setTimeout(() => {
+        fetch("/chat/history?after=" + Math.max(0, ...shown.keys()), { redirect: "manual" })
+          .then((r) => (r.ok ? connect() : noAccess()))
+          .catch(connect);
+      }, 500 * 2 ** retry);
     };
+  }
+
+  function noAccess() {
+    connText.textContent = "No access";
+    input.disabled = true;
+    document.getElementById("chat-send").disabled = true;
+    input.placeholder = "You don't have access to Pro chat right now. Reload the page.";
   }
 
   function flash(text) {

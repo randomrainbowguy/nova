@@ -55,10 +55,7 @@ app.use("*", async (c, next) => {
     if (type.includes("form")) form = await c.req.parseBody({ all: true });
     c.set("form", form);
     const sent = first(form.csrf) || c.req.header("X-CSRF-Token");
-    if (!sent || sent !== session.get("csrf")) {
-      return render(c, pages.messagePage("Page expired", "Your session changed since this page loaded. Go back, reload the page and try again."),
-        { title: "Page expired", status: 400 });
-    }
+    if (!sent || sent !== session.get("csrf")) c.set("csrfFailed", true);
   }
 
   const path = new URL(c.req.url).pathname;
@@ -87,7 +84,12 @@ app.use("*", async (c, next) => {
     if (guest) newGuest = null;
   }
 
-  await next();
+  if (c.get("csrfFailed")) {
+    c.res = await render(c, pages.messagePage("Page expired", "Your session changed since this page loaded. Go back, reload the page and try again."),
+      { title: "Page expired", status: 400, bare: true });
+  } else {
+    await next();
+  }
 
   if (c.res.status === 101) return; // WebSocket upgrade
   const secure = new URL(c.req.url).protocol === "https:";
@@ -286,7 +288,11 @@ app.get("/g/:file", loginRequired(async (c) => {
   if (!c.env.GAME_FILES) return notFound(c);
   const body = await c.env.GAME_FILES.get(c.req.param("file"), "stream");
   if (!body) return notFound(c);
-  return new Response(body, { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, max-age=300" } });
+  // Uploaded games run as their own sandboxed origin, so a game's scripts can't act as whoever is logged in.
+  return new Response(body, { headers: {
+    "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, max-age=300",
+    "Content-Security-Policy": "sandbox allow-scripts allow-forms allow-popups allow-pointer-lock allow-modals allow-orientation-lock allow-presentation allow-downloads",
+  } });
 }));
 
 app.post("/api/favorite/:id{[0-9]+}", loginRequired(async (c) => {
@@ -392,10 +398,10 @@ async function importOldSite(c) {
     flash(c, bad === -1 ? "That file is empty." : `That doesn't look like a nova-data.sql file (line ${bad + 1}).`, "error");
     return setupView(c, {});
   }
-  // D1 runs each batch as one transaction; keep them a reasonable size.
+  // One batch = one transaction, so a failed import leaves nothing half-done and can be retried.
   const stmts = lines.map((l) => db.prepare(l.replace(/;$/, "")));
   try {
-    for (let i = 0; i < stmts.length; i += 200) await db.batch(stmts.slice(i, i + 200));
+    await db.batch(stmts);
   } catch (e) {
     console.log("import failed", e);
     flash(c, `The import stopped partway: ${e.message}`, "error");
@@ -662,6 +668,11 @@ app.get("/chat/history", proRequired(async (c) => {
   let rows;
   if (after > 0) {
     rows = (await c.env.DB.prepare(`${chatSelect} AND m.id > ? ORDER BY m.id LIMIT 200`).bind(after).all()).results;
+    // ...and which of the messages the page already shows were deleted while it was disconnected.
+    const since = parseInt(c.req.query("since") || "0", 10);
+    const { results: gone } = await c.env.DB.prepare("SELECT id FROM chat_messages WHERE deleted = 1 AND id >= ? AND id <= ?")
+      .bind(since || after, after).all();
+    return c.json({ messages: rows.map(chatRow), deleted: gone.map((r) => r.id) });
   } else {
     rows = (await c.env.DB.prepare(`${chatSelect} AND m.id < ? ORDER BY m.id DESC LIMIT ${CHAT_PAGE}`).bind(before || 2 ** 31).all()).results.reverse();
   }
@@ -670,6 +681,8 @@ app.get("/chat/history", proRequired(async (c) => {
 
 app.get("/chat/ws", proRequired(async (c) => {
   if (c.req.header("Upgrade") !== "websocket") return c.text("Expected a WebSocket", 426);
+  // Only our own pages may open a chat socket with the visitor's cookies.
+  if (c.req.header("Origin") !== new URL(c.req.url).origin) return c.text("Forbidden", 403);
   const u = c.get("user");
   if (c.get("session").get("view_as")) return c.text("Exit the role preview to use chat.", 403);
   const stub = c.env.CHAT.get(c.env.CHAT.idFromName("pro"));
@@ -677,6 +690,13 @@ app.get("/chat/ws", proRequired(async (c) => {
   headers.set("X-Chat-User", JSON.stringify({ id: u.id, name: u.name, badge: badgeFor(u) }));
   return stub.fetch(new Request(c.req.url, { headers }));
 }));
+
+/** Closes someone's open chat connections right away (after a ban, delete or Pro removal). */
+function kickFromChat(c, userId) {
+  if (!c.env.CHAT) return;
+  const stub = c.env.CHAT.get(c.env.CHAT.idFromName("pro"));
+  c.executionCtx.waitUntil(stub.fetch("https://chat/kick", { headers: { "X-Chat-Kick": String(userId) } }).catch(() => {}));
+}
 
 /* ── owner: preview the site as another role ── */
 
@@ -751,14 +771,19 @@ app.get("/admin", staffRequired(undefined, async (c) => {
   return render(c, adminPage(c, me, d), { title: "Admin", page: "admin" });
 }));
 
-app.post("/admin/user/:id{[0-9]+}", staffRequired("people", async (c) => {
+app.post("/admin/user/:id{[0-9]+}", staffRequired(undefined, async (c) => {
   const db = c.env.DB;
   const userId = Number(c.req.param("id"));
   const action = field(c, "action");
   const target = withRoles(await db.prepare("SELECT * FROM users WHERE id = ?").bind(userId).first());
   if (!target) return notFound(c);
   const me = c.get("user");
-  const back = c.redirect("/admin?tab=users");
+  // Muting in chat is also allowed for Pro managers; everything else needs "people".
+  const isMute = action === "mute" || action === "unmute";
+  if (!can(c, "people") && !(isMute && can(c, "pro"))) {
+    return render(c, pages.messagePage("Not allowed", "That page is for admins."), { title: "Not allowed", status: 403 });
+  }
+  const back = c.redirect(can(c, "people") ? "/admin?tab=users" : "/admin?tab=pro");
   if (target.id === me.id) { flash(c, "You can't change your own account here.", "error"); return back; }
   if (target.is_owner || (target.is_staff && !me.is_owner)) { flash(c, "Only the owner can change staff accounts.", "error"); return back; }
   if (action === "set_perms") {
@@ -767,6 +792,7 @@ app.post("/admin/user/:id{[0-9]+}", staffRequired("people", async (c) => {
     const perms = role in ROLES ? [...ROLES[role][1]] : fieldAll(c, "perms").filter((p) => p in PERMS);
     const joined = perms.join(",");
     await db.prepare("UPDATE users SET perms = ?, status = CASE WHEN ? != '' THEN 'approved' ELSE status END WHERE id = ?").bind(joined, joined, userId).run();
+    if (!perms.length && !target.premium) kickFromChat(c, userId);
     flash(c, `${target.name} is now: ${(ROLES[roleKey(perms)] || ["custom staff"])[0]}.`);
     return back;
   }
@@ -778,12 +804,15 @@ app.post("/admin/user/:id{[0-9]+}", staffRequired("people", async (c) => {
     flash(c, `Approved ${target.name}.`);
   } else if (action === "ignore") {
     await db.prepare("UPDATE users SET status = 'ignored' WHERE id = ?").bind(userId).run();
+    kickFromChat(c, userId);
     flash(c, `Ignored ${target.name}. They stay locked out but aren't banned.`);
   } else if (action === "pending") {
     await db.prepare("UPDATE users SET status = 'pending' WHERE id = ?").bind(userId).run();
+    kickFromChat(c, userId);
     flash(c, `Moved ${target.name} back to pending.`);
   } else if (action === "ban") {
     await db.prepare("UPDATE users SET status = 'banned', ban_reason = ? WHERE id = ?").bind(field(c, "reason").trim().slice(0, 200), userId).run();
+    kickFromChat(c, userId);
     flash(c, `Banned ${target.name}.`);
   } else if (action === "mute" || action === "unmute") {
     await db.prepare("UPDATE users SET chat_muted = ? WHERE id = ?").bind(action === "mute" ? 1 : 0, userId).run();
@@ -798,6 +827,7 @@ app.post("/admin/user/:id{[0-9]+}", staffRequired("people", async (c) => {
     flash(c, `Dismissed ${target.name}'s reset request.`);
   } else if (action === "delete") {
     await db.prepare("DELETE FROM users WHERE id = ?").bind(userId).run();
+    kickFromChat(c, userId);
     flash(c, `Deleted ${target.name}'s account.`);
   }
   return back;
@@ -830,6 +860,7 @@ app.post("/admin/pro", staffRequired("pro", async (c) => {
     flash(c, `Cleared ${target.name}'s payment claim. They can send a new one from the Pro page.`);
   } else if (action === "revoke") {
     await db.prepare("UPDATE users SET premium = 0, premium_since = '' WHERE id = ?").bind(target.id).run();
+    kickFromChat(c, target.id);
     flash(c, `Removed Pro from ${target.name}.`);
   }
   return back;

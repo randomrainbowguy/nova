@@ -1,7 +1,7 @@
 import { html, raw } from "hono/html";
 import { csrfField } from "./layout.js";
 import { PERMS, ROLES } from "../lib/core.js";
-import { g, plural, truncate } from "../lib/util.js";
+import { g, plural, truncate, cssUrl } from "../lib/util.js";
 
 const titleCase = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const REQ_LABEL = { open: "open", added: "added", declined: "can't add" };
@@ -206,7 +206,7 @@ function gamesTab(c, d) {
         ${d.games.length ? d.games.map((gm) => html`
         <div class="game-row" data-search="${gm.name.toLowerCase()}">
           <input type="checkbox" name="ids" value="${gm.id}" form="bulk-form" class="pick" aria-label="Select ${gm.name}">
-          <div class="thumb" ${gm.image ? html`style="background-image:url('${gm.image}')"` : ""}></div>
+          <div class="thumb" ${gm.image ? html`style="background-image:url('${cssUrl(gm.image)}')"` : ""}></div>
           <div class="game-row-main"><b>${gm.name}</b>${gm.early ? html` <span class="status pro">early</span>` : ""}<br>
             <span class="muted small">${gm.genreList.join(", ") || "No genre"} · ${gm.plays} plays · ${gm.file ? "uploaded file" : "link"}</span></div>
           <div class="actions">
@@ -389,16 +389,20 @@ function proTab(c, me, d) {
         <tbody>
         ${pro.members.length ? pro.members.map((u) => html`
         <tr>
-          <td><b>${u.name}</b><br><span class="muted small">${u.email}</span></td>
+          <td><b>${u.name}</b>${u.chat_muted ? html` <span class="status banned">muted</span>` : ""}<br><span class="muted small">${u.email}</span></td>
           <td class="small muted">${u.premium_since.slice(0, 10)}</td>
           <td class="small">${u.premium_note}</td>
-          <td><form method="post" action="/admin/pro">${csrfField(c)}<input type="hidden" name="user_id" value="${u.id}">
-            <button class="btn bad small" name="action" value="revoke" data-confirm="Remove Pro from ${u.name}? They paid for it, so only do this for refunds or mistakes.">Remove Pro</button></form></td>
+          <td><div class="row-tight">
+            <form method="post" action="/admin/user/${u.id}">${csrfField(c)}
+              <button class="btn ghost small" name="action" value="${u.chat_muted ? "unmute" : "mute"}">${u.chat_muted ? "Unmute in chat" : "Mute in chat"}</button></form>
+            <form method="post" action="/admin/pro">${csrfField(c)}<input type="hidden" name="user_id" value="${u.id}">
+              <button class="btn bad small" name="action" value="revoke" data-confirm="Remove Pro from ${u.name}? They paid for it, so only do this for refunds or mistakes.">Remove Pro</button></form>
+          </div></td>
         </tr>`) : html`<tr><td colspan="4" class="muted small">No Pro members yet.</td></tr>`}
         </tbody>
       </table>
     </div>
-    <p class="muted small help">Staff get every Pro perk automatically, without the badge. Chat moderation (delete messages, mute people) is in the chat itself and on the People tab.</p>
+    <p class="muted small help">Staff get every Pro perk automatically, without the badge. Delete chat messages right in the chat; mute people here or on the People tab.</p>
   </section>`;
 }
 
