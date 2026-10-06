@@ -141,6 +141,10 @@
   /* ── library (games.json lives in the repo next to this file) ── */
   try {
     GAMES = await fetch(BASE + "games.json").then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+    if (MIRROR) {
+      const swap = (u) => String(u || "").replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/");
+      GAMES.forEach((g) => { g.url = swap(g.url); g.image = swap(g.image); });
+    }
   } catch (err) {
     $("grid").innerHTML = `<div class="empty">Couldn't load the game list (${esc(err.message)}). Check your connection and reload.</div>`;
     return;
