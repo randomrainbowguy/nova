@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `npm run dev` (local only - never commit .dev.vars).
+SECRET_KEY=change-me-to-a-long-random-string
+OWNER_SETUP_CODE=pick-a-setup-code
+# RESEND_API_KEY=re_...

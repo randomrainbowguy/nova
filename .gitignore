@@ -8,3 +8,8 @@ server.log
 .DS_Store
 nova-data*.txt
 nova-games.html
+node_modules/
+.wrangler/
+.dev.vars
+scripts/nova-data.sql
+tools/**/node_modules/

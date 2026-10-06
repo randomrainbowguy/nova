@@ -1,0 +1,51 @@
+// Cloudflare Workers config for Nova. See README.md → "Deploying to Cloudflare".
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nova",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // CSS, JS, the landing page and EmulatorJS. Anything not found here goes to the Worker.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "none"
+  },
+
+  // Users, games, polls, updates, chat history. Create it with:
+  //   npx wrangler d1 create nova
+  // then paste the database_id it prints below.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nova",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // Uploaded single-file HTML games. Create it with:
+  //   npx wrangler kv namespace create GAME_FILES
+  // then paste the id it prints below.
+  "kv_namespaces": [
+    { "binding": "GAME_FILES", "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID" }
+  ],
+
+  // Live Pro chat.
+  "durable_objects": {
+    "bindings": [{ "name": "CHAT", "class_name": "ChatRoom" }]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["ChatRoom"] }
+  ],
+
+  "observability": { "enabled": true },
+
+  // Non-secret settings. Secrets (SECRET_KEY, OWNER_SETUP_CODE, RESEND_API_KEY) are set with
+  //   npx wrangler secret put NAME
+  "vars": {
+    "SITE_URL": "",
+    "MAIL_FROM": ""
+  }
+}
