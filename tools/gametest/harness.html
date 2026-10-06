@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Game harness</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; overflow: hidden; }
+  #game-frame { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #000; }
+  #game-status { color: #ccc; font: 16px sans-serif; padding: 20px; }
+</style>
+<script src="/static/game-sanitize.js"></script>
+</head>
+<body>
+<div id="game-status">loading…</div>
+<iframe id="game-frame" hidden allow="fullscreen; autoplay; gamepad; clipboard-write"></iframe>
+<script>
+  // Mirrors static/app.js "player: raw HTML files": fetch -> <base> -> Blob -> iframe.
+  // ?url=<game url>   &sanitize=0 to use the old base-only path (default 1).
+  const params = new URLSearchParams(location.search);
+  const url = params.get("url");
+  const sanitize = params.get("sanitize") !== "0" && typeof window.sanitizeGameHtml === "function";
+  const frame = document.getElementById("game-frame");
+  const status = document.getElementById("game-status");
+  window.__harness = { state: "fetching", sanitize };
+  const withBase = (html) => {   // exact copy of the current app.js behaviour
+    const base = `<base href="${url.slice(0, url.lastIndexOf("/") + 1)}">`;
+    return /<head[^>]*>/i.test(html) ? html.replace(/<head([^>]*)>/i, `<head$1>${base}`) : base + html;
+  };
+  fetch(url)
+    .then((r) => { window.__harness.httpStatus = r.status; if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
+    .then((html) => {
+      window.__harness.bytes = html.length;
+      return sanitize ? window.sanitizeGameHtml(html, url) : withBase(html);
+    })
+    .then((html) => {
+      const blobUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+      if (params.get("top") === "1") { location.href = blobUrl; return; }   // debug: run the game top-level
+      frame.src = blobUrl;
+      frame.hidden = false;
+      status.remove();
+      frame.focus();
+      window.__harness.state = "loaded";
+    })
+    .catch((err) => {
+      window.__harness.state = "fetch_failed";
+      window.__harness.error = String(err && err.message || err);
+      status.textContent = "Couldn't load this game (" + window.__harness.error + ")";
+    });
+</script>
+</body>
+</html>

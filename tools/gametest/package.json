@@ -1,0 +1,13 @@
+{
+  "name": "nova-gametest",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Headless-Chrome harness that loads every game the way the site does and classifies it",
+  "scripts": {
+    "test": "node run.js"
+  },
+  "dependencies": {
+    "playwright-core": "^1.50.0",
+    "pngjs": "^7.0.0"
+  }
+}

@@ -8,6 +8,7 @@ The SQL file has everyone's emails and password hashes - it's in .gitignore, kee
 It replaces everything in the new database (users, games, polls...), so run it on a fresh site.
 """
 
+import json
 import os
 import sqlite3
 import sys
@@ -15,6 +16,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "nova.db")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, "nova-data.sql")
+# Broken games found by tools/gametest: new working links, and games that couldn't be fixed.
+DECISIONS = os.path.join(HERE, "..", "tools", "gametest", "decisions.json")
 
 # Parents before children, so foreign keys line up.
 TABLES = ["settings", "users", "games", "polls", "poll_options", "votes", "favorites", "notifications",
@@ -52,6 +55,14 @@ def main():
             lines.append(f"{verb} INTO {table} ({', '.join(cols)}) VALUES ({values});")
             n += 1
         counts[table] = n
+    if os.path.exists(DECISIONS):
+        with open(DECISIONS, encoding="utf-8") as f:
+            decisions = json.load(f)
+        for r in decisions.get("replace", []):
+            lines.append(f"UPDATE games SET url = {quote(r['new_url'])} WHERE id = {int(r['id'])} AND url = {quote(r['old_url'])};")
+        for r in decisions.get("remove", []):
+            lines.append(f"DELETE FROM games WHERE id = {int(r['id'])};")
+        print(f"  game fixes: {len(decisions.get('replace', []))} new links, {len(decisions.get('remove', []))} broken games removed")
     # Games that pointed at the old self-hosted emulator file now use the EmulatorJS page in /public.
     lines.append("UPDATE games SET url = '/emulator/', file = '' WHERE file = 'emulator.html';")
     with open(OUT, "w", encoding="utf-8") as f:
