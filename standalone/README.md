@@ -9,6 +9,8 @@ The file only knows this folder's address; everything else loads from this repo 
   game cleanup from `public/static/game-sanitize.js`, the emulator from `public/emulator/`).
 - `games.json`: the game list. Rebuild it from `nova.db` with `python3 standalone/build-games.py`.
 - `config.js`: your Google Analytics ID (`gaId`) and the movies doc link.
+- `ga.js`: sends visits and game plays to Google Analytics. (Google's own gtag.js won't send from a
+  downloaded file or an about:blank tab, so this talks to GA's collection endpoint directly.)
 
 ## The tiny file
 

@@ -626,21 +626,10 @@
   document.querySelectorAll("[data-open-nova]").forEach(function (a) { a.addEventListener("click", openNova); });
 
   // Visits to this front page go to the same Google Analytics property (gaId in standalone/config.js).
-  var cfg = document.createElement("script");
-  cfg.src = BASE + "config.js";
-  cfg.onload = function () {
-    var id = (window.NOVA_CONFIG || {}).gaId || "";
-    if (!/^G-[A-Z0-9]{4,20}$/.test(id)) return;
-    var cid; try { cid = localStorage.getItem("nova_ga_cid"); } catch (e) {}
-    if (!cid) { cid = Math.floor(Math.random() * 2147483647) + "." + Math.floor(Date.now() / 1000); try { localStorage.setItem("nova_ga_cid", cid); } catch (e) {} }
-    var s = document.createElement("script"); s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + id; document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { dataLayer.push(arguments); };
-    gtag("js", new Date());
-    gtag("config", id, { client_storage: "none", client_id: cid, page_title: "Front page", page_location: "https://nova.games/", page_path: "/" });
-  };
-  document.head.appendChild(cfg);
+  function load(src, cb) { var el = document.createElement("script"); el.src = src; el.onload = cb; document.head.appendChild(el); }
+  load(BASE + "config.js", function () {
+    load(BASE + "ga.js", function () { window.novaTrack("page_view", {}, { title: "Front page", path: "/" }); });
+  });
 })();
 </script>
 </body>

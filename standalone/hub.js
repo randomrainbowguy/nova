@@ -3,7 +3,6 @@
   const CONFIG = window.NOVA_CONFIG || {};
   const BASE = window.NOVA_BASE || "";
   const MOVIES_DOC = CONFIG.moviesDoc || "";
-  const GA_ID = CONFIG.gaId || "";
   let GAMES = [];
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -14,25 +13,9 @@
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const cssUrl = (u) => String(u || "").replace(/["'()\\\s]/g, encodeURIComponent);
 
-  /* ── analytics (Google Analytics 4) ── */
-  let cid = store.get("nova_ga_cid");
-  if (!cid) { cid = Math.floor(Math.random() * 2147483647) + "." + Math.floor(Date.now() / 1000); store.set("nova_ga_cid", cid); }
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () { dataLayer.push(arguments); };
-  const gaOn = /^G-[A-Z0-9]{4,20}$/.test(GA_ID);
-  if (gaOn) {
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-    document.head.appendChild(s);
-    gtag("js", new Date());
-    // This tab is about:blank, so give GA a stable client id and readable page names.
-    gtag("config", GA_ID, { client_storage: "none", client_id: cid, send_page_view: false });
-  }
-  function track(name, params) { if (gaOn) try { gtag("event", name, params || {}); } catch (e) {} }
-  function pageView(title, path) {
-    track("page_view", { page_title: title, page_location: "https://nova.games" + path, page_path: path });
-  }
+  /* ── analytics: Google Analytics 4 through ga.js (gaId in config.js) ── */
+  function track(name, params) { if (window.novaTrack) window.novaTrack(name, params); }
+  function pageView(title, path) { if (window.novaTrack) window.novaTrack("page_view", {}, { title, path }); }
 
   /* ── theme ── */
   const matrix = (() => {
