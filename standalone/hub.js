@@ -3,6 +3,7 @@
   const CONFIG = window.NOVA_CONFIG || {};
   const BASE = window.NOVA_BASE || "";
   const MOVIES_DOC = CONFIG.moviesDoc || "";
+  const MIRROR = /^https:\/\/(fastly|gcore)\.jsdelivr\.net\//.test(BASE) ? new URL(BASE).origin : "";
   let GAMES = [];
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -264,7 +265,9 @@ try{Object.defineProperty(c,"subtle",{configurable:true,value:{digest:function(a
     pageView(g.name, "/play/" + g.id);
     track("play_game", { game_name: g.name, game_id: String(g.id) });
     const token = {};
-    loaded = fetch(g.url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, g.url));
+    // If the launcher had to use a jsDelivr mirror (cdn.jsdelivr.net blocked), load games through it too.
+    const url = MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
+    loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, url));
     loaded.token = token;
     const mine = loaded;
     mine.then((html) => {
