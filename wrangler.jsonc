@@ -13,24 +13,19 @@
     "not_found_handling": "none"
   },
 
-  // Users, games, polls, updates, chat history. Create it with:
-  //   npx wrangler d1 create nova
-  // then paste the database_id it prints below.
+  // Users, games, polls, updates, chat history. No id needed: `wrangler deploy` creates the
+  // database the first time, and the Worker creates the tables on its first request.
   "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "nova",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID",
-      "migrations_dir": "migrations"
-    }
+    { "binding": "DB", "database_name": "nova", "migrations_dir": "migrations" }
   ],
 
-  // Uploaded single-file HTML games. Create it with:
-  //   npx wrangler kv namespace create GAME_FILES
-  // then paste the id it prints below.
+  // Uploaded single-file HTML games. Also created automatically on the first deploy.
   "kv_namespaces": [
-    { "binding": "GAME_FILES", "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID" }
+    { "binding": "GAME_FILES" }
   ],
+
+  // Lets the Worker import migrations/*.sql as text (it sets up its own tables).
+  "rules": [{ "type": "Text", "globs": ["**/*.sql"], "fallthrough": true }],
 
   // Live Pro chat.
   "durable_objects": {
@@ -42,8 +37,8 @@
 
   "observability": { "enabled": true },
 
-  // Non-secret settings. Secrets (SECRET_KEY, OWNER_SETUP_CODE, RESEND_API_KEY) are set with
-  //   npx wrangler secret put NAME
+  // Optional settings. Secrets (SECRET_KEY, OWNER_SETUP_CODE, RESEND_API_KEY) are optional too and are set
+  // in the dashboard (Worker → Settings → Variables and Secrets) or with `npx wrangler secret put NAME`.
   "vars": {
     "SITE_URL": "",
     "MAIL_FROM": ""

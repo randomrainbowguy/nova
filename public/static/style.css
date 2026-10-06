@@ -1052,3 +1052,5 @@ body.is-chat { overflow: hidden; }
 .poll-label { overflow-wrap: anywhere; }
 .two-col > .card + .card, .two-col > .card + section, .two-col > * + * { margin-top: 0; }
 .filter-row { align-items: center; }
+.auth-sub { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 4px 0 -2px; }
+.auth-alt { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border); }

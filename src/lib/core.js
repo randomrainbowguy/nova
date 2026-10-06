@@ -82,7 +82,7 @@ export function applyPreview(u, viewAs) {
 export async function loadSettings(db) {
   const { results } = await db.prepare("SELECT key, value FROM settings").all();
   const s = { ...DEFAULT_SETTINGS };
-  for (const r of results) s[r.key] = r.value;
+  for (const r of results) if (r.key !== "secret_key" && r.key !== "setup_code") s[r.key] = r.value;
   return s;
 }
 

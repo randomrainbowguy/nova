@@ -10,7 +10,7 @@ export const emailConfigured = (env) => !!env.RESEND_API_KEY;
 
 export const siteUrl = (c) => (c.env.SITE_URL || new URL(c.req.url).origin).replace(/\/$/, "");
 
-export const unsubscribeToken = (env, userId) => sign(env.SECRET_KEY + ":unsubscribe", String(userId));
+export const unsubscribeToken = (c, userId) => sign(c.get("secret") + ":unsubscribe", String(userId));
 
 async function sendAll(env, messages) {
   if (!emailConfigured(env)) {
@@ -40,7 +40,7 @@ export async function sendEmail(c, recipients, subject, body) {
   const messages = [];
   for (const r of recipients) {
     let footer = "";
-    if (r.id != null) footer = `\n\n--\nDon't want these emails? ${base}/unsubscribe/${await unsubscribeToken(c.env, r.id)}`;
+    if (r.id != null) footer = `\n\n--\nDon't want these emails? ${base}/unsubscribe/${await unsubscribeToken(c, r.id)}`;
     messages.push({ to: r.email, subject, text: body + footer });
   }
   if (messages.length) c.executionCtx.waitUntil(sendAll(c.env, messages));

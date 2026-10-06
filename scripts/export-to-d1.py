@@ -2,9 +2,10 @@
 
     python3 scripts/export-to-d1.py            # reads nova.db, writes scripts/nova-data.sql
     npx wrangler d1 execute nova --remote --file scripts/nova-data.sql
+    (or upload it on the new site's /setup page, before anyone has made an owner account)
 
 The SQL file has everyone's emails and password hashes - it's in .gitignore, keep it private.
-Run it on an empty database (right after `npm run db:migrate`); it clears the tables first.
+It replaces everything in the new database (users, games, polls...), so run it on a fresh site.
 """
 
 import os
@@ -25,7 +26,9 @@ def quote(value):
         return "NULL"
     if isinstance(value, (int, float)):
         return repr(value)
-    return "'" + str(value).replace("'", "''") + "'"
+    # One statement per line: newlines inside text become char(10) so the file can be split by line.
+    text = "'" + str(value).replace("'", "''") + "'"
+    return text.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "' || char(10) || '")
 
 
 def main():
@@ -34,7 +37,9 @@ def main():
     have = {r[0] for r in src.execute("SELECT name FROM sqlite_master WHERE type = 'table'")}
     lines = ["PRAGMA defer_foreign_keys = true;"]
     for table in reversed(TABLES):
-        lines.append(f"DELETE FROM {table};")
+        # keep the new site's own secret key and setup code
+        lines.append("DELETE FROM settings WHERE key NOT IN ('secret_key', 'setup_code');" if table == "settings"
+                     else f"DELETE FROM {table};")
     counts = {}
     for table in TABLES:
         if table not in have:

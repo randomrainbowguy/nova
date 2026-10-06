@@ -12,6 +12,7 @@ import { loadSession, sessionCookie, readCookie, unsign } from "./lib/session.js
 import { hashPassword, checkPassword, tempPassword } from "./lib/passwords.js";
 import { notify, emailManagers, sendEmail, siteUrl, emailConfigured } from "./lib/email.js";
 import { parseGameList, cleanGenres } from "./lib/importer.js";
+import { ensureSchema, storedSecret } from "./lib/schema.js";
 import { now, today, daysAgo, addDays, cleanName, EMAIL_RE, randomHex, safeNext, isHttpUrl, safeLink, plural } from "./lib/util.js";
 import { layout } from "./views/layout.js";
 import * as pages from "./views/pages.js";
@@ -30,11 +31,12 @@ const UNTRACKED = ["/g/", "/api/", "/favicon", "/chat/ws", "/chat/history"];
 /* ── per-request setup: session, user, CSRF, visitor counting ── */
 
 app.use("*", async (c, next) => {
-  if (!c.env.SECRET_KEY) {
-    return c.text("Set the SECRET_KEY secret first (see README): npx wrangler secret put SECRET_KEY", 500);
-  }
   const db = c.env.DB;
-  const session = await loadSession(c.req.raw, c.env.SECRET_KEY);
+  await ensureSchema(db);
+  // A SECRET_KEY secret is optional: without one, a random key is made once and kept in D1.
+  const secret = c.env.SECRET_KEY || await storedSecret(db, "secret_key", () => randomHex(32));
+  c.set("secret", secret);
+  const session = await loadSession(c.req.raw, secret);
   if (!session.get("csrf")) session.set("csrf", randomHex(16));
   c.set("session", session);
   c.set("settings", await loadSettings(db));
@@ -91,7 +93,7 @@ app.use("*", async (c, next) => {
   const secure = new URL(c.req.url).protocol === "https:";
   const cookies = [];
   if (newGuest) cookies.push(`nv=${newGuest}; Path=/; Max-Age=${400 * 86400}; HttpOnly; SameSite=Lax${secure ? "; Secure" : ""}`);
-  if (session.dirty) cookies.push(await sessionCookie(session, c.env.SECRET_KEY, secure));
+  if (session.dirty) cookies.push(await sessionCookie(session, secret, secure));
   if (cookies.length) {
     try {
       cookies.forEach((v) => c.res.headers.append("Set-Cookie", v));
@@ -332,22 +334,38 @@ app.post("/signup", async (c) => {
   return c.redirect("/");
 });
 
+/** The code needed to create the owner account (or import the old site) on a fresh site: the
+ *  OWNER_SETUP_CODE secret, or one made up once and printed to the Worker logs. */
+async function setupCode(c) {
+  if (c.env.OWNER_SETUP_CODE) return c.env.OWNER_SETUP_CODE;
+  const code = await storedSecret(c.env.DB, "setup_code", () => randomHex(4));
+  console.log(`No owner yet. Setup code: ${code}`);
+  return code;
+}
+
+const setupView = (c, form) => render(c, pages.setupPage(c, c.get("settings").site_name, form, !!c.env.OWNER_SETUP_CODE),
+  { title: "Set up", bare: true });
+
 app.get("/setup", async (c) => {
   if (await ownerExists(c.env.DB)) return notFound(c);
-  return render(c, pages.setupPage(c, c.get("settings").site_name, {}, !!c.env.OWNER_SETUP_CODE), { title: "Set up", bare: true });
+  await setupCode(c);
+  return setupView(c, {});
 });
 
 app.post("/setup", async (c) => {
   const db = c.env.DB;
   if (await ownerExists(db)) return notFound(c);
-  const name = cleanName(field(c, "name")), email = field(c, "email").trim(), password = field(c, "password");
   const code = field(c, "code").trim();
-  let error;
-  if (!c.env.OWNER_SETUP_CODE || code !== c.env.OWNER_SETUP_CODE) error = "Wrong setup code. It's the OWNER_SETUP_CODE secret.";
-  else error = await accountError(db, name, email, password, 8);
+  if (!timingSafeEqualStr(code, await setupCode(c))) {
+    flash(c, "Wrong setup code.", "error");
+    return setupView(c, { name: field(c, "name"), email: field(c, "email") });
+  }
+  if (field(c, "action") === "import") return importOldSite(c);
+  const name = cleanName(field(c, "name")), email = field(c, "email").trim(), password = field(c, "password");
+  const error = await accountError(db, name, email, password, 8);
   if (error) {
     flash(c, error, "error");
-    return render(c, pages.setupPage(c, c.get("settings").site_name, { name, email, code }, !!c.env.OWNER_SETUP_CODE), { title: "Set up", bare: true });
+    return setupView(c, { name, email, code });
   }
   const res = await db.prepare("INSERT INTO users (username, name, email, password_hash, status, role, created_at) VALUES (?, ?, ?, ?, 'approved', 'owner', ?)")
     .bind(await makeUsername(db, email), name, email, await hashPassword(password), now()).run();
@@ -355,6 +373,45 @@ app.post("/setup", async (c) => {
   flash(c, "You're the owner. Welcome!");
   return c.redirect("/admin");
 });
+
+const IMPORT_TABLES = "settings|users|games|polls|poll_options|votes|favorites|notifications|game_plays|visits|game_requests";
+const IMPORT_LINE = new RegExp(`^(PRAGMA defer_foreign_keys = true|DELETE FROM (${IMPORT_TABLES})( WHERE .*)?|` +
+  `(INSERT|INSERT OR REPLACE) INTO (${IMPORT_TABLES}) \\(.*|UPDATE games SET .*);$`);
+
+/** Loads nova-data.sql (made by scripts/export-to-d1.py from the old Flask site's nova.db). */
+async function importOldSite(c) {
+  const db = c.env.DB;
+  const file = first(c.get("form").data_file);
+  if (!file || typeof file === "string" || !file.name) {
+    flash(c, "Pick the nova-data.sql file first.", "error");
+    return setupView(c, {});
+  }
+  const lines = (await file.text()).split(/\r?\n/).filter((l) => l.trim());
+  const bad = lines.findIndex((l) => !IMPORT_LINE.test(l));
+  if (!lines.length || bad !== -1) {
+    flash(c, bad === -1 ? "That file is empty." : `That doesn't look like a nova-data.sql file (line ${bad + 1}).`, "error");
+    return setupView(c, {});
+  }
+  // D1 runs each batch as one transaction; keep them a reasonable size.
+  const stmts = lines.map((l) => db.prepare(l.replace(/;$/, "")));
+  try {
+    for (let i = 0; i < stmts.length; i += 200) await db.batch(stmts.slice(i, i + 200));
+  } catch (e) {
+    console.log("import failed", e);
+    flash(c, `The import stopped partway: ${e.message}`, "error");
+    return setupView(c, {});
+  }
+  const counts = await db.prepare("SELECT (SELECT COUNT(*) FROM users) AS u, (SELECT COUNT(*) FROM games) AS g").first();
+  flash(c, `Imported ${counts.u} ${plural(counts.u, "account")} and ${counts.g} ${plural(counts.g, "game")}. Log in with your old email and password.`);
+  return c.redirect("/login");
+}
+
+function timingSafeEqualStr(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
 
 app.get("/login", async (c) => {
   if (!(await ownerExists(c.env.DB))) return c.redirect("/setup");
@@ -464,7 +521,7 @@ app.post("/account", loginRequired(async (c) => {
 }));
 
 app.get("/unsubscribe/:token", async (c) => {
-  const id = await unsign(c.env.SECRET_KEY + ":unsubscribe", c.req.param("token"));
+  const id = await unsign(c.get("secret") + ":unsubscribe", c.req.param("token"));
   if (!id) return notFound(c);
   await c.env.DB.prepare("UPDATE users SET email_opt_in = 0 WHERE id = ?").bind(Number(id)).run();
   return render(c, pages.messagePage("Unsubscribed", "You won't get any more emails. You can turn them back on in your account page."),

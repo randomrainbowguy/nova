@@ -335,18 +335,27 @@ export const forgotPage = (c) => authShell("Forgot password", "The admin will re
     <p class="muted small center"><a href="/login">Back to log in</a></p>
   </form>`);
 
-export const setupPage = (c, site, form, hasCode) => authShell(`Set up ${site}`,
-  raw("Create the <b>owner</b> account. You need the setup code: the <code>OWNER_SETUP_CODE</code> secret in Cloudflare."),
-  hasCode ? html`
+export const setupPage = (c, site, form, fromSecret) => authShell(`Set up ${site}`,
+  fromSecret ? raw("You need the setup code: the <code>OWNER_SETUP_CODE</code> secret you set in Cloudflare.")
+    : raw("You need the setup code. It's in the Worker's logs: Cloudflare dashboard → your Worker → <b>Logs</b> (look for \"Setup code\")."), html`
   <form class="form" method="post">
-    ${csrfField(c)}
+    ${csrfField(c)}<input type="hidden" name="action" value="owner">
+    <h2 class="auth-sub">Start fresh</h2>
     <label>Setup code <input class="input" name="code" required autocomplete="off" value="${form.code || ""}"></label>
     <label>Your name <input class="input" name="name" value="${form.name || ""}" maxlength="40" required autocomplete="name"></label>
     <label>Email <input class="input" name="email" type="email" value="${form.email || ""}" required autocomplete="email"></label>
     <label>Password (8+ characters) <input class="input" name="password" type="password" minlength="8" required autocomplete="new-password"></label>
     <p class="pw-note">💡 Save this password somewhere safe, like your notes app, so you won't forget it.</p>
     <button class="btn full big">Create owner account</button>
-  </form>` : html`<div class="notice">Set the <code>OWNER_SETUP_CODE</code> secret first (see README), then reload this page.</div>`);
+  </form>
+  <form class="form auth-alt" method="post" enctype="multipart/form-data">
+    ${csrfField(c)}<input type="hidden" name="action" value="import">
+    <h2 class="auth-sub">Moving from the old site?</h2>
+    <p class="muted small">Upload <code>nova-data.sql</code> (made by <code>scripts/export-to-d1.py</code>) to bring over every account, game, poll and update. Everyone keeps their password.</p>
+    <label>Setup code <input class="input" name="code" required autocomplete="off"></label>
+    <label>nova-data.sql <input class="input" type="file" name="data_file" accept=".sql,.txt" required></label>
+    <button class="btn ghost full">Import old site</button>
+  </form>`);
 
 export const waitingPage = (c, me) => authShell(me.status === "banned" ? "You've been banned" : "Waiting for approval",
   me.status === "banned" ? (me.ban_reason || "The admin has removed your access.")
