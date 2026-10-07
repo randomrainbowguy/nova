@@ -39,6 +39,9 @@ def main():
         url = replace.get(r["id"], r["url"])
         if r["file"] == "emulator.html" or url == "/emulator/":
             url = EMU_URL
+        # freebuisness games load straight from the GitHub repo instead of through jsDelivr.
+        url = re.sub(r"^https://cdn\.jsdelivr\.net/gh/freebuisness/html@([^/]+)/",
+                     r"https://raw.githubusercontent.com/freebuisness/html/\1/", url or "")
         if re.sub(r"^https?://", "", url or "").split("/")[0].lower() not in RAW_HOSTS:
             continue  # the hub only runs games that load from a code repo
         games.append({"id": r["id"], "name": r["name"], "description": r["description"] or "",
