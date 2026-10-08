@@ -1,4 +1,9 @@
-# Emulator (self-hosted EmulatorJS)
+# Emulator (EmulatorJS)
+
+> **Oct 2026:** `public/emulator/data/` was removed from the repo. `public/emulator/index.html` now loads
+> EmulatorJS 4.2.3 from `https://cdn.emulatorjs.org/4.2.3/data/` (the 96 MB of cores put the repo over
+> jsDelivr's 50 MB limit, so jsDelivr returned 403 for every file). The self-hosting notes below describe
+> the old setup; the copy is in git history (commit `724d10f`) if it's ever needed again.
 
 `public/emulator/` is a fully self-hosted copy of [EmulatorJS](https://github.com/EmulatorJS/EmulatorJS)
 plus our own front page (`public/emulator/index.html`). It is served from our own origin at

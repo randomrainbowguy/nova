@@ -89,8 +89,10 @@ Most games are raw HTML files on GitHub/jsDelivr. The player downloads the file 
 frame. `public/static/game-sanitize.js` first strips the game's own ads and trackers and applies
 loader fixes. `tools/gametest/` is a headless-Chrome harness that checks every game (see its README).
 
-The emulator is [EmulatorJS](https://github.com/EmulatorJS/EmulatorJS), self-hosted in
-`public/emulator/` (all cores are in the repo; nothing loads from a CDN). See `tools/emulator/README.md`.
+The emulator is [EmulatorJS](https://github.com/EmulatorJS/EmulatorJS). Our front page is
+`public/emulator/index.html`; the emulator itself and its cores load from EmulatorJS's own CDN
+(`cdn.emulatorjs.org/4.2.3/data/`). They used to be in the repo, but at ~96 MB they pushed it over
+jsDelivr's 50 MB limit, which broke the standalone site. See `tools/emulator/README.md`.
 
 ## Pro chat
 

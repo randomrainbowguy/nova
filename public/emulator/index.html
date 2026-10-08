@@ -300,6 +300,7 @@
   if (pre && names[pre]) coreSel.value = pre;
   else { try { var last = localStorage.getItem('emu.lastCore'); if (last && names[last]) coreSel.value = last; } catch (e) {} }
 
+  var EJS_DATA = 'https://cdn.emulatorjs.org/4.2.3/data/';
   var started = false;
   function start() {
     if (started || !romFile || !coreSel.value) return;
@@ -310,7 +311,7 @@
     window.EJS_gameName     = romFile.name.replace(/\.[^.]+$/, '') || 'game';  // also the key for browser saves
     window.EJS_gameUrl      = URL.createObjectURL(romFile);
     if (biosFile) window.EJS_biosUrl = URL.createObjectURL(biosFile);
-    window.EJS_pathtodata   = 'data/';      // self-hosted, relative to this page
+    window.EJS_pathtodata   = EJS_DATA;     // EmulatorJS's own hosted copy (too big for jsDelivr to serve from this repo)
     window.EJS_startOnLoaded = true;
     window.EJS_color        = '#7c5cff';
     window.EJS_backgroundColor = '#000000';
@@ -322,7 +323,7 @@
     document.title = window.EJS_gameName + ' — Emulator';
 
     var s = document.createElement('script');
-    s.src = 'data/loader.js';
+    s.src = EJS_DATA + 'loader.js';
     s.onerror = function () { alert('Could not load the emulator files.'); location.reload(); };
     document.body.appendChild(s);
   }
