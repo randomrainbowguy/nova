@@ -610,9 +610,13 @@
    NOVA_BASE is set by the tiny launcher file; it's this folder on jsDelivr. */
 (function () {
   var BASE = window.NOVA_BASE || "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/";
-  var hub = fetch(BASE + "hub.html").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); });
+  // jsDelivr tells browsers to keep files for 7 days. Always ask for the latest (cheap: unchanged files
+  // come back as "not modified"), and tag scripts/styles so a saved old copy is never reused for long.
+  var FRESH = "?v=" + Math.floor(Date.now() / 600000);
+  var hub = fetch(BASE + "hub.html", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); });
   function hubHtml(text) {
-    return text.split("__BASE__").join(BASE)
+    return text.replace(/__BASE__([^"']+\.(?:js|css))/g, function (m, file) { return BASE + file + FRESH; })
+      .split("__BASE__").join(BASE)
       .replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(BASE) + ';<\/script>');
   }
   function openNova(e) {
@@ -627,8 +631,8 @@
 
   // Visits to this front page go to the same Google Analytics property (gaId in standalone/config.js).
   function load(src, cb) { var el = document.createElement("script"); el.src = src; el.onload = cb; document.head.appendChild(el); }
-  load(BASE + "config.js", function () {
-    load(BASE + "ga.js", function () { window.novaTrack("page_view", {}, { title: "Front page", path: "/" }); });
+  load(BASE + "config.js" + FRESH, function () {
+    load(BASE + "ga.js" + FRESH, function () { window.novaTrack("page_view", {}, { title: "Front page", path: "/" }); });
   });
 })();
 </script>

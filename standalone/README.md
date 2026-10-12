@@ -20,7 +20,7 @@ The file only knows this folder's address; everything else loads from this repo 
 <body style="background:#f7f6f2">
 <script>
 var NOVA_BASE = "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/";
-fetch(NOVA_BASE + "index.html").then(function (r) { return r.text(); }).then(function (html) {
+fetch(NOVA_BASE + "index.html", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(function (html) {
   html = html.replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(NOVA_BASE) + ';<\/script>');
   document.open(); document.write(html); document.close();
 }).catch(function () { document.body.textContent = "Couldn't load. Check your connection and reload."; });
@@ -33,8 +33,9 @@ fetch(NOVA_BASE + "index.html").then(function (r) { return r.text(); }).then(fun
 
 ## Updating
 
-Commit changes here and the tiny file picks them up. jsDelivr caches branch files for up to
-12 hours; to see a change right away, open `https://purge.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/<file>`.
+Commit changes here and the tiny file picks them up. Browsers always re-check for the latest files
+(jsDelivr would otherwise let them keep a copy for 7 days), but jsDelivr itself caches branch files
+for up to 12 hours; to push a change out right away, open `https://purge.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/<file>`.
 
 ## Analytics
 
