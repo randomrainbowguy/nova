@@ -227,7 +227,9 @@
   const thumb = (u, w) => u ? `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${w}&h=${Math.round(w * 0.75)}&fit=cover&output=webp&q=75` : "";
   const FALLBACK = "if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full}else{this.remove()}";
   const img = (u, w, lazy = true) => `<img src="${esc(thumb(u, w))}" data-full="${esc(u)}" alt=""${lazy ? ' loading="lazy"' : ""} decoding="async" onerror="${FALLBACK}">`;
-  const art = (g) => `<span class="hv-noart" style="--h:${(g.id * 47) % 360}">${esc((g.name || "?").slice(0, 1))}</span>` +
+  // Games without a cover get a title card: the name on a gradient (the cover, if any, sits on top of it
+  // and the card shows through if the image fails to load).
+  const art = (g) => `<span class="hv-noart titled" style="--h:${(g.id * 47) % 360}"><b>${esc(g.name || "?")}</b></span>` +
     (g.image ? img(g.image, 480) : "");
   $("game-count").textContent = GAMES.length;
   buildWelcome();

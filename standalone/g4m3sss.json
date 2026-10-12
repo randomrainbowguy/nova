@@ -1,5 +1,5 @@
 {
- "_about": "Games load from github.com/randomrainbowguy/g4m3sss (offline/), pinned to this commit. 'match': Nova game id -> file (replaces freebuisness). 'new': games only in g4m3sss. Games from freebuisness without a match are removed.",
+ "_about": "Games load from github.com/randomrainbowguy/g4m3sss (offline/), pinned to this commit. 'match': Nova game id -> file (replaces freebuisness). 'new': games only in g4m3sss. Games from freebuisness without a match are removed. 'image' on new games: a cover found in freebuisness/covers, selenite-cc/selenite-old or bubbls/UGS-Assets (games without one get a title card).",
  "commit": "5dbfcd7a6e788101a8acab50a6cf1af209938641",
  "match": {
   "86": "12-mini-battles.html",
@@ -145,7 +145,8 @@
  "new": [
   {
    "file": "1-on-1-soccer.html",
-   "name": "1 On 1 Soccer"
+   "name": "1 On 1 Soccer",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/1on1soccer/logo.jpg"
   },
   {
    "file": "1-on-1-tennis.html",
@@ -181,15 +182,18 @@
   },
   {
    "file": "Alpha_1.2.6.html",
-   "name": "Minecraft Alpha 1.2.6"
+   "name": "Minecraft Alpha 1.2.6",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/298.png"
   },
   {
    "file": "Beta_1.3.html",
-   "name": "Minecraft Beta 1.3"
+   "name": "Minecraft Beta 1.3",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/299.png"
   },
   {
    "file": "Indev.html",
-   "name": "Minecraft Indev"
+   "name": "Minecraft Indev",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/301.png"
   },
   {
    "file": "agar-io-lite.html",
@@ -201,7 +205,8 @@
   },
   {
    "file": "age-of-war.html",
-   "name": "Age Of War"
+   "name": "Age Of War",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/ageofwar/warofage.jpg"
   },
   {
    "file": "among-us.html",
@@ -225,7 +230,8 @@
   },
   {
    "file": "bouncy-motors.html",
-   "name": "Bouncy Motors"
+   "name": "Bouncy Motors",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/bouncy%20motors/icon.png"
   },
   {
    "file": "boxel-rebound.html",
@@ -233,11 +239,13 @@
   },
   {
    "file": "breaking-the-bank.html",
-   "name": "Breaking The Bank"
+   "name": "Breaking The Bank",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/breakingthebank/balling.avif"
   },
   {
    "file": "bubble-shooter.html",
-   "name": "Bubble Shooter"
+   "name": "Bubble Shooter",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/bubbleshooter/cover.svg"
   },
   {
    "file": "car-drawing.html",
@@ -249,7 +257,8 @@
   },
   {
    "file": "chess.html",
-   "name": "Chess"
+   "name": "Chess",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/chess/icon.png"
   },
   {
    "file": "crazy-crash-landing.html",
@@ -293,7 +302,8 @@
   },
   {
    "file": "escaping-the-prison.html",
-   "name": "Escaping The Prison"
+   "name": "Escaping The Prison",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/escapingtheprison/pwison.avif"
   },
   {
    "file": "eugenes-life.html",
@@ -305,7 +315,8 @@
   },
   {
    "file": "fireboy-and-watergirl-4.html",
-   "name": "Fireboy And Watergirl 4"
+   "name": "Fireboy And Watergirl 4",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/fireboywatergirl4/300.jpg"
   },
   {
    "file": "fireboy-and-watergirl.html",
@@ -313,7 +324,8 @@
   },
   {
    "file": "fleeing-the-complex.html",
-   "name": "Fleeing The Complex"
+   "name": "Fleeing The Complex",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/fleeingthecomplex/flee.jpg"
   },
   {
    "file": "flood-runner-2.html",
@@ -329,7 +341,8 @@
   },
   {
    "file": "fnaf-sister-location.html",
-   "name": "Five Nights at Freddy's: Sister Location"
+   "name": "Five Nights at Freddy's: Sister Location",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/185.png"
   },
   {
    "file": "free-rider-3.html",
@@ -341,7 +354,8 @@
   },
   {
    "file": "funny-mad-racing.html",
-   "name": "Funny Mad Racing"
+   "name": "Funny Mad Racing",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/funnymadracing/logo.webp"
   },
   {
    "file": "get-on-top.html",
@@ -361,11 +375,13 @@
   },
   {
    "file": "hole-io.html",
-   "name": "Hole.io"
+   "name": "Hole.io",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/holeio/feature800x470.png"
   },
   {
    "file": "infiltrating-the-airship.html",
-   "name": "Infiltrating The Airship"
+   "name": "Infiltrating The Airship",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/infiltratingtheairship/air.avif"
   },
   {
    "file": "iron-snout.html",
@@ -381,11 +397,13 @@
   },
   {
    "file": "karate-bros.html",
-   "name": "Karate Bros"
+   "name": "Karate Bros",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/karate%20bros/icon.png"
   },
   {
    "file": "kart-bros.html",
-   "name": "Kart Bros"
+   "name": "Kart Bros",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/kart%20bros/kartbro_512x512.png"
   },
   {
    "file": "little-alchemy-2.html",
@@ -397,15 +415,18 @@
   },
   {
    "file": "merge-round-racers.html",
-   "name": "Merge Round Racers"
+   "name": "Merge Round Racers",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/merge%20round%20racers/splash.png"
   },
   {
    "file": "minesweeper.html",
-   "name": "Minesweeper"
+   "name": "Minesweeper",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/minesweeper/cover.svg"
   },
   {
    "file": "monster-tracks.html",
-   "name": "Monster Tracks"
+   "name": "Monster Tracks",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/36.png"
   },
   {
    "file": "motherload.html",
@@ -425,15 +446,18 @@
   },
   {
    "file": "ovo-3-dimensions.html",
-   "name": "OvO 3 Dimensions"
+   "name": "OvO 3 Dimensions",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/3.png"
   },
   {
    "file": "pac-man.html",
-   "name": "Pac-Man"
+   "name": "Pac-Man",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/pacman/icon.png"
   },
   {
    "file": "papas-pizzeria.html",
-   "name": "Papa's Pizzeria"
+   "name": "Papa's Pizzeria",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/papaspizzeria/images.jpeg"
   },
   {
    "file": "parking-fury-2.html",
@@ -481,7 +505,8 @@
   },
   {
    "file": "rocket-soccer-derby.html",
-   "name": "Rocket Soccer Derby"
+   "name": "Rocket Soccer Derby",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/rocket%20soccer%20derby/e521bbbf13a6480b60d75421e7edc8d8d0e1edadaccd7d43438864b62a74088a.png"
   },
   {
    "file": "rooftop-run.html",
@@ -489,7 +514,8 @@
   },
   {
    "file": "sand-game.html",
-   "name": "Sand Game"
+   "name": "Sand Game",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/sand/icon.png"
   },
   {
    "file": "sandbox-city.html",
@@ -509,15 +535,18 @@
   },
   {
    "file": "slope-3.html",
-   "name": "Slope 3"
+   "name": "Slope 3",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/slope3/cover.svg"
   },
   {
    "file": "sm-63.html",
-   "name": "Super Mario 63"
+   "name": "Super Mario 63",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/314.png"
   },
   {
    "file": "sm-64.html",
-   "name": "Super Mario 64"
+   "name": "Super Mario 64",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/588.png"
   },
   {
    "file": "snail-bob-2.html",
@@ -553,7 +582,8 @@
   },
   {
    "file": "soccer-bros.html",
-   "name": "Soccer Bros"
+   "name": "Soccer Bros",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/soccer%20bros/icon.png"
   },
   {
    "file": "space-is-key-2.html",
@@ -565,11 +595,13 @@
   },
   {
    "file": "speed-stars.html",
-   "name": "Speed Stars"
+   "name": "Speed Stars",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/266.png"
   },
   {
    "file": "stealing-the-diamond.html",
-   "name": "Stealing The Diamond"
+   "name": "Stealing The Diamond",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/stealingthediamond/diamante.avif"
   },
   {
    "file": "stick-archers-battle.html",
@@ -613,7 +645,8 @@
   },
   {
    "file": "the-impossible-quiz.html",
-   "name": "The Impossible Quiz"
+   "name": "The Impossible Quiz",
+   "image": "https://cdn.jsdelivr.net/gh/freebuisness/covers@298e9bedbc2ae3d7257bb67f28752a4c151ba5f8/507.png"
   },
   {
    "file": "there-is-no-g.html",
@@ -637,11 +670,13 @@
   },
   {
    "file": "worlds-hardest-game-2.html",
-   "name": "World's Hardest Game 2"
+   "name": "World's Hardest Game 2",
+   "image": "https://cdn.jsdelivr.net/gh/selenite-cc/selenite-old@9c743188888af0986c8c7b293dbac8f9e421a4ee/worldhardestgame2/the-worlds-hardest-game-2.jpg"
   },
   {
    "file": "wrestle-bros.html",
-   "name": "Wrestle Bros"
+   "name": "Wrestle Bros",
+   "image": "https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@9cf433220236bb0471ab3a68ec8fe3e0a2799e36/wrestle%20bros/icon.png"
   },
   {
    "file": "zrist.html",

@@ -91,7 +91,7 @@ def main():
                       "image": pin(r["image"]), "url": pin(url), "rank": len(games),
                       **({"walled": True} if r["id"] in walled else {})})
     for i, n in enumerate(g4["new"]):  # games only in g4m3sss; ids above any Nova game id
-        games.append({"id": 100000 + i, "name": n["name"], "description": "", "genres": [], "image": "",
+        games.append({"id": 100000 + i, "name": n["name"], "description": "", "genres": [], "image": n.get("image", ""),
                       "url": g4_base + n["file"], "rank": len(games)})
     out = os.path.join(HERE, "games.json")
     with open(out, "w", encoding="utf-8") as f:
