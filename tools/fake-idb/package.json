@@ -1,0 +1,1 @@
+{"name":"nova-fake-idb","private":true,"type":"module","scripts":{"build":"esbuild entry.js --bundle --minify --format=iife --target=es2018 --outfile=../../standalone/fake-idb.js"},"dependencies":{"esbuild":"^0.28.2","fake-indexeddb":"^6.2.5"},"allowScripts":{"esbuild@0.28.2":true}}

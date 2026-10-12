@@ -1,0 +1,651 @@
+{
+ "_about": "Games load from github.com/randomrainbowguy/g4m3sss (offline/), pinned to this commit. 'match': Nova game id -> file (replaces freebuisness). 'new': games only in g4m3sss. Games from freebuisness without a match are removed.",
+ "commit": "5dbfcd7a6e788101a8acab50a6cf1af209938641",
+ "match": {
+  "86": "12-mini-battles.html",
+  "87": "1v1.lol.html",
+  "108": "ages-of-conflict.html",
+  "113": "angry-birds.html",
+  "115": "angry-birds-showdown.html",
+  "125": "awesome-tanks.html",
+  "126": "awesome-tanks-2.html",
+  "128": "bacon-may-die.html",
+  "129": "bad-ice-cream.html",
+  "130": "bad-ice-cream-2.html",
+  "131": "bad-ice-cream-3.html",
+  "133": "bad-parenting.html",
+  "134": "bad-piggies.html",
+  "135": "bad-time-simulator.html",
+  "136": "baldis-basics.html",
+  "142": "bank-robbery-2.html",
+  "143": "bank-robbery-3.html",
+  "156": "big-ice-tower-tiny-square.html",
+  "157": "big-neon-tower-tiny-square.html",
+  "158": "big-tower-tiny-square.html",
+  "159": "big-tower-tiny-square-2.html",
+  "162": "bitlife.html",
+  "169": "bloons-TD.html",
+  "170": "bloons-TD-2.html",
+  "171": "bloons-TD-3.html",
+  "172": "bloons-TD-4.html",
+  "173": "bloons-TD-5.html",
+  "174": "bloxorz.html",
+  "175": "blumgi-rocket.html",
+  "176": "bob-the-robber-2.html",
+  "180": "bow-masters.html",
+  "194": "burrito-bison-launcha-libre.html",
+  "198": "candy-crush.html",
+  "216": "choppy-orc.html",
+  "218": "circloO.html",
+  "219": "circloO-2.html",
+  "222": "clash-of-vikings.html",
+  "235": "coreball.html",
+  "237": "crazy-cattle-3D.html",
+  "244": "cut-the-rope.html",
+  "245": "cut-the-rope-holiday-gift.html",
+  "246": "cut-the-rope-time-travel.html",
+  "247": "dadish-3.html",
+  "253": "death-run-3D.html",
+  "264": "doodle-jump.html",
+  "269": "draw-climber.html",
+  "275": "duck-life.html",
+  "276": "duck-life-2.html",
+  "277": "duck-life-3.html",
+  "278": "duck-life-4.html",
+  "279": "duck-life-5.html",
+  "287": "escape-road.html",
+  "288": "escape-road-2.html",
+  "289": "escape-road-3.html",
+  "295": "fancy-pants-adventure.html",
+  "296": "fancy-pants-adventure-2.html",
+  "312": "fireboy-and-watergirl-2.html",
+  "313": "fireboy-and-watergirl-3.html",
+  "339": "friday-night-funkin.html",
+  "397": "geometry-dash.html",
+  "400": "getaway-shootout.html",
+  "403": "gladi-hoppers.html",
+  "409": "google-baseball.html",
+  "413": "granny-2.html",
+  "432": "hill-climb-racing-lite.html",
+  "451": "ice-dodo.html",
+  "452": "idle-breakout.html",
+  "453": "idle-dice.html",
+  "466": "jetpack-joyride.html",
+  "481": "kittytoy.html",
+  "486": "learn-to-fly.html",
+  "487": "learn-to-fly-2.html",
+  "488": "learn-to-fly-3.html",
+  "489": "learn-to-fly-idle.html",
+  "497": "madalin-stunt-cars-2.html",
+  "508": "melon-playground.html",
+  "531": "moto-x3m-3.html",
+  "532": "moto-x3m-pool-party.html",
+  "533": "moto-x3m-spooky-land.html",
+  "534": "moto-x3m-winter.html",
+  "561": "ovo-2.html",
+  "567": "papas-bakeria.html",
+  "568": "papas-burgeria.html",
+  "569": "papas-cheeseria.html",
+  "570": "papas-cupcakeria.html",
+  "571": "papas-donuteria.html",
+  "572": "papas-freezeria.html",
+  "573": "papas-hot-doggeria.html",
+  "574": "papas-pancakeria.html",
+  "575": "papas-pastaria.html",
+  "577": "papas-scooperia.html",
+  "578": "papas-sushiria.html",
+  "579": "papas-taco-mia.html",
+  "580": "papas-wingeria.html",
+  "593": "picos-school.html",
+  "600": "plants-vs-zombies.html",
+  "614": "pou.html",
+  "622": "ragdoll-hit.html",
+  "632": "red-ball-4-vol-2.html",
+  "633": "red-ball-4-vol-3.html",
+  "640": "riddle-school.html",
+  "641": "riddle-school-2.html",
+  "642": "riddle-school-3.html",
+  "643": "riddle-school-4.html",
+  "644": "riddle-school-5.html",
+  "645": "riddle-transfer.html",
+  "646": "riddle-transfer-2.html",
+  "657": "rooftop-snipers-2.html",
+  "662": "run.html",
+  "663": "run-2.html",
+  "696": "slow-roads.html",
+  "712": "space-waves.html",
+  "727": "sprunki.html",
+  "752": "super-star-car.html",
+  "753": "superhot.html",
+  "767": "tanuki-sunset.html",
+  "777": "territorial-io.html",
+  "786": "worlds-hardest-game.html",
+  "787": "worlds-hardest-game-3.html",
+  "789": "they-are-coming.html",
+  "791": "this-is-the-only-level.html",
+  "811": "trivia-crack.html",
+  "813": "tube-jumpers.html",
+  "833": "vex-4.html",
+  "834": "vex-5.html",
+  "839": "vex-x3m.html",
+  "840": "vex-x3m-2.html",
+  "842": "volley-random.html",
+  "846": "war-the-knights.html",
+  "849": "we-become-what-we-behold.html",
+  "855": "wheely.html",
+  "856": "wheely-2.html",
+  "857": "wheely-3.html",
+  "858": "wheely-4.html",
+  "859": "wheely-5.html",
+  "860": "wheely-6.html",
+  "861": "wheely-7.html",
+  "862": "wheely-8.html",
+  "869": "yohoho-io.html"
+ },
+ "new": [
+  {
+   "file": "1-on-1-soccer.html",
+   "name": "1 On 1 Soccer"
+  },
+  {
+   "file": "1-on-1-tennis.html",
+   "name": "1 On 1 Tennis"
+  },
+  {
+   "file": "1.12.html",
+   "name": "Minecraft 1.12"
+  },
+  {
+   "file": "1.12_WASM.html",
+   "name": "Minecraft 1.12 (WASM)"
+  },
+  {
+   "file": "1.5.html",
+   "name": "Minecraft 1.5"
+  },
+  {
+   "file": "1.8_WASM.html",
+   "name": "Minecraft 1.8 (WASM)"
+  },
+  {
+   "file": "3D-flight-simulator.html",
+   "name": "3D Flight Simulator"
+  },
+  {
+   "file": "3d-free-kick.html",
+   "name": "3D Free Kick"
+  },
+  {
+   "file": "9007199254740992.html",
+   "name": "9007199254740992"
+  },
+  {
+   "file": "Alpha_1.2.6.html",
+   "name": "Minecraft Alpha 1.2.6"
+  },
+  {
+   "file": "Beta_1.3.html",
+   "name": "Minecraft Beta 1.3"
+  },
+  {
+   "file": "Indev.html",
+   "name": "Minecraft Indev"
+  },
+  {
+   "file": "agar-io-lite.html",
+   "name": "Agar.io Lite"
+  },
+  {
+   "file": "age-of-war-2.html",
+   "name": "Age Of War 2"
+  },
+  {
+   "file": "age-of-war.html",
+   "name": "Age Of War"
+  },
+  {
+   "file": "among-us.html",
+   "name": "Among Us"
+  },
+  {
+   "file": "angry-birds-space.html",
+   "name": "Angry Birds Space"
+  },
+  {
+   "file": "basketball-legends.html",
+   "name": "Basketball Legends"
+  },
+  {
+   "file": "bob-the-robber-5.html",
+   "name": "Bob The Robber 5"
+  },
+  {
+   "file": "bob-the-robber.html",
+   "name": "Bob The Robber"
+  },
+  {
+   "file": "bouncy-motors.html",
+   "name": "Bouncy Motors"
+  },
+  {
+   "file": "boxel-rebound.html",
+   "name": "Boxel Rebound"
+  },
+  {
+   "file": "breaking-the-bank.html",
+   "name": "Breaking The Bank"
+  },
+  {
+   "file": "bubble-shooter.html",
+   "name": "Bubble Shooter"
+  },
+  {
+   "file": "car-drawing.html",
+   "name": "Car Drawing"
+  },
+  {
+   "file": "chaos-faction-2.html",
+   "name": "Chaos Faction 2"
+  },
+  {
+   "file": "chess.html",
+   "name": "Chess"
+  },
+  {
+   "file": "crazy-crash-landing.html",
+   "name": "Crazy Crash Landing"
+  },
+  {
+   "file": "cut-the-rope-2.html",
+   "name": "Cut The Rope 2"
+  },
+  {
+   "file": "deadly-descent.html",
+   "name": "Deadly Descent"
+  },
+  {
+   "file": "death-chase.html",
+   "name": "Death Chase"
+  },
+  {
+   "file": "demolition-derby-crash-racing.html",
+   "name": "Demolition Derby Crash Racing"
+  },
+  {
+   "file": "drift-hunters-pro.html",
+   "name": "Drift Hunters Pro"
+  },
+  {
+   "file": "ducklings-io.html",
+   "name": "Ducklings.io"
+  },
+  {
+   "file": "eagle-ride.html",
+   "name": "Eagle Ride"
+  },
+  {
+   "file": "earn-to-die-2.html",
+   "name": "Earn To Die 2"
+  },
+  {
+   "file": "earn-to-die.html",
+   "name": "Earn To Die"
+  },
+  {
+   "file": "escaping-the-prison.html",
+   "name": "Escaping The Prison"
+  },
+  {
+   "file": "eugenes-life.html",
+   "name": "Eugene's Life"
+  },
+  {
+   "file": "fireblob.html",
+   "name": "Fireblob"
+  },
+  {
+   "file": "fireboy-and-watergirl-4.html",
+   "name": "Fireboy And Watergirl 4"
+  },
+  {
+   "file": "fireboy-and-watergirl.html",
+   "name": "Fireboy And Watergirl"
+  },
+  {
+   "file": "fleeing-the-complex.html",
+   "name": "Fleeing The Complex"
+  },
+  {
+   "file": "flood-runner-2.html",
+   "name": "Flood Runner 2"
+  },
+  {
+   "file": "flood-runner-3.html",
+   "name": "Flood Runner 3"
+  },
+  {
+   "file": "flood-runner-4.html",
+   "name": "Flood Runner 4"
+  },
+  {
+   "file": "fnaf-sister-location.html",
+   "name": "Five Nights at Freddy's: Sister Location"
+  },
+  {
+   "file": "free-rider-3.html",
+   "name": "Free Rider 3"
+  },
+  {
+   "file": "funny-battle-2.html",
+   "name": "Funny Battle 2"
+  },
+  {
+   "file": "funny-mad-racing.html",
+   "name": "Funny Mad Racing"
+  },
+  {
+   "file": "get-on-top.html",
+   "name": "Get On Top"
+  },
+  {
+   "file": "google-dino.html",
+   "name": "Google Dino"
+  },
+  {
+   "file": "hanger-2.html",
+   "name": "Hanger 2"
+  },
+  {
+   "file": "highway-traffic.html",
+   "name": "Highway Traffic"
+  },
+  {
+   "file": "hole-io.html",
+   "name": "Hole.io"
+  },
+  {
+   "file": "infiltrating-the-airship.html",
+   "name": "Infiltrating The Airship"
+  },
+  {
+   "file": "iron-snout.html",
+   "name": "Iron Snout"
+  },
+  {
+   "file": "jacksmith.html",
+   "name": "Jacksmith"
+  },
+  {
+   "file": "jumping-shell.html",
+   "name": "Jumping Shell"
+  },
+  {
+   "file": "karate-bros.html",
+   "name": "Karate Bros"
+  },
+  {
+   "file": "kart-bros.html",
+   "name": "Kart Bros"
+  },
+  {
+   "file": "little-alchemy-2.html",
+   "name": "Little Alchemy 2"
+  },
+  {
+   "file": "madness-project-nexus.html",
+   "name": "Madness Project Nexus"
+  },
+  {
+   "file": "merge-round-racers.html",
+   "name": "Merge Round Racers"
+  },
+  {
+   "file": "minesweeper.html",
+   "name": "Minesweeper"
+  },
+  {
+   "file": "monster-tracks.html",
+   "name": "Monster Tracks"
+  },
+  {
+   "file": "motherload.html",
+   "name": "Motherload"
+  },
+  {
+   "file": "murder.html",
+   "name": "Murder"
+  },
+  {
+   "file": "openTTD.html",
+   "name": "OpenTTD"
+  },
+  {
+   "file": "opposite-day.html",
+   "name": "Opposite Day"
+  },
+  {
+   "file": "ovo-3-dimensions.html",
+   "name": "OvO 3 Dimensions"
+  },
+  {
+   "file": "pac-man.html",
+   "name": "Pac-Man"
+  },
+  {
+   "file": "papas-pizzeria.html",
+   "name": "Papa's Pizzeria"
+  },
+  {
+   "file": "parking-fury-2.html",
+   "name": "Parking Fury 2"
+  },
+  {
+   "file": "parking-fury-3.html",
+   "name": "Parking Fury 3"
+  },
+  {
+   "file": "parking-fury.html",
+   "name": "Parking Fury"
+  },
+  {
+   "file": "ping-pong-chaos.html",
+   "name": "Ping Pong Chaos"
+  },
+  {
+   "file": "pixel-speedrun.html",
+   "name": "Pixel Speedrun"
+  },
+  {
+   "file": "plonky.html",
+   "name": "Plonky"
+  },
+  {
+   "file": "poor-bunny.html",
+   "name": "Poor Bunny"
+  },
+  {
+   "file": "ragdoll-soccer.html",
+   "name": "Ragdoll Soccer"
+  },
+  {
+   "file": "red-ball-4-vol-1.html",
+   "name": "Red Ball 4 Vol. 1"
+  },
+  {
+   "file": "retro-highway.html",
+   "name": "Retro Highway"
+  },
+  {
+   "file": "retro-ping-pong.html",
+   "name": "Retro Ping Pong"
+  },
+  {
+   "file": "rocket-soccer-derby.html",
+   "name": "Rocket Soccer Derby"
+  },
+  {
+   "file": "rooftop-run.html",
+   "name": "Rooftop Run"
+  },
+  {
+   "file": "sand-game.html",
+   "name": "Sand Game"
+  },
+  {
+   "file": "sandbox-city.html",
+   "name": "Sandbox City"
+  },
+  {
+   "file": "short-life.html",
+   "name": "Short Life"
+  },
+  {
+   "file": "six-cats-under.html",
+   "name": "Six Cats Under"
+  },
+  {
+   "file": "slope-2-player.html",
+   "name": "Slope 2 Player"
+  },
+  {
+   "file": "slope-3.html",
+   "name": "Slope 3"
+  },
+  {
+   "file": "sm-63.html",
+   "name": "Super Mario 63"
+  },
+  {
+   "file": "sm-64.html",
+   "name": "Super Mario 64"
+  },
+  {
+   "file": "snail-bob-2.html",
+   "name": "Snail Bob 2"
+  },
+  {
+   "file": "snail-bob-3.html",
+   "name": "Snail Bob 3"
+  },
+  {
+   "file": "snail-bob-4.html",
+   "name": "Snail Bob 4"
+  },
+  {
+   "file": "snail-bob-5.html",
+   "name": "Snail Bob 5"
+  },
+  {
+   "file": "snail-bob-6.html",
+   "name": "Snail Bob 6"
+  },
+  {
+   "file": "snail-bob-7.html",
+   "name": "Snail Bob 7"
+  },
+  {
+   "file": "snail-bob-8.html",
+   "name": "Snail Bob 8"
+  },
+  {
+   "file": "snail-bob.html",
+   "name": "Snail Bob"
+  },
+  {
+   "file": "soccer-bros.html",
+   "name": "Soccer Bros"
+  },
+  {
+   "file": "space-is-key-2.html",
+   "name": "Space Is Key 2"
+  },
+  {
+   "file": "space-is-key.html",
+   "name": "Space Is Key"
+  },
+  {
+   "file": "speed-stars.html",
+   "name": "Speed Stars"
+  },
+  {
+   "file": "stealing-the-diamond.html",
+   "name": "Stealing The Diamond"
+  },
+  {
+   "file": "stick-archers-battle.html",
+   "name": "Stick Archers Battle"
+  },
+  {
+   "file": "subway-surfers-beijing.html",
+   "name": "Subway Surfers Beijing"
+  },
+  {
+   "file": "subway-surfers-havana.html",
+   "name": "Subway Surfers Havana"
+  },
+  {
+   "file": "subway-surfers-san-francisco.html",
+   "name": "Subway Surfers San Francisco"
+  },
+  {
+   "file": "super-bike-the-champion.html",
+   "name": "Super Bike The Champion"
+  },
+  {
+   "file": "super-liquid-soccer.html",
+   "name": "Super Liquid Soccer"
+  },
+  {
+   "file": "table-tennis-world-tour.html",
+   "name": "Table Tennis World Tour"
+  },
+  {
+   "file": "temple-of-boom.html",
+   "name": "Temple Of Boom"
+  },
+  {
+   "file": "tetrominoes.html",
+   "name": "Tetrominoes"
+  },
+  {
+   "file": "the-impossible-quiz-2.html",
+   "name": "The Impossible Quiz 2"
+  },
+  {
+   "file": "the-impossible-quiz.html",
+   "name": "The Impossible Quiz"
+  },
+  {
+   "file": "there-is-no-g.html",
+   "name": "There Is No G"
+  },
+  {
+   "file": "this-is-the-only-level-too.html",
+   "name": "This Is The Only Level Too"
+  },
+  {
+   "file": "trap-the-cat.html",
+   "name": "Trap The Cat"
+  },
+  {
+   "file": "unicycle-hero.html",
+   "name": "Unicycle Hero"
+  },
+  {
+   "file": "wheelie-bike.html",
+   "name": "Wheelie Bike"
+  },
+  {
+   "file": "worlds-hardest-game-2.html",
+   "name": "World's Hardest Game 2"
+  },
+  {
+   "file": "wrestle-bros.html",
+   "name": "Wrestle Bros"
+  },
+  {
+   "file": "zrist.html",
+   "name": "Zrist"
+  }
+ ]
+}

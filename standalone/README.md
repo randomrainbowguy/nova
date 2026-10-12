@@ -8,6 +8,11 @@ The file only knows this folder's address; everything else loads from this repo 
 - `hub.html`, `hub.js`, `hub.css`: the games hub and Movies tab (styles come from `public/static/style.css`,
   game cleanup from `public/static/game-sanitize.js`, the emulator page from `public/emulator/`, its cores from `cdn.emulatorjs.org`).
 - `games.json`: the game list. Rebuild it from `nova.db` with `python3 standalone/build-games.py`.
+- `g4m3sss.json`: games load from github.com/randomrainbowguy/g4m3sss (`offline/`), pinned to a commit.
+  `match` maps Nova games to their g4m3sss file; `new` lists games only in g4m3sss. freebuisness isn't used.
+- `prefer-corduroy.json`: games that load from CorduroyBrick49/Games.
+- `fake-idb.js`: an in-memory IndexedDB for games when Nova is opened from a downloaded file (the browser
+  blocks the real one there). Built from `tools/fake-idb` with `npm run build`.
 - `config.js`: your Google Analytics ID (`gaId`) and the movies doc link.
 - `ga.js`: sends visits and game plays to Google Analytics. (Google's own gtag.js won't send from a
   downloaded file or an about:blank tab, so this talks to GA's collection endpoint directly.)

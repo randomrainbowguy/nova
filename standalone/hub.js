@@ -164,7 +164,7 @@
     // count up to the number of games
     const n = GAMES.length, el = $("wl-count"), t0 = performance.now();
     (function tick(t) {
-      const k = still ? 1 : Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+      const k = still ? 1 : Math.min(1, Math.max(0, (t - t0) / 1400)), e = 1 - Math.pow(1 - k, 3);
       el.textContent = Math.round(n * e);
       if (k < 1) requestAnimationFrame(tick);
     })(t0);
@@ -338,7 +338,7 @@ if(blocked(function(){return window.localStorage})){var d=${saved},t;var ls=mem(
 try{Object.defineProperty(window,"localStorage",{configurable:true,get:function(){return ls}})}catch(e){}}
 if(blocked(function(){return window.sessionStorage})){var ss=mem({},function(){});try{Object.defineProperty(window,"sessionStorage",{configurable:true,get:function(){return ss}})}catch(e){}}
 var idb=true;try{window.indexedDB.open("__nova")}catch(e){idb=false}
-if(!idb){try{Object.defineProperty(window,"indexedDB",{configurable:true,get:function(){return undefined}})}catch(e){}}
+if(!idb&&!window.__novaFakeIdb){try{Object.defineProperty(window,"indexedDB",{configurable:true,get:function(){return undefined}})}catch(e){}}
 var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGamepads",{configurable:true,value:function(){try{return gp.call(navigator)}catch(e){return[]}}})}catch(e){}}})();<\/script>`;
   }
   addEventListener("message", (e) => {
@@ -346,7 +346,26 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     if (!m || typeof m.novaSave !== "number" || !current || m.novaSave !== current.id) return;
     try { store.set("nova_save_" + m.novaSave, JSON.stringify(m.data)); } catch (err) {}
   });
-  function prepare(html, url, id) {
+  // Some games (g4m3sss) unpack themselves and rewrite the whole page with document.write. The page's
+  // address is a blob: URL, which relative paths can't be resolved against (Ruffle can't find its own
+  // files and gives up), so add a <base> to whatever page the game writes.
+  function rewriteBase(url) {
+    const base = JSON.stringify(url.slice(0, url.lastIndexOf("/") + 1)).replace(/</g, "\\u003c");
+    return `<script>(function(){var B=${base},done=false,w=document.write;
+document.write=function(){var a=Array.prototype.join.call(arguments,"");
+if(!done&&!/<base[\\s>]/i.test(a)){var t='<base href="'+B+'">';
+if(/<head[^>]*>/i.test(a)){a=a.replace(/<head[^>]*>/i,function(m){return m+t});done=true}
+else if(/<html[^>]*>/i.test(a)){a=a.replace(/<html[^>]*>/i,function(m){return m+t});done=true}}
+return w.call(document,a)};})();<\/script>`;
+  }
+  // In-memory IndexedDB (standalone/fake-idb.js, ~56 KB) for games running with no origin, where the
+  // browser blocks the real one. Unity games (Funny Battle 2, Blumgi Rocket...) stall without it.
+  const FAKE_IDB = fetch(BASE + "fake-idb.js").then((r) => (r.ok ? r.text() : "")).catch(() => "");
+  const fakeIdbShim = (code) => !code ? "" :
+    `<script>(function(){var ok=true;try{window.indexedDB.open("__nova")}catch(e){ok=false}if(ok)return;window.__novaFakeIdb=true;
+${code.replace(/<\/(script)/gi, "<\\/$1")}
+})();<\/script>`;
+  function prepare(html, url, id, fakeIdb) {
     let out;
     if (window.sanitizeGameHtml) out = window.sanitizeGameHtml(html, url);
     else {
@@ -355,8 +374,13 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     }
     // The game runs from a blob: URL, which may not count as secure even when this page does,
     // so always add the shims (they only fill in what's missing).
-    const shims = storageShim(id) + CRYPTO_SHIM;
-    return /<head[^>]*>/i.test(out) ? out.replace(/<head([^>]*)>/i, (m) => m + shims) : shims + out;
+    const shims = fakeIdbShim(fakeIdb) + storageShim(id) + CRYPTO_SHIM + rewriteBase(url);
+    // Put them right after <head>, unless a script comes first: some games (g4m3sss) are a <script> that
+    // writes the real page out of a string containing its own "<head>", and inserting there would cut
+    // that script short. Then they go at the very top instead.
+    const head = out.search(/<head[\s>]/i), script = out.search(/<script[\s>]/i);
+    if (head === -1 || (script !== -1 && script < head)) return shims + out;
+    return out.replace(/<head([^>]*)>/i, (m) => m + shims);
   }
   function openGame(g) {
     if (!g) return;
@@ -375,7 +399,7 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     // If the launcher had to use a jsDelivr mirror (cdn.jsdelivr.net blocked), load games through it too.
     const url = g.url.startsWith("nova:") ? BASE + g.url.slice(5)   // a game kept in this repo
       : MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
-    loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, url, g.id));
+    loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => FAKE_IDB.then((fake) => prepare(h, url, g.id, fake)));
     loaded.token = token;
     const mine = loaded;
     mine.then((html) => {

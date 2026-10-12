@@ -56,6 +56,12 @@ def main():
     local = {698: "games/2351.html"}
     # Games with a site lock that blacks them out on about:blank; the hub runs these walled off.
     walled = {698}
+    # freebuisness is no longer used: games that have a copy in g4m3sss load from there, the rest are
+    # dropped, and games only in g4m3sss are added (see g4m3sss.json).
+    with open(os.path.join(HERE, "g4m3sss.json"), encoding="utf-8") as f:
+        g4 = json.load(f)
+    g4_base = f"https://raw.githubusercontent.com/randomrainbowguy/g4m3sss/{g4['commit']}/offline/"
+    g4_match = {int(k): v for k, v in g4["match"].items()}
     # Games that exist in both repos load from CorduroyBrick49 (see prefer-corduroy.json).
     with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
         corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
@@ -69,6 +75,10 @@ def main():
             url = "nova:" + local[r["id"]]
         elif r["id"] in corduroy:
             url = f"https://raw.githubusercontent.com/CorduroyBrick49/Games/main/{corduroy[r['id']]}"
+        elif r["id"] in g4_match:
+            url = g4_base + g4_match[r["id"]]
+        elif "freebuisness/html" in (url or ""):
+            continue  # no longer offered
         if r["file"] == "emulator.html" or url == "/emulator/":
             url = EMU_URL
         # freebuisness games load straight from the GitHub repo instead of through jsDelivr.
@@ -80,6 +90,9 @@ def main():
                       "genres": [g.strip() for g in (r["genres"] or "").split(",") if g.strip()],
                       "image": pin(r["image"]), "url": pin(url), "rank": len(games),
                       **({"walled": True} if r["id"] in walled else {})})
+    for i, n in enumerate(g4["new"]):  # games only in g4m3sss; ids above any Nova game id
+        games.append({"id": 100000 + i, "name": n["name"], "description": "", "genres": [], "image": "",
+                      "url": g4_base + n["file"], "rank": len(games)})
     out = os.path.join(HERE, "games.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(games, f, ensure_ascii=False, separators=(",", ":"))
