@@ -53,7 +53,7 @@ def main():
     remove = {r["id"] for r in decisions["remove"]}
     # Games kept in this repo (standalone/games/). "nova:" means "next to games.json"; the hub fills
     # in the address, so they load from the same commit as everything else.
-    local = {698: "games/snowrider3d.html"}  # Snow Rider 3D
+    local = {698: "games/2351.html"}
     # Games that exist in both repos load from CorduroyBrick49 (see prefer-corduroy.json).
     with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
         corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
