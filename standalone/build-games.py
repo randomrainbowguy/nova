@@ -51,6 +51,9 @@ def main():
     with open(os.path.join(HERE, "..", "tools", "gametest", "decisions.json"), encoding="utf-8") as f:
         decisions = json.load(f)
     remove = {r["id"] for r in decisions["remove"]}
+    # Games kept in this repo (standalone/games/). "nova:" means "next to games.json"; the hub fills
+    # in the address, so they load from the same commit as everything else.
+    local = {698: "games/snowrider3d.html"}  # Snow Rider 3D
     # Games that exist in both repos load from CorduroyBrick49 (see prefer-corduroy.json).
     with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
         corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
@@ -60,14 +63,16 @@ def main():
         if r["id"] in remove:
             continue
         url = replace.get(r["id"], r["url"])
-        if r["id"] in corduroy:
+        if r["id"] in local:
+            url = "nova:" + local[r["id"]]
+        elif r["id"] in corduroy:
             url = f"https://raw.githubusercontent.com/CorduroyBrick49/Games/main/{corduroy[r['id']]}"
         if r["file"] == "emulator.html" or url == "/emulator/":
             url = EMU_URL
         # freebuisness games load straight from the GitHub repo instead of through jsDelivr.
         url = re.sub(r"^https://cdn\.jsdelivr\.net/gh/freebuisness/html@([^/]+)/",
                      r"https://raw.githubusercontent.com/freebuisness/html/\1/", url or "")
-        if re.sub(r"^https?://", "", url or "").split("/")[0].lower() not in RAW_HOSTS:
+        if not url.startswith("nova:") and re.sub(r"^https?://", "", url or "").split("/")[0].lower() not in RAW_HOSTS:
             continue  # the hub only runs games that load from a code repo
         games.append({"id": r["id"], "name": r["name"], "description": r["description"] or "",
                       "genres": [g.strip() for g in (r["genres"] or "").split(",") if g.strip()],

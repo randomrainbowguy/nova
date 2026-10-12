@@ -300,7 +300,8 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     track("play_game", { game_name: g.name, game_id: String(g.id) });
     const token = {};
     // If the launcher had to use a jsDelivr mirror (cdn.jsdelivr.net blocked), load games through it too.
-    const url = MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
+    const url = g.url.startsWith("nova:") ? BASE + g.url.slice(5)   // a game kept in this repo
+      : MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
     loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, url, g.id));
     loaded.token = token;
     const mine = loaded;
