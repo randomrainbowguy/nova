@@ -1,0 +1,185 @@
+{
+ "_about": "Games that exist in both freebuisness/html and CorduroyBrick49/Games load from CorduroyBrick49 (pinned commit in build-games.py). id -> file in CorduroyBrick49/Games.",
+ "games": {
+  "81": {
+   "name": "10 Minutes Till Dawn",
+   "file": "10minutestilldawn.html"
+  },
+  "80": {
+   "name": "8 Ball Classic",
+   "file": "8ballclassic.html"
+  },
+  "3": {
+   "name": "Backrooms",
+   "file": "backrooms.html"
+  },
+  "5": {
+   "name": "Baseball Bros",
+   "file": "baseballbros.html"
+  },
+  "6": {
+   "name": "Basket Bros",
+   "file": "basketbros.html"
+  },
+  "7": {
+   "name": "Basketball Stars",
+   "file": "basketballstars.html"
+  },
+  "164": {
+   "name": "BlackJack",
+   "file": "BlackJack.html"
+  },
+  "8": {
+   "name": "Blocky Snakes",
+   "file": "blockysnakes.html"
+  },
+  "13": {
+   "name": "Cluster Rush",
+   "file": "clusterrush.html"
+  },
+  "14": {
+   "name": "Cookie Clicker",
+   "file": "cookieclicker.html"
+  },
+  "15": {
+   "name": "Crazy Cars",
+   "file": "crazycars.html"
+  },
+  "17": {
+   "name": "Crossy Road",
+   "file": "crossyroad.html"
+  },
+  "19": {
+   "name": "Dadish",
+   "file": "dadish1.html"
+  },
+  "20": {
+   "name": "Dadish 2",
+   "file": "dadish2.html"
+  },
+  "23": {
+   "name": "Dread Head Parkour",
+   "file": "dreadheadparkour.html"
+  },
+  "22": {
+   "name": "Drift Boss",
+   "file": "driftboss.html"
+  },
+  "26": {
+   "name": "Evil Glitch",
+   "file": "evilglitch.html"
+  },
+  "27": {
+   "name": "Five Nights At Freddy's",
+   "file": "fnaf.html"
+  },
+  "28": {
+   "name": "Five Nights At Freddy's 2",
+   "file": "fnaf2.html"
+  },
+  "29": {
+   "name": "Five Nights At Freddy's 3",
+   "file": "fnaf3.html"
+  },
+  "30": {
+   "name": "Five Nights At Freddy's 4",
+   "file": "fnaf4.html"
+  },
+  "31": {
+   "name": "Flappy Bird",
+   "file": "flappybird.html"
+  },
+  "34": {
+   "name": "Football Bros",
+   "file": "footballbros.html"
+  },
+  "35": {
+   "name": "Fruit Ninja",
+   "file": "fruitninja.html"
+  },
+  "40": {
+   "name": "Granny",
+   "file": "granny.html"
+  },
+  "41": {
+   "name": "Guess Their Answer",
+   "file": "guesstheiranswer.html"
+  },
+  "424": {
+   "name": "Happy Wheels",
+   "file": "happywheels.html"
+  },
+  "43": {
+   "name": "House Of Hazards",
+   "file": "houseofhazards.html"
+  },
+  "45": {
+   "name": "Johnny Trigger",
+   "file": "johnnytrigger.html"
+  },
+  "530": {
+   "name": "Moto X3M 2",
+   "file": "motox3m2.html"
+  },
+  "51": {
+   "name": "MotoX3M",
+   "file": "motox3m.html"
+  },
+  "53": {
+   "name": "OvO",
+   "file": "ovo.html"
+  },
+  "55": {
+   "name": "PolyTrack",
+   "file": "polytrack.html"
+  },
+  "56": {
+   "name": "Ragdoll Archers",
+   "file": "ragdollarchers.html"
+  },
+  "57": {
+   "name": "Retro Bowl",
+   "file": "retrobowl.html"
+  },
+  "58": {
+   "name": "Retro Bowl College",
+   "file": "retrobowlcollege.html"
+  },
+  "60": {
+   "name": "Slope",
+   "file": "slope.html"
+  },
+  "62": {
+   "name": "Space Bar Clicker",
+   "file": "spacebarclicker.html"
+  },
+  "65": {
+   "name": "State.io",
+   "file": "stateio.html"
+  },
+  "67": {
+   "name": "Stickman Hook",
+   "file": "stickmanhook.html"
+  },
+  "70": {
+   "name": "Tag",
+   "file": "tag.html"
+  },
+  "73": {
+   "name": "Time Shooter 2",
+   "file": "timeshooter2.html"
+  },
+  "75": {
+   "name": "TinyFishing",
+   "file": "tinyfishing.html"
+  },
+  "76": {
+   "name": "Tomb Of The Mask",
+   "file": "tombofthemask.html"
+  },
+  "77": {
+   "name": "Tunnel Rush",
+   "file": "tunnelrush.html"
+  }
+ }
+}

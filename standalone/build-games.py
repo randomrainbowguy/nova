@@ -51,12 +51,17 @@ def main():
     with open(os.path.join(HERE, "..", "tools", "gametest", "decisions.json"), encoding="utf-8") as f:
         decisions = json.load(f)
     remove = {r["id"] for r in decisions["remove"]}
+    # Games that exist in both repos load from CorduroyBrick49 (see prefer-corduroy.json).
+    with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
+        corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
     replace = {r["id"]: r["new_url"] for r in decisions["replace"]}
     games = []
     for r in rows:
         if r["id"] in remove:
             continue
         url = replace.get(r["id"], r["url"])
+        if r["id"] in corduroy:
+            url = f"https://raw.githubusercontent.com/CorduroyBrick49/Games/main/{corduroy[r['id']]}"
         if r["file"] == "emulator.html" or url == "/emulator/":
             url = EMU_URL
         # freebuisness games load straight from the GitHub repo instead of through jsDelivr.
