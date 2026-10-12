@@ -10,6 +10,7 @@ It replaces everything in the new database (users, games, polls...), so run it o
 
 import json
 import os
+import re
 import sqlite3
 import sys
 
@@ -18,6 +19,26 @@ SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "nova.db")
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, "nova-data.sql")
 # Broken games found by tools/gametest: new working links, and games that couldn't be fixed.
 DECISIONS = os.path.join(HERE, "..", "tools", "gametest", "decisions.json")
+
+# Upstream repos rename and delete files (freebuisness renamed most of theirs on 2026-10-11), so every
+# link is pinned to the commit the games were tested at (tools/gametest). Their changes can't break us.
+PINS = {
+    "freebuisness/html": "b329f92bab254daca7abce41facb94884b02834d",
+    "freebuisness/covers": "298e9bedbc2ae3d7257bb67f28752a4c151ba5f8",
+    "CorduroyBrick49/Games": "38c8fabee53bd919875e4845df1bfacff6d6d426",
+}
+
+
+def pin(url):
+    url = url or ""
+    for repo, sha in PINS.items():
+        url = re.sub(rf"^https://cdn\.jsdelivr\.net/gh/{repo}@main/", f"https://cdn.jsdelivr.net/gh/{repo}@{sha}/", url)
+        url = re.sub(rf"^https://raw\.githubusercontent\.com/{repo}/(?:refs/heads/)?main/",
+                     f"https://raw.githubusercontent.com/{repo}/{sha}/", url)
+        url = re.sub(rf"^https://github\.com/{repo}/(?:blob|raw)/main/([^?]+)(?:\?raw=true)?$",
+                     rf"https://raw.githubusercontent.com/{repo}/{sha}/\1", url)
+    return url
+
 
 # Parents before children, so foreign keys line up.
 TABLES = ["settings", "users", "games", "polls", "poll_options", "votes", "favorites", "notifications",
@@ -50,7 +71,7 @@ def main():
         cols = [r[1] for r in src.execute(f"PRAGMA table_info({table})")]
         n = 0
         for row in src.execute(f"SELECT {', '.join(cols)} FROM {table}"):
-            values = ", ".join(quote(row[c]) for c in cols)
+            values = ", ".join(quote(pin(row[c]) if table == "games" and c in ("url", "image") else row[c]) for c in cols)
             verb = "INSERT OR REPLACE" if table == "settings" else "INSERT"
             lines.append(f"{verb} INTO {table} ({', '.join(cols)}) VALUES ({values});")
             n += 1
@@ -59,7 +80,7 @@ def main():
         with open(DECISIONS, encoding="utf-8") as f:
             decisions = json.load(f)
         for r in decisions.get("replace", []):
-            lines.append(f"UPDATE games SET url = {quote(r['new_url'])} WHERE id = {int(r['id'])} AND url = {quote(r['old_url'])};")
+            lines.append(f"UPDATE games SET url = {quote(pin(r['new_url']))} WHERE id = {int(r['id'])} AND url = {quote(pin(r['old_url']))};")
         for r in decisions.get("remove", []):
             lines.append(f"DELETE FROM games WHERE id = {int(r['id'])};")
         print(f"  game fixes: {len(decisions.get('replace', []))} new links, {len(decisions.get('remove', []))} broken games removed")

@@ -16,6 +16,26 @@ from datetime import datetime, timedelta, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 DB = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "nova.db")
 EMU_URL = "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/public/emulator/index.html"
+# Upstream repos rename and delete files (freebuisness renamed most of theirs on 2026-10-11), so every
+# link is pinned to the commit the games were tested at (tools/gametest). Their changes can't break us.
+PINS = {
+    "freebuisness/html": "b329f92bab254daca7abce41facb94884b02834d",
+    "freebuisness/covers": "298e9bedbc2ae3d7257bb67f28752a4c151ba5f8",
+    "CorduroyBrick49/Games": "38c8fabee53bd919875e4845df1bfacff6d6d426",
+}
+
+
+def pin(url):
+    url = url or ""
+    for repo, sha in PINS.items():
+        url = re.sub(rf"^https://cdn\.jsdelivr\.net/gh/{repo}@main/", f"https://cdn.jsdelivr.net/gh/{repo}@{sha}/", url)
+        url = re.sub(rf"^https://raw\.githubusercontent\.com/{repo}/(?:refs/heads/)?main/",
+                     f"https://raw.githubusercontent.com/{repo}/{sha}/", url)
+        url = re.sub(rf"^https://github\.com/{repo}/(?:blob|raw)/main/([^?]+)(?:\?raw=true)?$",
+                     rf"https://raw.githubusercontent.com/{repo}/{sha}/\1", url)
+    return url
+
+
 RAW_HOSTS = ("raw.githubusercontent.com", "gist.githubusercontent.com", "cdn.jsdelivr.net", "rawcdn.githack.com")
 
 
@@ -46,7 +66,7 @@ def main():
             continue  # the hub only runs games that load from a code repo
         games.append({"id": r["id"], "name": r["name"], "description": r["description"] or "",
                       "genres": [g.strip() for g in (r["genres"] or "").split(",") if g.strip()],
-                      "image": r["image"] or "", "url": url, "rank": len(games)})
+                      "image": pin(r["image"]), "url": pin(url), "rank": len(games)})
     out = os.path.join(HERE, "games.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(games, f, ensure_ascii=False, separators=(",", ":"))
