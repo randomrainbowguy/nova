@@ -249,16 +249,41 @@ for(var o=0;o<n;o+=64){for(var t=0;t<16;t++)w[t]=dv.getUint32(o+t*4);for(t=16;t<
 var A=h[0],B=h[1],C=h[2],D=h[3],E=h[4],F=h[5],G=h[6],I=h[7];for(t=0;t<64;t++){var t1=(I+((E>>>6|E<<26)^(E>>>11|E<<21)^(E>>>25|E<<7))+((E&F)^(~E&G))+K[t]+w[t])|0,t2=(((A>>>2|A<<30)^(A>>>13|A<<19)^(A>>>22|A<<10))+((A&B)^(A&C)^(B&C)))|0;I=G;G=F;F=E;E=(D+t1)|0;D=C;C=B;B=A;A=(t1+t2)|0}
 h[0]=h[0]+A|0;h[1]=h[1]+B|0;h[2]=h[2]+C|0;h[3]=h[3]+D|0;h[4]=h[4]+E|0;h[5]=h[5]+F|0;h[6]=h[6]+G|0;h[7]=h[7]+I|0}var out=new DataView(new ArrayBuffer(32));h.forEach(function(v,i){out.setUint32(i*4,v)});return out.buffer}
 try{Object.defineProperty(c,"subtle",{configurable:true,value:{digest:function(alg,data){var name=(alg&&alg.name||alg||"").toUpperCase();if(name!=="SHA-256")return Promise.reject(new Error("Only SHA-256 is available here"));return Promise.resolve(sha256(data))}}})}catch(e){}})();<\/script>`;
-  function prepare(html, url) {
+  // Opened from a downloaded file, games run with no web address, so the browser blocks localStorage,
+  // sessionStorage, IndexedDB and gamepads. Unity games (Snow Rider) call getGamepads() every frame and
+  // stop on "Running, Wait.." when it throws. Give the game in-memory stand-ins and a safe getGamepads;
+  // localStorage saves are kept in this tab's storage, so progress isn't lost.
+  function storageShim(id) {
+    let saved = "{}";
+    try { const v = store.get("nova_save_" + id); if (v && v.charAt(0) === "{") saved = v; } catch (e) {}
+    saved = saved.replace(/</g, "\\u003c");
+    return `<script>(function(){function mem(d,onChange){var o={getItem:function(k){k=String(k);return Object.prototype.hasOwnProperty.call(d,k)?d[k]:null},
+setItem:function(k,v){d[String(k)]=String(v);onChange()},removeItem:function(k){delete d[String(k)];onChange()},clear:function(){for(var k in d)delete d[k];onChange()},
+key:function(i){return Object.keys(d)[i]||null}};Object.defineProperty(o,"length",{get:function(){return Object.keys(d).length}});return o}
+function blocked(get){try{var s=get();s.getItem("__nova");return false}catch(e){return true}}
+if(blocked(function(){return window.localStorage})){var d=${saved},t;var ls=mem(d,function(){clearTimeout(t);t=setTimeout(function(){try{parent.postMessage({novaSave:${Number(id)},data:d},"*")}catch(e){}},400)});
+try{Object.defineProperty(window,"localStorage",{configurable:true,get:function(){return ls}})}catch(e){}}
+if(blocked(function(){return window.sessionStorage})){var ss=mem({},function(){});try{Object.defineProperty(window,"sessionStorage",{configurable:true,get:function(){return ss}})}catch(e){}}
+var idb=true;try{window.indexedDB.open("__nova")}catch(e){idb=false}
+if(!idb){try{Object.defineProperty(window,"indexedDB",{configurable:true,get:function(){return undefined}})}catch(e){}}
+var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGamepads",{configurable:true,value:function(){try{return gp.call(navigator)}catch(e){return[]}}})}catch(e){}}})();<\/script>`;
+  }
+  addEventListener("message", (e) => {
+    const m = e.data;
+    if (!m || typeof m.novaSave !== "number" || !current || m.novaSave !== current.id) return;
+    try { store.set("nova_save_" + m.novaSave, JSON.stringify(m.data)); } catch (err) {}
+  });
+  function prepare(html, url, id) {
     let out;
     if (window.sanitizeGameHtml) out = window.sanitizeGameHtml(html, url);
     else {
       const base = `<base href="${url.slice(0, url.lastIndexOf("/") + 1)}">`;
-      out = /<head[^>]*>/i.test(html) ? html.replace(/<head([^>]*)>/i, `<head$1>${base}`) : base + html;
+      out = /<head[^>]*>/i.test(out = html) ? html.replace(/<head([^>]*)>/i, `<head$1>${base}`) : base + html;
     }
     // The game runs from a blob: URL, which may not count as secure even when this page does,
-    // so always add the shim (it only fills in what's missing).
-    return /<head[^>]*>/i.test(out) ? out.replace(/<head([^>]*)>/i, (m) => m + CRYPTO_SHIM) : CRYPTO_SHIM + out;
+    // so always add the shims (they only fill in what's missing).
+    const shims = storageShim(id) + CRYPTO_SHIM;
+    return /<head[^>]*>/i.test(out) ? out.replace(/<head([^>]*)>/i, (m) => m + shims) : shims + out;
   }
   function openGame(g) {
     if (!g) return;
@@ -276,7 +301,7 @@ try{Object.defineProperty(c,"subtle",{configurable:true,value:{digest:function(a
     const token = {};
     // If the launcher had to use a jsDelivr mirror (cdn.jsdelivr.net blocked), load games through it too.
     const url = MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
-    loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, url));
+    loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => prepare(h, url, g.id));
     loaded.token = token;
     const mine = loaded;
     mine.then((html) => {
