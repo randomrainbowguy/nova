@@ -151,8 +151,13 @@
   }
   const byId = new Map(GAMES.map((g) => [g.id, g]));
   const favs = new Set((() => { try { return JSON.parse(store.get("nova_favs") || "[]"); } catch (e) { return []; } })());
+  // Some covers are huge (up to 12 MB), so show small thumbnails made by wsrv.nl (a free image resizer),
+  // falling back to the original if that fails.
+  const thumb = (u, w) => u ? `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${w}&h=${Math.round(w * 0.75)}&fit=cover&output=webp&q=75` : "";
+  const FALLBACK = "if(this.dataset.full&&this.src!==this.dataset.full){this.src=this.dataset.full}else{this.remove()}";
+  const img = (u, w, lazy = true) => `<img src="${esc(thumb(u, w))}" data-full="${esc(u)}" alt=""${lazy ? ' loading="lazy"' : ""} decoding="async" onerror="${FALLBACK}">`;
   const art = (g) => `<span class="hv-noart" style="--h:${(g.id * 47) % 360}">${esc((g.name || "?").slice(0, 1))}</span>` +
-    (g.image ? `<img src="${esc(g.image)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : "");
+    (g.image ? img(g.image, 480) : "");
   $("game-count").textContent = GAMES.length;
   $("search").placeholder = `Search ${GAMES.length} games…`;
 
@@ -160,7 +165,7 @@
   if (featured) {
     const f = $("featured");
     f.hidden = false; f.dataset.play = featured.id;
-    f.innerHTML = `<img src="${esc(featured.image)}" alt="" onerror="this.remove()"><div class="hv-feature-body"><span class="hv-kicker">🔥 Most played</span><h2>${esc(featured.name)}</h2>${featured.description ? `<p>${esc(featured.description)}</p>` : ""}<span class="hv-play">▶ Play now</span></div>`;
+    f.innerHTML = `${img(featured.image, 1200, false)}<div class="hv-feature-body"><span class="hv-kicker">🔥 Most played</span><h2>${esc(featured.name)}</h2>${featured.description ? `<p>${esc(featured.description)}</p>` : ""}<span class="hv-play">▶ Play now</span></div>`;
   }
   const trending = GAMES.filter((g) => g.image && g !== featured).slice(0, 8);
   $("trending").innerHTML = trending.map((g, i) =>
@@ -211,7 +216,7 @@
   function renderFavs() {
     const list = [...favs].map((id) => byId.get(id)).filter(Boolean);
     $("favs").innerHTML = list.length ? list.map((g) =>
-      `<a class="fav-item" data-play="${g.id}"${g.image ? ` style="background-image:url('${esc(cssUrl(g.image))}')"` : ""}><span>${esc(g.name)}</span></a>`).join("")
+      `<a class="fav-item" data-play="${g.id}"${g.image ? ` style="background-image:url('${esc(cssUrl(thumb(g.image, 360)))}')"` : ""}><span>${esc(g.name)}</span></a>`).join("")
       : `<div class="muted small">Star a game to pin it here.</div>`;
   }
   document.addEventListener("click", (e) => {
