@@ -17,13 +17,30 @@ The file only knows this folder's address; everything else loads from this repo 
 ```html
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Math Practice</title></head>
-<body style="background:#f7f6f2">
+<body style="background:#f7f6f2;font-family:system-ui,sans-serif">
 <script>
-var NOVA_BASE = "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/";
-fetch(NOVA_BASE + "index.html", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(function (html) {
-  html = html.replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(NOVA_BASE) + ';<\/script>');
-  document.open(); document.write(html); document.close();
-}).catch(function () { document.body.textContent = "Couldn't load. Check your connection and reload."; });
+// Everything else lives in github.com/randomrainbowguy/nova (standalone/), served by jsDelivr.
+var REPO = "randomrainbowguy/nova", BRANCH = "overnight";
+var HOSTS = ["https://cdn.jsdelivr.net", "https://fastly.jsdelivr.net", "https://gcore.jsdelivr.net"];
+var tried = [];
+// Load the newest commit (jsDelivr can serve a branch hours late); fall back to the branch name.
+var version = fetch("https://api.github.com/repos/" + REPO + "/commits/" + BRANCH, { headers: { Accept: "application/vnd.github.sha" }, cache: "no-cache" })
+  .then(function (r) { return r.ok ? r.text() : ""; }).catch(function () { return ""; })
+  .then(function (sha) { return /^[0-9a-f]{40}$/.test(sha.trim()) ? sha.trim() : BRANCH; });
+function next(i, ver) {
+  if (i >= HOSTS.length) {
+    document.body.innerHTML = '<div style="max-width:520px;margin:15vh auto;padding:0 16px;color:#1b1f1d"><h2>Couldn\'t load</h2>' +
+      '<p>Check your connection and reload. If it keeps happening, this network or app may be blocking jsDelivr.</p>' +
+      '<pre style="white-space:pre-wrap;font-size:12px;color:#5d6662">' + tried.join("\n").replace(/</g, "&lt;") + '</pre></div>';
+    return;
+  }
+  var base = HOSTS[i] + "/gh/" + REPO + "@" + ver + "/standalone/";
+  fetch(base + "index.html", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then(function (html) {
+    html = html.replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(base) + ';<\/script>');
+    document.open(); document.write(html); document.close();
+  }).catch(function (e) { tried.push(HOSTS[i] + ": " + (e && e.message || e)); next(i + 1, ver); });
+}
+version.then(function (ver) { next(0, ver); });
 </script>
 </body></html>
 ```
