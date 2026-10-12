@@ -6,7 +6,7 @@ The file only knows this folder's address; everything else loads from this repo 
 
 - `index.html`: the math-practice front page. Its "Sign in" links open an `about:blank` tab with the hub.
 - `hub.html`, `hub.js`, `hub.css`: the games hub and Movies tab (styles come from `public/static/style.css`,
-  game cleanup from `public/static/game-sanitize.js`, the emulator page from `public/emulator/`, its cores from `cdn.emulatorjs.org`).
+  game cleanup from `public/static/game-sanitize.js`, the emulator from `public/emulator/`, all of it in this repo).
 - `games.json`: the game list. Rebuild it from `nova.db` with `python3 standalone/build-games.py`.
 - `g4m3sss.json`: games load from github.com/randomrainbowguy/g4m3sss (`offline/`), pinned to a commit.
   `match` maps Nova games to their g4m3sss file; `new` lists games only in g4m3sss. freebuisness isn't used.
