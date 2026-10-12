@@ -128,7 +128,24 @@
   document.querySelector("[data-nav-toggle]").addEventListener("click", () => $("nav").classList.toggle("open"));
 
   /* ── views ── */
-  function show(view) {
+  function show(view, instant) {
+    const wl = $("view-welcome");
+    if (!wl.hidden && !instant) {   // leaving the welcome page: fade it out, then reveal the hub
+      wl.classList.add("leaving");
+      setTimeout(() => {
+        wl.hidden = true;
+        wl.classList.remove("leaving");
+        document.body.classList.remove("is-welcome");
+        show(view, true);
+        const v = $("view-" + view);
+        v.classList.add("arriving");
+        setTimeout(() => v.classList.remove("arriving"), 700);
+        if (view === "games") setTimeout(() => $("search").focus({ preventScroll: true }), 300);
+      }, 420);
+      return;
+    }
+    wl.hidden = true;
+    document.body.classList.remove("is-welcome");
     $("view-games").hidden = view !== "games";
     $("view-movies").hidden = view !== "movies";
     document.querySelectorAll(".nav [data-view]").forEach((b) => b.classList.toggle("active", b.dataset.view === view));
@@ -137,6 +154,60 @@
   }
   document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", (e) => { e.preventDefault(); show(b.dataset.view); }));
   if (MOVIES_DOC) $("movies-link").href = MOVIES_DOC; else $("movies-link").replaceWith(Object.assign(document.createElement("span"), { className: "muted", textContent: "Coming soon" }));
+
+  /* ── welcome page ── */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !$("view-welcome").hidden && !e.target.closest("input, textarea, button, a")) { e.preventDefault(); show("games"); }
+  });
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function buildWelcome() {
+    // count up to the number of games
+    const n = GAMES.length, el = $("wl-count"), t0 = performance.now();
+    (function tick(t) {
+      const k = still ? 1 : Math.min(1, (t - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(n * e);
+      if (k < 1) requestAnimationFrame(tick);
+    })(t0);
+    const withArt = GAMES.filter((g) => g.image);
+    // floating stack: the most popular five
+    const spots = [
+      { x: "0%", y: "2%", r: "-9deg", t: "7s" }, { x: "50%", y: "0%", r: "7deg", t: "8s" },
+      { x: "16%", y: "30%", r: "-2deg", t: "6.5s", big: true }, { x: "-4%", y: "64%", r: "6deg", t: "7.5s" }, { x: "52%", y: "62%", r: "-7deg", t: "8.5s" },
+    ];
+    $("wl-stack").innerHTML = withArt.slice(0, spots.length).map((g, i) => {
+      const s = spots[i];
+      return `<div class="wl-card${s.big ? " big" : ""}" style="--x:${s.x};--y:${s.y};--r:${s.r};--t:${s.t};--fd:-${i * 1.3}s;--pd:${0.35 + i * 0.1}s">` +
+        `${img(g.image, s.big ? 680 : 540, false)}<span class="wl-name">${esc(g.name)}</span></div>`;
+    }).join("");
+    // gentle parallax on the stack
+    const stack = $("wl-stack");
+    if (!still) $("view-welcome").addEventListener("mousemove", (e) => {
+      const dx = e.clientX / innerWidth - 0.5, dy = e.clientY / innerHeight - 0.5;
+      stack.querySelectorAll(".wl-card").forEach((c, i) => {
+        const depth = c.classList.contains("big") ? 26 : 12 + i * 3;
+        c.style.setProperty("--px", `${dx * depth}px`); c.style.setProperty("--py", `${dy * depth}px`);
+      });
+    });
+    // two scrolling rows of covers (each row doubled so the loop is seamless)
+    const row = (list) => { const h = list.map((g) => img(g.image, 400)).join(""); return h + h; };
+    const pool = withArt.slice(5, 69);
+    $("wl-row1").innerHTML = row(pool.filter((_, i) => i % 2 === 0).slice(0, 18));
+    $("wl-row2").innerHTML = row(pool.filter((_, i) => i % 2 === 1).slice(0, 18));
+    // typing demo in the search tile
+    const names = withArt.slice(0, 12).map((g) => g.name);
+    const typing = $("wl-typing");
+    if (still) { typing.textContent = names[0] || ""; return; }
+    let w = 0, c = 0, del = false;
+    (function type() {
+      const word = names[w % names.length] || "";
+      typing.textContent = word.slice(0, c);
+      if (!del && c < word.length) c++;
+      else if (!del) { del = true; return setTimeout(type, 1400); }
+      else if (c > 0) c--;
+      else { del = false; w++; }
+      setTimeout(type, del ? 35 : 75);
+    })();
+  }
 
   /* ── library (games.json lives in the repo next to this file) ── */
   try {
@@ -159,6 +230,7 @@
   const art = (g) => `<span class="hv-noart" style="--h:${(g.id * 47) % 360}">${esc((g.name || "?").slice(0, 1))}</span>` +
     (g.image ? img(g.image, 480) : "");
   $("game-count").textContent = GAMES.length;
+  buildWelcome();
   $("search").placeholder = `Search ${GAMES.length} games…`;
 
   const featured = GAMES.find((g) => g.image);
@@ -343,5 +415,5 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     try { if (panic) frame.contentWindow.addEventListener("keydown", onPanicKey, true); } catch (e) {}
   });
 
-  pageView("Games", "/games");
+  pageView("Welcome", "/welcome");
 })();

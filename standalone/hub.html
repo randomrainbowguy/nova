@@ -11,7 +11,84 @@
 <link rel="stylesheet" href="__BASE__../public/static/style.css">
 <link rel="stylesheet" href="__BASE__hub.css">
 </head>
-<body>
+<body class="is-welcome">
+<!-- ═════════ WELCOME (first thing people see after "Sign in") ═════════ -->
+<section class="welcome" id="view-welcome">
+  <div class="wl-bg" aria-hidden="true"><i class="wl-orb o1"></i><i class="wl-orb o2"></i><i class="wl-orb o3"></i><div class="wl-grid"></div></div>
+
+  <header class="wl-top">
+    <span class="logo">✦ Nova</span>
+    <button class="wl-skip" data-view="games">Skip to games <span aria-hidden="true">→</span></button>
+  </header>
+
+  <div class="wl-hero">
+    <div class="wl-copy">
+      <span class="pp-eyebrow wl-in" style="--d:0">★ Welcome to Nova</span>
+      <h1 class="wl-in" style="--d:1">Every game.<br><span class="gold-text">One tab.</span></h1>
+      <p class="wl-sub wl-in" style="--d:2">Hundreds of games, a retro emulator and movie night, all in one place. No sign-up, no ads, nothing to install.</p>
+      <div class="wl-cta wl-in" style="--d:3">
+        <button class="btn-gold wl-start" data-view="games">Start playing <span class="wl-arrow" aria-hidden="true">→</span></button>
+        <button class="btn-soft" data-view="movies">🎬 Movies</button>
+      </div>
+      <div class="wl-stats wl-in" style="--d:4">
+        <div><b id="wl-count">0</b><span>games</span></div>
+        <div><b>0</b><span>ads</span></div>
+        <div><b>0</b><span>sign-ups</span></div>
+        <div><b>7</b><span>themes</span></div>
+      </div>
+    </div>
+    <div class="wl-stack" id="wl-stack" aria-hidden="true"></div>
+  </div>
+
+  <div class="wl-marquee" aria-hidden="true">
+    <div class="wl-row" id="wl-row1"></div>
+    <div class="wl-row wl-rev" id="wl-row2"></div>
+  </div>
+
+  <section class="wl-section">
+    <div class="pp-center">
+      <span class="pp-eyebrow">What's inside</span>
+      <h2 class="pp-h2">Built for the five minutes<br>between everything else.</h2>
+    </div>
+    <div class="wl-bento">
+      <div class="wl-tile wide">
+        <div class="pp-ico">⚡</div>
+        <h3>Find anything instantly</h3>
+        <p>Search the whole library as you type, or browse by genre. Press <kbd>/</kbd> from anywhere to jump to search.</p>
+        <div class="wl-demo-search"><span>🔍</span><span class="wl-typing" id="wl-typing"></span><span class="wl-caret"></span></div>
+      </div>
+      <div class="wl-tile">
+        <div class="pp-ico">★</div>
+        <h3>Your favorites, pinned</h3>
+        <p>Star a game and it's waiting for you at the top, every time.</p>
+      </div>
+      <div class="wl-tile">
+        <div class="pp-ico">🎨</div>
+        <h3>Seven themes</h3>
+        <p>From Neon to Midnight Gold. Make it yours.</p>
+        <div class="wl-swatches"><i class="sw-aurora"></i><i class="sw-sunset"></i><i class="sw-gold"></i><i style="background:linear-gradient(135deg,#7c3aed,#2563eb)"></i><i style="background:linear-gradient(135deg,#ff4fd8,#8b5cf6)"></i><i style="background:linear-gradient(135deg,#00c853,#003d1a)"></i><i style="background:linear-gradient(135deg,#a0522d,#d4956a)"></i></div>
+      </div>
+      <div class="wl-tile">
+        <div class="pp-ico">🕶️</div>
+        <h3>Tab cloak &amp; panic key</h3>
+        <p>Disguise the tab, or leave in one keystroke.</p>
+      </div>
+      <div class="wl-tile">
+        <div class="pp-ico">🕹️</div>
+        <h3>Retro emulator</h3>
+        <p>NES, SNES, Game Boy, N64 and more, right in the browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wl-final">
+    <span class="pp-eyebrow">★ Nova</span>
+    <h2 class="pp-h2">Ready when you are.</h2>
+    <button class="btn-gold wl-start" data-view="games">Start playing <span class="wl-arrow" aria-hidden="true">→</span></button>
+    <p class="wl-hint">or press <kbd>Enter</kbd></p>
+  </section>
+</section>
+
 <header class="topbar">
   <a class="logo" href="#" data-view="games">✦ Nova</a>
   <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -68,7 +145,7 @@
 </div>
 
 <!-- ═════════ GAMES ═════════ -->
-<main class="page home-v2" id="view-games">
+<main class="page home-v2" id="view-games" hidden>
   <section class="hv-hero">
     <div class="hv-hello">
       <span class="pp-eyebrow">★ Nova</span>
