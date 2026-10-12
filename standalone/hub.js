@@ -238,6 +238,7 @@
 
   /* ── player: download the game's HTML, clean it, run it in a frame ── */
   let loaded = null, current = null;
+  const WALL = "allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-orientation-lock allow-presentation allow-downloads";
   const frame = $("game-frame");
   // Opened from a downloaded file, the page isn't a "secure context", so crypto.subtle and
   // crypto.randomUUID don't exist and some games (PolyTrack) stall. Give them small stand-ins.
@@ -307,6 +308,11 @@ var gp=navigator.getGamepads;if(gp){try{Object.defineProperty(navigator,"getGame
     const mine = loaded;
     mine.then((html) => {
       if (loaded !== mine) return;
+      // Some games (Snow Rider) have a site lock that reads the top window's address and stays black on
+      // about:blank. Those run walled off (no allow-same-origin) so they can't read it. Not every game,
+      // because others (Balatro) need the storage the wall takes away. Takes effect on this navigation.
+      if (g.walled) frame.setAttribute("sandbox", WALL);
+      else frame.removeAttribute("sandbox");
       frame.src = URL.createObjectURL(new Blob([html], { type: "text/html" }));
       frame.hidden = false;
       $("game-status").hidden = true;

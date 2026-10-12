@@ -54,6 +54,8 @@ def main():
     # Games kept in this repo (standalone/games/). "nova:" means "next to games.json"; the hub fills
     # in the address, so they load from the same commit as everything else.
     local = {698: "games/2351.html"}
+    # Games with a site lock that blacks them out on about:blank; the hub runs these walled off.
+    walled = {698}
     # Games that exist in both repos load from CorduroyBrick49 (see prefer-corduroy.json).
     with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
         corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
@@ -76,7 +78,8 @@ def main():
             continue  # the hub only runs games that load from a code repo
         games.append({"id": r["id"], "name": r["name"], "description": r["description"] or "",
                       "genres": [g.strip() for g in (r["genres"] or "").split(",") if g.strip()],
-                      "image": pin(r["image"]), "url": pin(url), "rank": len(games)})
+                      "image": pin(r["image"]), "url": pin(url), "rank": len(games),
+                      **({"walled": True} if r["id"] in walled else {})})
     out = os.path.join(HERE, "games.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(games, f, ensure_ascii=False, separators=(",", ":"))
