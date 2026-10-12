@@ -609,30 +609,40 @@
 /* ═══ Nova launcher ═══ "Sign in" opens an about:blank tab with the games hub (standalone/hub.html).
    NOVA_BASE is set by the tiny launcher file; it's this folder on jsDelivr. */
 (function () {
-  var BASE = window.NOVA_BASE || "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/";
-  // jsDelivr tells browsers to keep files for 7 days. Always ask for the latest (cheap: unchanged files
-  // come back as "not modified"), and tag scripts/styles so a saved old copy is never reused for long.
-  var FRESH = "?v=" + Math.floor(Date.now() / 600000);
-  var hub = fetch(BASE + "hub.html", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); });
-  function hubHtml(text) {
-    return text.replace(/__BASE__([^"']+\.(?:js|css))/g, function (m, file) { return BASE + file + FRESH; })
-      .split("__BASE__").join(BASE)
-      .replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(BASE) + ';<\/script>');
-  }
+  var BRANCH_BASE = window.NOVA_BASE || "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/";
+  // jsDelivr remembers which commit a branch points to for up to 12 hours (and tells browsers to keep
+  // files for 7 days), so updates would reach people late. Ask GitHub for the newest commit and load
+  // everything from that exact commit instead: those files never go stale. Falls back to the branch.
+  var m = /\/gh\/([^/]+\/[^/@]+)@([^/]+)\//.exec(BRANCH_BASE);
+  var ready = (m ? fetch("https://api.github.com/repos/" + m[1] + "/commits/" + m[2], {
+    headers: { Accept: "application/vnd.github.sha" }, cache: "no-cache",
+  }).then(function (r) { return r.ok ? r.text() : ""; }).catch(function () { return ""; }) : Promise.resolve(""))
+    .then(function (sha) {
+      return /^[0-9a-f]{40}$/.test(sha.trim()) ? BRANCH_BASE.replace("@" + m[2] + "/", "@" + sha.trim() + "/") : BRANCH_BASE;
+    });
+  var hub = ready.then(function (base) {
+    return fetch(base + "hub.html", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(function (text) {
+        return text.split("__BASE__").join(base)
+          .replace(/<head>/i, '<head><script>window.NOVA_BASE=' + JSON.stringify(base) + ';<\/script>');
+      });
+  });
   function openNova(e) {
     e.preventDefault();
     var w = window.open("about:blank", "_blank");
     var doc = w ? w.document : document;   // pop-ups blocked: open it in this tab instead
     if (w) { doc.open(); doc.write('<!DOCTYPE html><title></title><body style="background:#05060a"></body>'); doc.close(); }
-    hub.then(function (text) { doc.open(); doc.write(hubHtml(text)); doc.close(); })
+    hub.then(function (html) { doc.open(); doc.write(html); doc.close(); })
       .catch(function () { if (w) w.close(); alert("Couldn't load. Check your connection and try again."); });
   }
   document.querySelectorAll("[data-open-nova]").forEach(function (a) { a.addEventListener("click", openNova); });
 
   // Visits to this front page go to the same Google Analytics property (gaId in standalone/config.js).
   function load(src, cb) { var el = document.createElement("script"); el.src = src; el.onload = cb; document.head.appendChild(el); }
-  load(BASE + "config.js" + FRESH, function () {
-    load(BASE + "ga.js" + FRESH, function () { window.novaTrack("page_view", {}, { title: "Front page", path: "/" }); });
+  ready.then(function (base) {
+    load(base + "config.js", function () {
+      load(base + "ga.js", function () { window.novaTrack("page_view", {}, { title: "Front page", path: "/" }); });
+    });
   });
 })();
 </script>
