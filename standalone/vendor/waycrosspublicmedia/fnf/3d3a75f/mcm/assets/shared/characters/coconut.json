@@ -1,0 +1,119 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-873,
+				-461
+			],
+			"anim": "danceLeft",
+			"fps": 30,
+			"name": "Idle",
+			"indices": [
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-873,
+				-461
+			],
+			"anim": "danceRight",
+			"fps": 30,
+			"name": "Idle",
+			"indices": [
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-420,
+				-247
+			],
+			"anim": "singLEFT",
+			"fps": 40,
+			"name": "Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-563,
+				-446
+			],
+			"anim": "singDOWN",
+			"fps": 40,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-713,
+				-129
+			],
+			"anim": "singUP",
+			"fps": 40,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-622,
+				-202
+			],
+			"anim": "singRIGHT",
+			"fps": 40,
+			"name": "Right",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Paradise/coconut/1",
+	"position": [
+		-630,
+		-50
+	],
+	"healthicon": "coconut0",
+	"flip_x": false,
+	"healthbar_colors": [
+		216,
+		18,
+		101
+	],
+	"camera_position": [
+		390,
+		150
+	],
+	"sing_duration": 6.1,
+	"scale": 1.66666666666667,
+	"_editor_isPlayer": false
+}

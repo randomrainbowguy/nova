@@ -1,0 +1,133 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-5,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "BF idle dance instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-23,
+				22
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "L-Miss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-33,
+				-24
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "D-Miss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-62,
+				115
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "U-Miss instance 1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				3,
+				23
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "R-Miss instance 1",
+			"indices": []
+		},
+		{
+			"offsets": [
+				25,
+				-3
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "BF NOTE LEFT instance 1"
+		},
+		{
+			"offsets": [
+				-20,
+				-41
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "BF NOTE DOWN instance 1"
+		},
+		{
+			"offsets": [
+				-38,
+				3
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "BF NOTE RIGHT instance 1"
+		},
+		{
+			"offsets": [
+				-53,
+				54
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "BF NOTE UP instance 1"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				3,
+				13
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "Dodge instance 1",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/BoyFriend_Sammy",
+	"position": [
+		-150,
+		350
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		300,
+		-220
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

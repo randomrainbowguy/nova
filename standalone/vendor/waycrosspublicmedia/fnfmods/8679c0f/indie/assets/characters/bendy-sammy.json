@@ -1,0 +1,133 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Sammy Idle instance 1"
+		},
+		{
+			"offsets": [
+				150,
+				-160
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down instance 1"
+		},
+		{
+			"offsets": [
+				509,
+				-40
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Left instance 1"
+		},
+		{
+			"offsets": [
+				179,
+				-138
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Right instance 1"
+		},
+		{
+			"offsets": [
+				262,
+				45
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up instance 1"
+		},
+		{
+			"offsets": [
+				854,
+				159
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "start",
+			"indices": [],
+			"name": "Intro instance 1"
+		},
+		{
+			"offsets": [
+				153,
+				-102
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "end1",
+			"indices": [],
+			"name": "End Part01 instance 1"
+		},
+		{
+			"offsets": [
+				182,
+				33
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "end2",
+			"indices": [],
+			"name": "End02 instance 1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "attack",
+			"indices": [],
+			"name": "Axe attack instance 1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 1,
+			"anim": "attack2",
+			"indices": [],
+			"name": "Axe attack instance 10026"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/SammyRemastered",
+	"position": [
+		-300,
+		100
+	],
+	"healthicon": "sammy",
+	"flip_x": false,
+	"healthbar_colors": [
+		33,
+		33,
+		33
+	],
+	"camera_position": [
+		-600,
+		-150
+	],
+	"sing_duration": 6.1,
+	"scale": 1.7
+}

@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-5,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "yodi_idle_dance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				64,
+				147
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "yodi_ascends",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				153,
+				34
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "yodi_leftmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				155,
+				88
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "yodi_left0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				60,
+				-181
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "yodi_down0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-118,
+				4
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "yodi_right0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				95,
+				-209
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "yodi_downmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				107
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "yodi_upmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-114,
+				-14
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "yodi_rightmiss",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/PLAYABLE/yodi",
+	"position": [
+		0,
+		270
+	],
+	"healthicon": "yodi",
+	"flip_x": true,
+	"healthbar_colors": [
+		80,
+		175,
+		100
+	],
+	"camera_position": [
+		0,
+		30
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

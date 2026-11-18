@@ -1,0 +1,45 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				60,
+				871
+			],
+			"loop": false,
+			"anim": "fall",
+			"fps": 24,
+			"name": "gf fall",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				-9
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "gf beat",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/GFS/gf-pirate",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "gf",
+	"flip_x": false,
+	"healthbar_colors": [
+		165,
+		0,
+		97
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

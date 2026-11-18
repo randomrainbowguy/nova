@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				25,
+				-12
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "Pibby death loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-12,
+				-19
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "Pibby death confirm",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "firstDeath",
+			"loop": false,
+			"name": "Pibby death0"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Game_Over/pibby_dead",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

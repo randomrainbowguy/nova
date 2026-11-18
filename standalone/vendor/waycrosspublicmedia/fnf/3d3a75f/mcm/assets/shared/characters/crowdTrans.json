@@ -1,0 +1,47 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"fps": 24,
+			"anim": "intro",
+			"indices": [],
+			"name": "intro"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"fps": 24,
+			"anim": "idle",
+			"indices": [16],
+			"name": "intro"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Paradise/crowdTrans",
+	"position": [
+		-570,
+		120
+	],
+	"healthicon": "nil",
+	"flip_x": false,
+	"healthbar_colors": [
+		150,
+		150,
+		150
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 0.55,
+	"_editor_isPlayer": false
+}

@@ -1,0 +1,8 @@
+{"file":"particle.png","frames":{
+"texiaospeed_png":{"x":1,"y":43,"w":20,"h":20,"offX":0,"offY":0,"sourceW":20,"sourceH":20},
+"texiaoover3_png":{"x":1,"y":67,"w":32,"h":31,"offX":0,"offY":0,"sourceW":32,"sourceH":32},
+"texiaoover2_png":{"x":31,"y":34,"w":32,"h":31,"offX":0,"offY":0,"sourceW":32,"sourceH":32},
+"texiaoover1_png":{"x":31,"y":1,"w":32,"h":31,"offX":0,"offY":0,"sourceW":32,"sourceH":32},
+"texiaonode_png":{"x":53,"y":67,"w":8,"h":8,"offX":0,"offY":0,"sourceW":8,"sourceH":8},
+"texiaobg_png":{"x":35,"y":67,"w":16,"h":15,"offX":0,"offY":1,"sourceW":16,"sourceH":16},
+"texiao1_png":{"x":1,"y":1,"w":28,"h":40,"offX":0,"offY":0,"sourceW":28,"sourceH":40}}}

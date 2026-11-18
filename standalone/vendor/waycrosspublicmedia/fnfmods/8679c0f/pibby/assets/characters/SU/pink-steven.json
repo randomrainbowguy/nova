@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-160,
+				150
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle"
+		},
+		{
+			"offsets": [
+				119,
+				174
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Left"
+		},
+		{
+			"offsets": [
+				-183,
+				177
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Right"
+		},
+		{
+			"offsets": [
+				-205,
+				-54
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Down"
+		},
+		{
+			"offsets": [
+				-85,
+				260
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up"
+		},
+		{
+			"offsets": [
+				-101,
+				167
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "Stop It",
+			"loop": false,
+			"name": "Stop It"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/SU/pink_steven",
+	"position": [
+		-220,
+		240
+	],
+	"healthicon": "buffsteven",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		129,
+		190
+	],
+	"camera_position": [
+		230,
+		-120
+	],
+	"sing_duration": 6.1,
+	"scale": 1.1
+}

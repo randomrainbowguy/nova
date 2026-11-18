@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				52,
+				39
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Left"
+		},
+		{
+			"offsets": [
+				10,
+				-134
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Down"
+		},
+		{
+			"offsets": [
+				0,
+				178
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up"
+		},
+		{
+			"offsets": [
+				6,
+				-62
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "RIght"
+		},
+		{
+			"loop": true,
+			"offsets": [
+				1,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Random_ass_characters/timmy_pibby",
+	"position": [
+		-90,
+		250
+	],
+	"healthicon": "timmy",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		53,
+		118
+	],
+	"camera_position": [
+		50,
+		10
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

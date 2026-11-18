@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				78,
+				70
+			],
+			"loop": false,
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Left V",
+			"indices": []
+		},
+		{
+			"offsets": [
+				2,
+				-62
+			],
+			"loop": false,
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Down V",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-31,
+				68
+			],
+			"loop": false,
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Up V",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-10,
+				77
+			],
+			"loop": false,
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Right V",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle V",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/livesey/livesey-boss",
+	"position": [
+		600,
+		100
+	],
+	"healthicon": "livesey",
+	"flip_x": false,
+	"healthbar_colors": [
+		40,
+		15,
+		35
+	],
+	"camera_position": [
+		-470,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1.8
+}

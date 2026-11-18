@@ -1,0 +1,113 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "ough"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "ough"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "ough"
+		},
+		{
+			"offsets": [
+				-224,
+				-280
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "ough"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Humiliation/quiard",
+	"position": [
+		-300,
+		-250
+	],
+	"healthicon": "Squidward",
+	"flip_x": false,
+	"healthbar_colors": [
+		89,
+		168,
+		158
+	],
+	"camera_position": [
+		50,
+		450
+	],
+	"sing_duration": 6.1,
+	"scale": 0.833333333333333,
+	"_editor_isPlayer": false
+}

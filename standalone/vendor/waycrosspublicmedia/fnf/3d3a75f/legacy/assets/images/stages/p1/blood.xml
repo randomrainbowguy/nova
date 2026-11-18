@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="blood.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="blood30000" x="958" y="0" width="479" height="662" frameX="-246" frameY="-26" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="blood20000" x="479" y="0" width="479" height="663" frameX="-246" frameY="-26" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="blood10000" x="0" y="0" width="479" height="665" frameX="-246" frameY="-26" frameWidth="1024" frameHeight="768"/>
+	<SubTexture name="blood00000" x="0" y="665" width="479" height="649" frameX="-246" frameY="-26" frameWidth="1024" frameHeight="768"/>
+</TextureAtlas>

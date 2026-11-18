@@ -1,0 +1,155 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				136,
+				-88
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Left instance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				8,
+				-44
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Right instance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				90,
+				81
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Up instance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle instance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				4,
+				20
+			],
+			"anim": "bigShoot",
+			"fps": 24,
+			"name": "Hadoken",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				4,
+				-44
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "ShootRight",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				79,
+				-12
+			],
+			"anim": "singUP-alt",
+			"fps": 24,
+			"name": "ShootUp",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				24,
+				-58
+			],
+			"anim": "singDOWN-alt",
+			"fps": 24,
+			"name": "ShootDown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				80,
+				-92
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "ShootLeft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				2,
+				-54
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				49,
+				-76
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "Dodgez",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-36,
+				-192
+			],
+			"anim": "shoot",
+			"fps": 24,
+			"name": "Beamm",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/nm/Nightmare_Cuphead",
+	"position": [
+		0,
+		210
+	],
+	"healthicon": "cupnm",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		100,
+		100
+	],
+	"camera_position": [
+		100,
+		80
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

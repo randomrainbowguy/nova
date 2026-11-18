@@ -1,0 +1,57 @@
+{
+	"song": {
+		"song": "imminent-demise",
+		"notes": [],
+		"events": [
+			[
+				70000,
+				[
+					[
+						"video",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				89000,
+				[
+					[
+						"Change Character",
+						"BF",
+						"bendybf-mad"
+					]
+				]
+			],
+			[
+				89000,
+				[
+					[
+						"dadvisible",
+						"",
+						""
+					]
+				]
+			],
+			[
+				89000,
+				[
+					[
+						"pulseShader",
+						"",
+						""
+					]
+				]
+			]
+		],
+		"bpm": 200,
+		"needsVoices": true,
+		"speed": 2.6,
+		"player1": "bfsans",
+		"player2": "bendy",
+		"player3": null,
+		"gfVersion": "gf",
+		"stage": "factory",
+		"validScore": false
+	}
+}

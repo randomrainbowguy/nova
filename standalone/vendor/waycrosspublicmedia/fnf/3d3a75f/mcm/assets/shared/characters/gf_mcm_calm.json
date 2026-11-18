@@ -1,0 +1,69 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-78,
+				-39
+			],
+			"fps": 24,
+			"anim": "danceLeft",
+			"indices": [],
+			"name": "gf_calmleft"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-99,
+				-32
+			],
+			"fps": 24,
+			"anim": "danceRight",
+			"indices": [],
+			"name": "gf_calmright"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-93,
+				-39
+			],
+			"fps": 24,
+			"anim": "happyCalm",
+			"indices": [],
+			"name": "gf_ah"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-94,
+				110
+			],
+			"fps": 24,
+			"anim": "calmHappy",
+			"indices": [],
+			"name": "gf_oh"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/gf_mcm/2",
+	"position": [
+		151,
+		295
+	],
+	"healthicon": "gf",
+	"flip_x": false,
+	"healthbar_colors": [
+		165,
+		0,
+		77
+	],
+	"camera_position": [
+		-220,
+		190
+	],
+	"sing_duration": 4,
+	"scale": 0.68,
+	"_editor_isPlayer": false
+}

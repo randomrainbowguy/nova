@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="smoke.png" width="1080" height="1359">
+  <SubTexture name="Smoke10007.png" x="0" y="0"  width="374" height="427" frameX="-14" frameY="-14" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10003.png" x="374" y="0"  width="336" height="406" frameX="-80" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10009.png" x="710" y="0"  width="306" height="430" frameX="-89" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke20001.png" x="374" y="406"  width="301" height="465" frameX="-8" frameY="-22" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20005.png" x="0" y="871"  width="248" height="488" frameX="-75" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke10001.png" x="0" y="427"  width="285" height="420" frameX="-123" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke20007.png" x="248" y="871"  width="248" height="470" frameX="-79" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20009.png" x="496" y="871"  width="284" height="469" frameX="-36" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke10005.png" x="780" y="430"  width="300" height="405" frameX="-110" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke20003.png" x="780" y="835"  width="252" height="463" frameX="-52" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke10002.png" x="0" y="427"  width="285" height="420" frameX="-123" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10004.png" x="374" y="0"  width="336" height="406" frameX="-80" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10006.png" x="780" y="430"  width="300" height="405" frameX="-110" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10008.png" x="0" y="0"  width="374" height="427" frameX="-14" frameY="-14" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke10010.png" x="710" y="0"  width="306" height="430" frameX="-89" frameY="-15" frameWidth="433" frameHeight="450"/>
+  <SubTexture name="Smoke20002.png" x="374" y="406"  width="301" height="465" frameX="-8" frameY="-22" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20004.png" x="780" y="835"  width="252" height="463" frameX="-52" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20006.png" x="0" y="871"  width="248" height="488" frameX="-75" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20008.png" x="248" y="871"  width="248" height="470" frameX="-79" frameY="-23" frameWidth="340" frameHeight="516"/>
+  <SubTexture name="Smoke20010.png" x="496" y="871"  width="284" height="469" frameX="-36" frameY="-23" frameWidth="340" frameHeight="516"/>
+</TextureAtlas>

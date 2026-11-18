@@ -1,0 +1,36 @@
+{
+    "animations": [
+        {
+            "loop": false,
+            "offsets": [
+                -71,
+                -71
+            ],
+            "fps": 24,
+            "anim": "idle",
+            "indices": [],
+            "name": "BGBubbles"
+        }
+    ],
+    "vocals_file": "",
+    "no_antialiasing": false,
+    "image": "characters/MCM/Propaganda/bubblesidle",
+    "position": [
+        1550,
+        120
+    ],
+    "healthicon": "ppg",
+    "flip_x": true,
+    "healthbar_colors": [
+        105,
+        181,
+        234
+    ],
+    "camera_position": [
+        0,
+        230
+    ],
+    "sing_duration": 4,
+    "scale": 1.142857142857143,
+    "_editor_isPlayer": true
+}

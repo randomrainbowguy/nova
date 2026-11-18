@@ -1,0 +1,87 @@
+{
+	"song": {
+		"song": "Freaky-Machine",
+		"notes": [],
+		"events": [
+			[
+				32538,
+				[
+					[
+						"Play Animation",
+						"speech1",
+						"dad"
+					]
+				]
+			],
+			[
+				77500,
+				[
+					[
+						"Play Animation",
+						"transformation",
+						"dad"
+					]
+				]
+			],
+			[
+				79500,
+				[
+					[
+						"blackout",
+						"true",
+						"0.5"
+					]
+				]
+			],
+			[
+				82000,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt"
+					]
+				]
+			],
+			[
+				82300,
+				[
+					[
+						"Set Cam Zoom",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
+				82300,
+				[
+					[
+						"blackout",
+						"false",
+						"0.1"
+					]
+				]
+			],
+			[
+				143838,
+				[
+					[
+						"Play Animation",
+						"speech2",
+						"dad"
+					]
+				]
+			]
+		],
+		"bpm": 130,
+		"needsVoices": true,
+		"speed": 3.1,
+		"player1": "bf-da",
+		"player2": "bendy-da",
+		"player3": null,
+		"gfVersion": "gf",
+		"stage": "daStage",
+		"validScore": false
+	}
+}

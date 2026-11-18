@@ -1,0 +1,36 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-390,
+				79
+			],
+			"loop": false,
+			"fps": 31,
+			"anim": "yay",
+			"indices": [],
+			"name": "YM"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Paradise/coconut/2",
+	"position": [
+		-570,
+		0
+	],
+	"healthicon": "coconut0",
+	"flip_x": false,
+	"healthbar_colors": [
+		216,
+		18,
+		101
+	],
+	"camera_position": [
+		310,
+		-150
+	],
+	"sing_duration": 6.1,
+	"scale": 1.66666666666667,
+	"_editor_isPlayer": false
+}

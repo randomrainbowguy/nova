@@ -1,0 +1,92 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				140,
+				-70
+			],
+			"indices": [
+				6,
+				7
+			],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "Bubble Down"
+		},
+		{
+			"offsets": [
+				270,
+				-70
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "Bubble Left"
+		},
+		{
+			"offsets": [
+				135,
+				-68
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "Bubble Down"
+		},
+		{
+			"offsets": [
+				110,
+				40
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "Bubble Up"
+		},
+		{
+			"offsets": [
+				90,
+				-60
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "Bubble Right"
+		},
+		{
+			"offsets": [
+				190,
+				50
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "pop",
+			"loop": false,
+			"name": "Bubble Pop"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/SU/steven-transform",
+	"position": [
+		110,
+		200
+	],
+	"healthicon": "steven",
+	"flip_x": false,
+	"healthbar_colors": [
+		40,
+		15,
+		15
+	],
+	"camera_position": [
+		-240,
+		100
+	],
+	"sing_duration": 6.1,
+	"scale": 1.1
+}

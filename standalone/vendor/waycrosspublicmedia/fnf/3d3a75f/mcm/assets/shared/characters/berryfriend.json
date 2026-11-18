@@ -1,0 +1,124 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				-207,
+				-162
+			],
+			"anim": "idle",
+			"fps": 30,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				354,
+				36
+			],
+			"anim": "singLEFT",
+			"fps": 40,
+			"name": "singLEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-218,
+				-211
+			],
+			"anim": "singDOWN",
+			"fps": 40,
+			"name": "singDOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-112,
+				86
+			],
+			"anim": "singUP",
+			"fps": 40,
+			"name": "singUP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-297,
+				-153
+			],
+			"anim": "singRIGHT",
+			"fps": 40,
+			"name": "singRIGHT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				210,
+				-203
+			],
+			"anim": "singLEFTmiss",
+			"fps": 40,
+			"name": "miss left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-238,
+				-307
+			],
+			"anim": "singDOWNmiss",
+			"fps": 40,
+			"name": "miss down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-177,
+				-119
+			],
+			"anim": "singUPmiss",
+			"fps": 40,
+			"name": "miss up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-326,
+				-199
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 40,
+			"name": "miss right",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Paradise/berryfriend",
+	"position": [
+		-6,
+		189
+	],
+	"healthicon": "bfcoconut",
+	"flip_x": true,
+	"healthbar_colors": [
+		7,
+		216,
+		212
+	],
+	"camera_position": [
+		-260,
+		70
+	],
+	"sing_duration": 4,
+	"scale": 1.53846153846154,
+	"_editor_isPlayer": true
+}

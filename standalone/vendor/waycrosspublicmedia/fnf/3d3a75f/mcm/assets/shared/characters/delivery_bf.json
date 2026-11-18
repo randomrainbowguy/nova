@@ -1,0 +1,102 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				-86,
+				-55
+			],
+			"anim": "idle",
+			"fps": 60,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-1,
+				-56
+			],
+			"anim": "singLEFT",
+			"fps": 60,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-57,
+				-47
+			],
+			"anim": "singDOWN",
+			"fps": 60,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-61,
+				4
+			],
+			"anim": "singUP",
+			"fps": 60,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				14,
+				-55
+			],
+			"anim": "singRIGHT",
+			"fps": 60,
+			"name": "right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				227,
+				-59
+			],
+			"anim": "why1",
+			"fps": 105,
+			"name": "shit1",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-61,
+				-56
+			],
+			"anim": "why2",
+			"fps": 100,
+			"name": "shit2",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Delivery/delivery_bf",
+	"position": [
+		-40,
+		290
+	],
+	"healthicon": "bf_delivery",
+	"flip_x": true,
+	"healthbar_colors": [
+		41,
+		133,
+		255
+	],
+	"camera_position": [
+		105,
+		65
+	],
+	"sing_duration": 6.1,
+	"scale": 1.42857142857143,
+	"_editor_isPlayer": true
+}

@@ -1,0 +1,45 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "start",
+			"indices": [],
+			"name": "Intro"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 0,
+			"anim": "idle",
+			"indices": [],
+			"name": "Intro"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Devil_Intro_low",
+	"position": [
+		35,
+		-275
+	],
+	"healthicon": "devil",
+	"flip_x": false,
+	"healthbar_colors": [
+		33,
+		33,
+		33
+	],
+	"camera_position": [
+		-300,
+		-500
+	],
+	"sing_duration": 6.1,
+	"scale": 3
+}

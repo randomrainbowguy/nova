@@ -1,0 +1,167 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,share1_jpg,share2_jpg,share3_jpg,system_json,numimage_fnt,numimage_png,texiaofire_json,texiaorun_json,texiaowater_json,texiaoxue_json,soundbg_mp3,soundcall_mp3,sounddie_mp3,soundenemyshot_mp3,soundfail_mp3,soundjump_mp3,soundover_mp3,soundpress_mp3,soundrandom_mp3,soundrun_mp3,soundshot_mp3,soundunlock_mp3,soundwarn_mp3,soundwin_mp3,gameall1_json,soundhead_mp3,gameall2_json",
+			"name": "preload"
+		},
+		{
+			"keys": "loading2_png,loading1_png",
+			"name": "loading"
+		}
+	],
+	"resources": [
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/share1.jpg",
+			"type": "image",
+			"name": "share1_jpg"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/share2.jpg",
+			"type": "image",
+			"name": "share2_jpg"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/share3.jpg",
+			"type": "image",
+			"name": "share3_jpg"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/system.json",
+			"type": "sheet",
+			"name": "system_json",
+			"subkeys": "bg_tips_png,default-portrait_png,head_cycle_mask_png,head_square_mask_png,loading_indicator_png,rank_levelbg_png,share_challenge_head1_png,share_challenge_head2_png,share_challenge_head3_png,share_crown_png,sharehead_png"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/loading2.png",
+			"type": "image",
+			"name": "loading2_png"
+		},
+		{
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/system/loading1.png",
+			"type": "image",
+			"name": "loading1_png"
+		},
+		{
+			"name": "numimage_fnt",
+			"type": "font",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/image/numimage.fnt"
+		},
+		{
+			"name": "numimage_png",
+			"type": "image",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/image/numimage.png"
+		},
+		{
+			"name": "texiaofire_json",
+			"type": "json",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/particle/texiaofire.json"
+		},
+		{
+			"name": "texiaorun_json",
+			"type": "json",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/particle/texiaorun.json"
+		},
+		{
+			"name": "texiaowater_json",
+			"type": "json",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/particle/texiaowater.json"
+		},
+		{
+			"name": "texiaoxue_json",
+			"type": "json",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/particle/texiaoxue.json"
+		},
+		{
+			"name": "soundbg_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundbg.mp3"
+		},
+		{
+			"name": "soundcall_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundcall.mp3"
+		},
+		{
+			"name": "sounddie_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/sounddie.mp3"
+		},
+		{
+			"name": "soundenemyshot_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundenemyshot.mp3"
+		},
+		{
+			"name": "soundfail_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundfail.mp3"
+		},
+		{
+			"name": "soundjump_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundjump.mp3"
+		},
+		{
+			"name": "soundover_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundover.mp3"
+		},
+		{
+			"name": "soundpress_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundpress.mp3"
+		},
+		{
+			"name": "soundrandom_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundrandom.mp3"
+		},
+		{
+			"name": "soundrun_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundrun.mp3"
+		},
+		{
+			"name": "soundshot_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundshot.mp3"
+		},
+		{
+			"name": "soundunlock_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundunlock.mp3"
+		},
+		{
+			"name": "soundwarn_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundwarn.mp3"
+		},
+		{
+			"name": "soundwin_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundwin.mp3"
+		},
+		{
+			"name": "gameall1_json",
+			"type": "sheet",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/image/gameall1.json",
+			"subkeys": "shopselect_png,storeitem3_png,storeitem2_png,storeitem1_png,herobg_png,storeitem5_png,storeitem4_png,storeitem6_png,storeitem7_png,storeitem9_png,storeitem8_png,shoptitle_png,shopbtn2_png,shopbtn3_png,shoptip_png,shopbtn1_png,shopbtn4_png,herounlock_png,rankbg_png,rankview2_png,rankbtn1_png,rankview3_png,rankpeople_png,rankmark_png,rankview1_png,rankbtn3_png,rankbtn2_png,rankbtn4_png,rankshare_png,rankme_png,inter1_png,inter2_png,inter3_png,inter4_png,interbg_png,moregame3_png,overbtn2_png,overbtn3_png,moregame2_png,overtitle1_png,overtitle3_png,overbtn1_png,moregame1_png,overtitle2_png,overbtn4_png,overtitle4_png,map34s_png,map2_png,map3_png,map38s_png,map15s_png,map42s_png,map5_png,map39_png,map7_png,map35s_png,map6_png,map45s_png,map32s_png,map49s_png,map48s_png,map33s_png,map44s_png,map29s_png,map47s_png,map31s_png,map47_png,map46s_png,map200s_png,map41s_png,map40s_png"
+		},
+		{
+			"name": "soundhead_mp3",
+			"type": "sound",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/sound/soundhead.mp3"
+		},
+		{
+			"name": "gameall2_json",
+			"type": "sheet",
+			"url": "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/Jtrigger/fd7a154/resource/assets/image/gameall2.json",
+			"subkeys": "bullet0_png,shothead_png,enemy14_png,enemy15_png,enemy12_png,enemy13_png,enemy11_png,enemy21_png,enemy35_png,enemy34_png,enemy22_png,enemy23_png,enemy33_png,enemy32_png,enemy24_png,enemy31_png,enemy25_png,enemy42_png,enemy43_png,enemy41_png,enemy44_png,enemy45_png,hero132_png,hero126_png,hero127_png,hero133_png,hero119_png,hero125_png,hero131_png,hero1810_png,hero124_png,hero118_png,hero134_png,hero135_png,hero121_png,hero137_png,hero123_png,hero122_png,hero136_png,hero179_png,hero151_png,hero145_png,hero186_png,hero187_png,hero144_png,hero178_png,hero146_png,hero152_png,hero185_png,hero184_png,hero153_png,hero147_png,hero143_png,hero157_png,hero181_png,hero156_png,hero142_png,hero154_png,hero183_png,hero182_png,hero1518_png,hero141_png,hero155_png,hero158_png,hero1515_png,hero164_png,hero165_png,hero171_png,hero1514_png,hero159_png,hero1516_png,hero173_png,hero1310_png,hero1311_png,hero172_png,hero1517_png,hero166_png,hero162_png,hero176_png,hero1513_png,hero189_png,hero188_png,hero1512_png,hero177_png,hero163_png,hero1710_png,hero175_png,hero1510_png,hero161_png,hero149_png,hero000_png,hero148_png,hero1511_png,hero174_png,hero113_png,hero1416_png,hero112_png,hero138_png,hero1415_png,hero1414_png,hero111_png,hero139_png,hero115_png,hero129_png,hero1410_png,hero1411_png,hero128_png,hero114_png,hero116_png,hero1413_png,hero1412_png,hero117_png,map207_png,map33_png,map32_png,map206_png,map204_png,map30_png,map31_png,map205_png,map201_png,map35_png,map9_png,map8_png,map34_png,map200_png,map202_png,map36_png,map37_png,map203_png,map44_png,map45_png,map46_png,map42_png,map43_png,map41_png,map40_png,mapbg1_png,mapbg2_png,mapbg3_png,map48_png,map49_png,map12_png,map13_png,map11_png,map38_png,map10_png,map14_png,map15_png,map29_png,map16_png,texiaowater_png,bullet5_png,bullet4_png,bullet6_png,shopbg_png,bullet7_png,bullet3_png,bullet2_png,bullet1_png,texiaofire_png,bullet9_png,bullet8_png,texiaoxue_png,texiaorun_png,shoplight_png,shotline_png,title_png,titlebtn3_png,titlebtn2_png,titlebtn1_png,shotnull_png"
+		}
+	]
+}

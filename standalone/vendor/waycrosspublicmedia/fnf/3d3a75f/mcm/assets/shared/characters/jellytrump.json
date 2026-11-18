@@ -1,0 +1,58 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				6,
+				0
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "first",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-1,
+				6
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "third",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "second",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Humiliation/jellytrump",
+	"position": [
+		-220,
+		-10
+	],
+	"healthicon": "null",
+	"flip_x": false,
+	"healthbar_colors": [
+		100,
+		100,
+		100
+	],
+	"camera_position": [
+		-150,
+		-20
+	],
+	"sing_duration": 6.1,
+	"scale": 0.3,
+	"_editor_isPlayer": false
+}

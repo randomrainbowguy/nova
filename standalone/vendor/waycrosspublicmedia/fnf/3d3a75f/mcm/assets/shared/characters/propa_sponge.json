@@ -1,0 +1,148 @@
+{
+    "animations": [
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "idle",
+            "indices": [],
+            "name": "spong idle"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singLEFT",
+            "indices": [],
+            "name": "left pose"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singDOWN",
+            "indices": [],
+            "name": "down pose"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singUP",
+            "indices": [],
+            "name": "up pose"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singRIGHT",
+            "indices": [],
+            "name": "right pose"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singLEFTmiss",
+            "indices": [],
+            "name": "left miss"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singDOWNmiss",
+            "indices": [],
+            "name": "down miss"
+        },
+        {
+            "offsets": [
+                -138,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singUPmiss",
+            "indices": [],
+            "name": "up miss"
+        },
+        {
+            "offsets": [
+                -135,
+                -104
+            ],
+            "loop": false,
+            "fps": 24,
+            "anim": "singRIGHTmiss",
+            "indices": [],
+            "name": "right miss"
+        },
+        {
+            "loop": false,
+            "offsets": [
+                -125,
+                -97
+            ],
+            "anim": "look",
+            "fps": 24,
+            "name": "alt anim",
+            "indices": []
+        },
+        {
+            "loop": false,
+            "offsets": [
+                -125,
+                -97
+            ],
+            "anim": "idle-alt",
+            "fps": 24,
+            "name": "alt anim",
+            "indices": [
+                19
+            ]
+        }
+    ],
+    "vocals_file": "",
+    "no_antialiasing": false,
+    "image": "characters/MCM/Propaganda/spongebob",
+    "position": [
+        300,
+        100
+    ],
+    "healthicon": "spongey",
+    "flip_x": true,
+    "healthbar_colors": [
+        250,
+        236,
+        61
+    ],
+    "camera_position": [
+        150,
+        -80
+    ],
+    "sing_duration": 6.1,
+    "scale": 1.6666666666666667,
+    "_editor_isPlayer": true
+}

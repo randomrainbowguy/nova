@@ -1,0 +1,166 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle Normal instance"
+		},
+		{
+			"offsets": [
+				112,
+				-59
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Down Normal instance"
+		},
+		{
+			"offsets": [
+				226,
+				-43
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Left instance"
+		},
+		{
+			"offsets": [
+				22,
+				-38
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Right Normal instance"
+		},
+		{
+			"offsets": [
+				95,
+				86
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up Normal instance"
+		},
+		{
+			"offsets": [
+				231,
+				112
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle-alt",
+			"indices": [],
+			"name": "Oblivion Bendy instance"
+		},
+		{
+			"offsets": [
+				176,
+				50
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "Down Oblivion instance"
+		},
+		{
+			"offsets": [
+				302,
+				37
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "Left Oblivion instance"
+		},
+		{
+			"offsets": [
+				201,
+				34
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "Right Oblivion instance"
+		},
+		{
+			"offsets": [
+				67,
+				204
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "Up Oblivion instance"
+		},
+		{
+			"offsets": [
+				-6,
+				-29
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "transformation",
+			"indices": [],
+			"name": "Transformation instance"
+		},
+		{
+			"offsets": [
+				37,
+				-49
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "speech1",
+			"indices": [],
+			"name": "You've got this"
+		},
+		{
+			"offsets": [
+				9,
+				46
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "speech2",
+			"indices": [],
+			"name": "ugh lowblow instance"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/BendyDAgames",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "ben",
+	"flip_x": false,
+	"healthbar_colors": [
+		33,
+		33,
+		33
+	],
+	"camera_position": [
+		-50,
+		50
+	],
+	"sing_duration": 6.1,
+	"scale": 1.5
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="agua.png" width="1634" height="2152">
+  <SubTexture name="agua0000.png" x="0" y="0"  width="1634" height="538" frameX="-0" frameY="-0" frameWidth="1634" frameHeight="538"/>
+  <SubTexture name="agua0001.png" x="0" y="538"  width="1634" height="538" frameX="-0" frameY="-0" frameWidth="1634" frameHeight="538"/>
+  <SubTexture name="agua0002.png" x="0" y="1076"  width="1634" height="538" frameX="-0" frameY="-0" frameWidth="1634" frameHeight="538"/>
+  <SubTexture name="agua0003.png" x="0" y="1614"  width="1634" height="538" frameX="-0" frameY="-0" frameWidth="1634" frameHeight="538"/>
+</TextureAtlas>

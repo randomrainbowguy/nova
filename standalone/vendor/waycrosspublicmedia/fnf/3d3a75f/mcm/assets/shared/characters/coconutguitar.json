@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-314,
+				-363
+			],
+			"loop": false,
+			"fps": 30,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle instance"
+		},
+		{
+			"offsets": [
+				62,
+				-379
+			],
+			"loop": false,
+			"fps": 40,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left instance"
+		},
+		{
+			"offsets": [
+				391,
+				-362
+			],
+			"loop": false,
+			"fps": 40,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down instance"
+		},
+		{
+			"offsets": [
+				503,
+				-273
+			],
+			"loop": false,
+			"fps": 40,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up instance"
+		},
+		{
+			"offsets": [
+				487,
+				-331
+			],
+			"loop": false,
+			"fps": 40,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right instance"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Paradise/cocoguitar",
+	"position": [
+		-30,
+		250
+	],
+	"healthicon": "coconut0",
+	"flip_x": false,
+	"healthbar_colors": [
+		216,
+		18,
+		101
+	],
+	"camera_position": [
+		-280,
+		-570
+	],
+	"sing_duration": 6.1,
+	"scale": 1.83333333333333,
+	"_editor_isPlayer": false
+}

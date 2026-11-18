@@ -1,0 +1,147 @@
+{
+	"song": {
+		"song": "Devils-Gambit",
+		"notes": [],
+		"events": [
+			[
+				5000,
+				[
+					[
+						"shooting",
+						"bulletNM",
+						""
+					]
+				]
+			],
+			[
+				16450,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				19000,
+				[
+					[
+						"shooting",
+						"bulletNM",
+						""
+					]
+				]
+			],
+			[
+				32900,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				38400,
+				[
+					[
+						"shooting",
+						"bulletNM",
+						""
+					]
+				]
+			],
+			[
+				46600,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				65800,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				68500,
+				[
+					[
+						"shooting",
+						"bulletNM",
+						""
+					]
+				]
+			],
+			[
+				82200,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				98700,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				98700,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			],
+			[
+				105000,
+				[
+					[
+						"shooting",
+						"bulletNM",
+						""
+					]
+				]
+			],
+			[
+				115000,
+				[
+					[
+						"shooting",
+						"hadoken",
+						""
+					]
+				]
+			]
+		],
+		"bpm": 175,
+		"needsVoices": true,
+		"speed": 2.9,
+		"player1": "nmbf",
+		"player2": "nmcup",
+		"player3": null,
+		"gfVersion": "gf",
+		"stage": "devilHall",
+		"validScore": false
+	}
+}

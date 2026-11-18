@@ -1,0 +1,133 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Run_cycle",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idlealt",
+			"fps": 24,
+			"name": "Run_When",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				19,
+				4
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Leftt",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-2,
+				3
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Rightt",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-1,
+				9
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Down instance",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-6,
+				10
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Up instance",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-13,
+				-11
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Up Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-2,
+				-17
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Down Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-9,
+				-21
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Left Miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-2,
+				-23
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Right Miss",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/dark/NM-run-BF-Dark",
+	"position": [
+		400,
+		200
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		33,
+		33,
+		33
+	],
+	"camera_position": [
+		200,
+		-50
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

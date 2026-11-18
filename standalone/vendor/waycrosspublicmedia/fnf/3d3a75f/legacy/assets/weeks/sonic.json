@@ -1,0 +1,41 @@
+{
+	"songs": [
+		[
+			"2torial",
+			"sonic",
+			[
+				26,
+				53,
+				253
+			]
+		],
+		[
+			"free-4-me",
+			"sonic",
+			[
+				26,
+				53,
+				253
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "",
+	"difficulties": "Hard",
+	"weekCharacters": [
+		"sonic",
+		"bf",
+		""
+	],
+	"storyName": "Rodentrap",
+	"weekName": "rodentrap",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

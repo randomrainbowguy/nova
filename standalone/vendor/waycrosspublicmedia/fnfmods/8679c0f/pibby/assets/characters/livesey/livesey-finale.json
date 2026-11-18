@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				101,
+				350
+			],
+			"loop": false,
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"offsets": [
+				130,
+				280
+			],
+			"loop": false,
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"offsets": [
+				154,
+				430
+			],
+			"loop": false,
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"offsets": [
+				174,
+				327
+			],
+			"loop": false,
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				510
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/livesey/livesey-gnidosa",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "livesey",
+	"flip_x": false,
+	"healthbar_colors": [
+		61,
+		97,
+		107
+	],
+	"camera_position": [
+		-310,
+		-400
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

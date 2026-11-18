@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				290,
+				140
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "IDLE"
+		},
+		{
+			"offsets": [
+				280,
+				99
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "DOWN"
+		},
+		{
+			"offsets": [
+				314,
+				200
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "UP"
+		},
+		{
+			"offsets": [
+				264,
+				150
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "RIGHT"
+		},
+		{
+			"offsets": [
+				436,
+				126
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "LEFT"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/FNF/bf",
+	"position": [
+		340,
+		510
+	],
+	"healthicon": "pibboyfriend",
+	"flip_x": false,
+	"healthbar_colors": [
+		9,
+		121,
+		171
+	],
+	"camera_position": [
+		-290,
+		-70
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

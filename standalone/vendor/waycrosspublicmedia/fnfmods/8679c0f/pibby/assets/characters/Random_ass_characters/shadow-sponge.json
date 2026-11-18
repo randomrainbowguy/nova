@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				70,
+				-367
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Shadow_Left"
+		},
+		{
+			"offsets": [
+				-96,
+				-414
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Shadow_Right"
+		},
+		{
+			"offsets": [
+				-4,
+				-463
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Shadow_Down"
+		},
+		{
+			"offsets": [
+				60,
+				-362
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Shadow_Up"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-72,
+				-406
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Shadow_Idle",
+			"indices": []
+		}
+	],
+	"vocals_file": "Voices",
+	"no_antialiasing": false,
+	"image": "characters/Random_ass_characters/shadow-sponge",
+	"position": [
+		130,
+		100
+	],
+	"healthicon": "shadowbob",
+	"flip_x": false,
+	"healthbar_colors": [
+		10,
+		0,
+		0
+	],
+	"camera_position": [
+		-10,
+		420
+	],
+	"sing_duration": 4,
+	"scale": 1.2,
+	"_editor_isPlayer": false
+}

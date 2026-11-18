@@ -1,0 +1,80 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				158,
+				-97
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Sponge_Idle"
+		},
+		{
+			"offsets": [
+				336,
+				-28
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Sponge_Left"
+		},
+		{
+			"offsets": [
+				134,
+				-134
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Sponge_Right"
+		},
+		{
+			"offsets": [
+				341,
+				15
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Sponge_Down"
+		},
+		{
+			"offsets": [
+				206,
+				58
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Sponge_Up"
+		}
+	],
+	"vocals_file": "Voices",
+	"no_antialiasing": false,
+	"image": "characters/Random_ass_characters/spongebob",
+	"position": [
+		160,
+		140
+	],
+	"healthicon": "sponge",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		243,
+		101
+	],
+	"camera_position": [
+		-220,
+		120
+	],
+	"sing_duration": 4,
+	"scale": 0.999999999999999,
+	"_editor_isPlayer": false
+}

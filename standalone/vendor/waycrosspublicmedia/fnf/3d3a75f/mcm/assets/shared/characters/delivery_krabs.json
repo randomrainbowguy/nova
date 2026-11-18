@@ -1,0 +1,52 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 105,
+			"anim": "animation",
+			"indices": [],
+			"name": "krab"
+		},
+		{
+			"offsets": [
+				0,
+				9999999
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hidden",
+			"indices": [
+				1,
+				2,
+				3,
+				4
+			],
+			"name": "krabs"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Delivery/delivery_krabs2",
+	"position": [
+		-150,
+		-20
+	],
+	"healthicon": "null",
+	"flip_x": false,
+	"healthbar_colors": [
+		100,
+		100,
+		100
+	],
+	"camera_position": [
+		30,
+		-80
+	],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

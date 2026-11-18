@@ -1,0 +1,100 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				155,
+				86
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hit",
+			"indices": [],
+			"name": "Sticker"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "strrr"
+		},
+		{
+			"offsets": [
+				3,
+				5
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "attack",
+			"indices": [],
+			"name": "regeg"
+		},
+		{
+			"offsets": [
+				42,
+				7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "preattack",
+			"indices": [],
+			"name": "PunchAttack_container"
+		},
+		{
+			"offsets": [
+				250,
+				87
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dead",
+			"indices": [],
+			"name": "I ded"
+		},
+		{
+			"offsets": [
+				250,
+				87
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "finaldeath",
+			"indices": [],
+			"name": "I ded"
+		},
+		{
+			"loop": true,
+			"offsets": [
+				44,
+				9
+			],
+			"anim": "walk",
+			"fps": 24,
+			"name": "Str walk",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Striker",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "dad",
+	"flip_x": false,
+	"healthbar_colors": [
+		175,
+		102,
+		206
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1.9
+}

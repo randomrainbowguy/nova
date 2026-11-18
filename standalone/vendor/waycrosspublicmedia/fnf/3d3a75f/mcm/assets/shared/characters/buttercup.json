@@ -1,0 +1,72 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-99,
+				-106
+			],
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "BGButtercup"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				135,
+				184
+			],
+			"fps": 24,
+			"anim": "igor being evil",
+			"indices": [],
+			"name": "evil igor idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				137,
+				184
+			],
+			"fps": 24,
+			"anim": "idle-alt",
+			"indices": [
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38
+			],
+			"name": "evil igor idle"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/MCM/Propaganda/buttercup",
+	"position": [
+		-800,
+		120
+	],
+	"healthicon": "ppg",
+	"flip_x": true,
+	"healthbar_colors": [
+		137,
+		181,
+		55
+	],
+	"camera_position": [
+		-130,
+		150
+	],
+	"sing_duration": 4,
+	"scale": 1.14285714285714,
+	"_editor_isPlayer": true
+}

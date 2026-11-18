@@ -1,0 +1,34 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				110,
+				30
+			],
+			"loop": false,
+			"fps": 23,
+			"anim": "idle",
+			"indices": [],
+			"name": "i"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/talkSonic",
+	"position": [
+		150,
+		330
+	],
+	"healthicon": "sonic",
+	"flip_x": false,
+	"healthbar_colors": [
+		5,
+		30,
+		178
+	],
+	"camera_position": [
+		-100,
+		-110
+	],
+	"sing_duration": 6.1,
+	"scale": 1.54
+}

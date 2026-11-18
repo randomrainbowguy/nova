@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				276,
+				764
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "death0",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				149,
+				179
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "deathloop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				198,
+				202
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "deathconfirm",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Game_Over/yodi-death",
+	"position": [
+		30,
+		360
+	],
+	"healthicon": "yodi",
+	"flip_x": true,
+	"healthbar_colors": [
+		80,
+		175,
+		100
+	],
+	"camera_position": [
+		150,
+		-350
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

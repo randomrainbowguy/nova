@@ -1,0 +1,317 @@
+{
+	"song": {
+		"song": "Bonedoggle",
+		"notes": [],
+		"events": [
+			[
+				19200,
+				[
+					[
+						"Set Cam Zoom",
+						"1.1",
+						"4"
+					]
+				]
+			],
+			[
+				24600,
+				[
+					[
+						"Play Animation",
+						"01 instance 1",
+						"gf"
+					]
+				]
+			],
+			[
+				24600,
+				[
+					[
+						"Alt Idle Animation",
+						"gf",
+						"-sleep"
+					]
+				]
+			],
+			[
+				24600,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt"
+					]
+				]
+			],
+			[
+				24800,
+				[
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				25200,
+				[
+					[
+						"Play Animation",
+						"pro",
+						"dad"
+					]
+				]
+			],
+			[
+				30000,
+				[
+					[
+						"Play Animation",
+						"03 instance 1",
+						"gf"
+					]
+				]
+			],
+			[
+				32000,
+				[
+					[
+						"Set Cam Zoom",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				32000,
+				[
+					[
+						"Alt Idle Animation",
+						"gf",
+						""
+					]
+				]
+			],
+			[
+				32000,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt2"
+					]
+				]
+			],
+			[
+				42000,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						""
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"Play Animation",
+						"drum on",
+						"gf"
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"Alt Idle Animation",
+						"gf",
+						"-alt"
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"Set Cam Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"both",
+						"true",
+						""
+					]
+				]
+			],
+			[
+				70600,
+				[
+					[
+						"both",
+						"",
+						""
+					]
+				]
+			],
+			[
+				70600,
+				[
+					[
+						"Play Animation",
+						"bruh",
+						"dad"
+					]
+				]
+			],
+			[
+				77200,
+				[
+					[
+						"Set Cam Zoom",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				77200,
+				[
+					[
+						"Play Animation",
+						"idle-alt",
+						"dad"
+					]
+				]
+			],
+			[
+				77200,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt"
+					]
+				]
+			],
+			[
+				81200,
+				[
+					[
+						"Play Animation",
+						"drum off",
+						"gf"
+					]
+				]
+			],
+			[
+				81200,
+				[
+					[
+						"Alt Idle Animation",
+						"gf",
+						""
+					]
+				]
+			],
+			[
+				81000,
+				[
+					[
+						"Play Animation",
+						"idle-alt2",
+						"dad"
+					]
+				]
+			],
+			[
+				81000,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						"-alt2"
+					]
+				]
+			],
+			[
+				82400,
+				[
+					[
+						"Play Animation",
+						"1:22",
+						"gf"
+					]
+				]
+			],
+			[
+				82800,
+				[
+					[
+						"Play Animation",
+						"pro",
+						"dad"
+					]
+				]
+			],
+			[
+				82800,
+				[
+					[
+						"Alt Idle Animation",
+						"dad",
+						""
+					]
+				]
+			],
+			[
+				123200,
+				[
+					[
+						"Play Animation",
+						"01 instance 1",
+						"gf"
+					]
+				]
+			],
+			[
+				123200,
+				[
+					[
+						"Alt Idle Animation",
+						"gf",
+						"-sleep"
+					]
+				]
+			],
+			[
+				124500,
+				[
+					[
+						"Play Animation",
+						"bruh",
+						"dad"
+					]
+				]
+			]
+		],
+		"bpm": 150,
+		"needsVoices": true,
+		"speed": 2.6,
+		"player1": "bfwinter",
+		"player2": "papyrus2",
+		"player3": null,
+		"gfVersion": "sans-brrrrr",
+		"stage": "iceland",
+		"validScore": false
+	}
+}

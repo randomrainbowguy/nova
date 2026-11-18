@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-2,
+				-31
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "BF NOTE DOWN",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-17,
+				1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "BF NOTE RIGHT"
+		},
+		{
+			"offsets": [
+				-39,
+				56
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "BF NOTE UP"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "BF idle dance"
+		},
+		{
+			"offsets": [
+				41,
+				-4
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "BF NOTE LEFT"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				16,
+				13
+			],
+			"anim": "dodge",
+			"fps": 24,
+			"name": "Dodge",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				154
+			],
+			"anim": "hit",
+			"fps": 24,
+			"name": "Ouch",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				438,
+				150
+			],
+			"anim": "attackL",
+			"fps": 24,
+			"name": "Attack instance 1",
+			"indices": []
+		},
+		{
+			"offsets": [
+				-27,
+				153
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "attackR",
+			"loop": false,
+			"name": "Attack instance 2"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/BoyFriend_3rdPhase",
+	"position": [
+		100,
+		330
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		33,
+		33,
+		33
+	],
+	"camera_position": [
+		600,
+		-240
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

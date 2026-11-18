@@ -1,0 +1,16 @@
+{
+	"initial": [
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/egret.min_1b571385.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/egret.web.min_401f9695.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/game.min_16249d0f.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/tween.min_6c5a88f9.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/assetsmanager.min_52b82f60.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/promise.min_83a6a5d.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/particle.min_27fe451d.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/Box2dweb.min_bed73707.js",
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/8733508/js/vconsole.min_314a0209.js"
+	],
+	"game": [
+		"https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/yrgen73/draw-cl/717b46c/js/main.min_c7454720.js"
+	]
+}

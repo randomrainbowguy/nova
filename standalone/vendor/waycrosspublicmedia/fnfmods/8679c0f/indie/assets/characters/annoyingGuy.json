@@ -1,0 +1,45 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "walkLeft",
+			"loop": true,
+			"name": "BoiRun instance 1"
+		},
+		{
+			"offsets": [
+				-300,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "walkRight",
+			"loop": true,
+			"name": "BoiRun instance 2"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/annoying-guy",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "dad",
+	"flip_x": false,
+	"healthbar_colors": [
+		195,
+		102,
+		206
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 2.3
+}

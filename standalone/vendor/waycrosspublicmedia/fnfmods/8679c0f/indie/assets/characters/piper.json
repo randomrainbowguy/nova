@@ -1,0 +1,100 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Piperr",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				106,
+				12
+			],
+			"anim": "walk",
+			"fps": 24,
+			"name": "pip walk",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				163
+			],
+			"anim": "hit",
+			"fps": 24,
+			"name": "Piper gets Hit",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				88,
+				157
+			],
+			"anim": "dead",
+			"fps": 24,
+			"name": "Piper ded",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				88,
+				157
+			],
+			"anim": "finaldeath",
+			"fps": 24,
+			"name": "Piper ded",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				71,
+				40
+			],
+			"anim": "preattack",
+			"fps": 24,
+			"name": "PipAttack",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				316,
+				236
+			],
+			"anim": "attack",
+			"fps": 24,
+			"name": "PeepAttack",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Piper",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "dad",
+	"flip_x": false,
+	"healthbar_colors": [
+		195,
+		102,
+		206
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1.9
+}

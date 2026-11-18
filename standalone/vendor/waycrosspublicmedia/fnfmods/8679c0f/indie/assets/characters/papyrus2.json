@@ -1,0 +1,188 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle instance 1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "upahgn instance 1"
+		},
+		{
+			"offsets": [
+				100,
+				7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left instance 1"
+		},
+		{
+			"offsets": [
+				150,
+				-60
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Right copy instance 1"
+		},
+		{
+			"offsets": [
+				0,
+				120
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Up instance 1"
+		},
+		{
+			"offsets": [
+				0,
+				-30
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "bruh",
+			"indices": [],
+			"name": "Bruh instance 1"
+		},
+		{
+			"offsets": [
+				80,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle-alt",
+			"indices": [],
+			"name": "Even more Mad instance 1"
+		},
+		{
+			"offsets": [
+				113,
+				95
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "ISTG instance 1"
+		},
+		{
+			"offsets": [
+				7,
+				63
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "pro",
+			"indices": [],
+			"name": "Oh Sans you Mother fuc- instance 1"
+		},
+		{
+			"offsets": [
+				190,
+				-100
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "SANS WAKE UP BITCH instance 1"
+		},
+		{
+			"offsets": [
+				67,
+				41
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "Sans lessgo instance 1",
+			"indices": [],
+			"name": "Sans lessgo instance 1"
+		},
+		{
+			"offsets": [
+				62,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle-alt2",
+			"indices": [],
+			"name": "That's ma boi instance 1"
+		},
+		{
+			"offsets": [
+				50,
+				-95
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "fzt instance 1"
+		},
+		{
+			"offsets": [
+				90,
+				-30
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "gzezy",
+			"indices": [],
+			"name": "gzezy instance 1"
+		},
+		{
+			"offsets": [
+				183,
+				4
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "jghrue instance 1"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Papyrus",
+	"position": [
+		300,
+		0
+	],
+	"healthicon": "sans-papyrus",
+	"flip_x": false,
+	"healthbar_colors": [
+		171,
+		22,
+		74
+	],
+	"camera_position": [
+		-200,
+		-80
+	],
+	"sing_duration": 6.1,
+	"scale": 1.3
+}

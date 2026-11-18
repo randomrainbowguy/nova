@@ -1,0 +1,179 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-190,
+				-227
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "bf_idle"
+		},
+		{
+			"offsets": [
+				-141,
+				-206
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "bf_left"
+		},
+		{
+			"offsets": [
+				-180,
+				-231
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "bf_down"
+		},
+		{
+			"offsets": [
+				-192,
+				-202
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "bf_up"
+		},
+		{
+			"offsets": [
+				-200,
+				-207
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "bf_right"
+		},
+		{
+			"offsets": [
+				-189,
+				-202
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle-alt",
+			"indices": [],
+			"name": "Hidle"
+		},
+		{
+			"offsets": [
+				-171,
+				-199
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "Hleft"
+		},
+		{
+			"offsets": [
+				-180,
+				-230
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "Hdown"
+		},
+		{
+			"offsets": [
+				-191,
+				-208
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "Hup"
+		},
+		{
+			"offsets": [
+				-189,
+				-199
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "Hright"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-160,
+				-214
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "bf_lmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-190,
+				-244
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "bf_dmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-199,
+				-205
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "bf_umiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-195,
+				-220
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "bf_rmiss",
+			"indices": []
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/bf_mcm/1",
+	"position": [
+		120,
+		190
+	],
+	"healthicon": "bf_mcm",
+	"flip_x": true,
+	"healthbar_colors": [
+		76,
+		185,
+		228
+	],
+	"camera_position": [
+		-90,
+		200
+	],
+	"sing_duration": 6.1,
+	"scale": 0.85,
+	"_editor_isPlayer": true
+}

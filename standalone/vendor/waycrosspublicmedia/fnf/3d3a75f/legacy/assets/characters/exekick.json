@@ -1,0 +1,71 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				180,
+				149
+			],
+			"anim": "kick",
+			"fps": 26,
+			"name": "kickx",
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				180,
+				152
+			],
+			"anim": "laugh",
+			"fps": 16,
+			"name": "kickx",
+			"indices": [
+				20,
+				21,
+				22,
+				23,
+				24,
+				25
+			]
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/X_Kick",
+	"position": [
+		-20,
+		210
+	],
+	"healthicon": "p2",
+	"flip_x": false,
+	"healthbar_colors": [
+		5,
+		30,
+		178
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 0.8
+}

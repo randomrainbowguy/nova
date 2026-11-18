@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				281,
+				10
+			],
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Dr_Left"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				170,
+				-70
+			],
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Dr_Down"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				270,
+				180
+			],
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Dr_Up"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				180,
+				-53
+			],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Dr_Right"
+		},
+		{
+			"offsets": [
+				70,
+				190
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Dr_Idle"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/livesey/livesey",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "livesey",
+	"flip_x": false,
+	"healthbar_colors": [
+		14,
+		103,
+		59
+	],
+	"camera_position": [
+		-420,
+		-150
+	],
+	"sing_duration": 6.1,
+	"scale": 1.4
+}

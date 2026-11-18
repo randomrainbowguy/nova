@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				330,
+				320
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "GF_IDLE"
+		},
+		{
+			"offsets": [
+				328,
+				200
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "GF_DOWN"
+		},
+		{
+			"offsets": [
+				184,
+				420
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "GF_UP"
+		},
+		{
+			"offsets": [
+				318,
+				350
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "GF_RIGHT"
+		},
+		{
+			"offsets": [
+				459,
+				289
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "GF_LEFT"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/FNF/gf",
+	"position": [
+		380,
+		570
+	],
+	"healthicon": "pibgirlfriend",
+	"flip_x": false,
+	"healthbar_colors": [
+		165,
+		0,
+		77
+	],
+	"camera_position": [
+		-290,
+		-270
+	],
+	"sing_duration": 6.1,
+	"scale": 1.1
+}
