@@ -1,0 +1,1118 @@
+<script>(function(){var M={"bubbls/ugs-assets": {"ae6706e5224c55594c491edfc7f5ad541e2ea02b": "bubbls/UGS-Assets/ae6706e", "master": "bubbls/UGS-Assets/ae6706e", "latest": "bubbls/UGS-Assets/ae6706e", "main": "bubbls/UGS-Assets/ae6706e", "ae6706e": "bubbls/UGS-Assets/ae6706e"}},V="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/",RAW="https://raw.githubusercontent.com/randomrainbowguy/nova/overnight/standalone/vendor/",BIG={};
+var RE=/^(?:https?:)?\/\/(?:cdn\.jsdelivr\.net\/gh\/([^\/@?#]+)\/([^\/@?#]+)(?:@([^\/?#]+))?|(?:rawcdn|bbcdn|raw)\.githack\.com\/([^\/?#]+)\/([^\/?#]+)\/([^\/?#]+)|raw\.githubusercontent\.com\/([^\/?#]+)\/([^\/?#]+)\/(?:refs\/heads\/)?([^\/?#]+)|cdn\.statically\.io\/gh\/([^\/@?#]+)\/([^\/@?#]+)[@\/]([^\/?#]+)|github\.com\/([^\/?#]+)\/([^\/?#]+)\/(?:raw|blob)\/(?:refs\/heads\/)?([^\/?#]+))\/?([^?#]*)(.*)$/i;
+var C=/^https:\/\/cdn\.jsdelivr\.net\/gh\/randomrainbowguy\/nova@[^\/]+\/standalone\/vendor\//i,CR=/^https:\/\/raw\.githubusercontent\.com\/randomrainbowguy\/nova\/[^\/]+\/standalone\/vendor\//i;
+function map(u){if(typeof u!=="string")return u;if(C.test(u))return u.replace(C,V);if(CR.test(u))return u.replace(CR,RAW);var m=RE.exec(u);if(!m)return u;
+var o,r,v,i;for(i=1;i<=13;i+=3)if(m[i]){o=m[i];r=m[i+1];v=m[i+2]||"main";break}
+var e=M[(o+"/"+r).toLowerCase()];if(!e)return u;var d=e[v];if(!d)return u;
+var p=(m[16]||"").replace(/^\//,"");try{p=decodeURIComponent(p)}catch(x){}
+return (BIG[d+"/"+p]?RAW:V)+d+"/"+encodeURI(p).replace(/#/g,"%23")+(m[17]||"");}
+var w=window;try{w.__novaVendorMap=map}catch(x){}
+if(w.fetch){var f=w.fetch;w.fetch=function(a,b){try{if(typeof a==="string")a=map(a);else if(a&&typeof a.url==="string"&&map(a.url)!==a.url)a=new Request(map(a.url),a)}catch(x){}return f.call(this,a,b)}}
+if(w.XMLHttpRequest){var xo=XMLHttpRequest.prototype.open;XMLHttpRequest.prototype.open=function(m,u){var a=Array.prototype.slice.call(arguments);try{a[1]=map(String(u))}catch(x){}return xo.apply(this,a)}}
+if(w.Worker){var W=w.Worker;w.Worker=function(u,o){return new W(map(String(u)),o)};w.Worker.prototype=W.prototype}
+function prop(C,n){try{var d=Object.getOwnPropertyDescriptor(C.prototype,n);if(!d||!d.set)return;Object.defineProperty(C.prototype,n,{configurable:true,enumerable:d.enumerable,get:d.get,set:function(v){d.set.call(this,map(String(v)))}})}catch(x){}}
+[["HTMLScriptElement","src"],["HTMLImageElement","src"],["HTMLAudioElement","src"],["HTMLVideoElement","src"],["HTMLMediaElement","src"],["HTMLSourceElement","src"],["HTMLIFrameElement","src"],["HTMLLinkElement","href"],["HTMLObjectElement","data"],["HTMLEmbedElement","src"]].forEach(function(e){if(w[e[0]])prop(w[e[0]],e[1])});
+var sa=Element.prototype.setAttribute;Element.prototype.setAttribute=function(n,v){if(/^(src|href|data|srcset)$/i.test(n))v=map(String(v));return sa.call(this,n,v)};
+var dw=document.write,dl=document.writeln,fix=function(s){return String(s).replace(/https?:\/\/[^\s"'<>()]+/g,map)};
+document.write=function(){return dw.apply(document,Array.prototype.map.call(arguments,fix))};document.writeln=function(){return dl.apply(document,Array.prototype.map.call(arguments,fix))};
+var ih=Object.getOwnPropertyDescriptor(Element.prototype,"innerHTML");if(ih&&ih.set)Object.defineProperty(Element.prototype,"innerHTML",{configurable:true,enumerable:ih.enumerable,get:ih.get,set:function(v){ih.set.call(this,typeof v==="string"&&/jsdelivr|githack|githubusercontent|statically|github\.com/i.test(v)?fix(v):v)}});
+})();</script><script data-r="c7a94e">function _0x4c77(_0xd29370,_0x35da0a){_0xd29370=_0xd29370-0xc2;const _0x157e95=_0x157e();let _0x4c77ec=_0x157e95[_0xd29370];if(_0x4c77['VoshJp']===undefined){var _0x47a5e2=function(_0x3e0650){const _0x3f6ec8='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x4c0d69='',_0x59b563='';for(let _0xa7ac19=0x0,_0x505f7c,_0x55adda,_0x5615db=0x0;_0x55adda=_0x3e0650['charAt'](_0x5615db++);~_0x55adda&&(_0x505f7c=_0xa7ac19%0x4?_0x505f7c*0x40+_0x55adda:_0x55adda,_0xa7ac19++%0x4)?_0x4c0d69+=String['fromCharCode'](0xff&_0x505f7c>>(-0x2*_0xa7ac19&0x6)):0x0){_0x55adda=_0x3f6ec8['indexOf'](_0x55adda);}for(let _0x56c002=0x0,_0x312b5d=_0x4c0d69['length'];_0x56c002<_0x312b5d;_0x56c002++){_0x59b563+='%'+('00'+_0x4c0d69['charCodeAt'](_0x56c002)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x59b563);};_0x4c77['coFIPO']=_0x47a5e2,_0x4c77['qLyxUs']={},_0x4c77['VoshJp']=!![];}const _0x5b4128=_0x157e95[0x0];_0x4c77['wPzFxu']!==_0x5b4128&&(_0x4c77['qLyxUs']={},_0x4c77['wPzFxu']=_0x5b4128);const _0x4ef258=_0x4c77['qLyxUs'][_0xd29370];return _0x4ef258===undefined?(_0x4c77ec=_0x4c77['coFIPO'](_0x4c77ec),_0x4c77['qLyxUs'][_0xd29370]=_0x4c77ec):_0x4c77ec=_0x4ef258,_0x4c77ec;}const _0x3f03d7=_0x4c77;(function(_0x11c99f,_0x55b8c2){const _0xffdcc0=_0x4c77,_0x505b79=_0x11c99f();while(!![]){try{const _0x3a2932=parseInt(_0xffdcc0(0xcd))/0x1*(-parseInt(_0xffdcc0(0xdb))/0x2)+parseInt(_0xffdcc0(0xcf))/0x3*(parseInt(_0xffdcc0(0xf9))/0x4)+parseInt(_0xffdcc0(0xe8))/0x5+parseInt(_0xffdcc0(0xf2))/0x6*(-parseInt(_0xffdcc0(0xe7))/0x7)+parseInt(_0xffdcc0(0xd3))/0x8*(parseInt(_0xffdcc0(0xf1))/0x9)+parseInt(_0xffdcc0(0xed))/0xa+parseInt(_0xffdcc0(0xdf))/0xb*(parseInt(_0xffdcc0(0xc2))/0xc);if(_0x3a2932===_0x55b8c2)break;else _0x505b79['push'](_0x505b79['shift']());}catch(_0x1664e7){_0x505b79['push'](_0x505b79['shift']());}}}(_0x157e,0x81c84),function _0xa7ac19(_0x505f7c,_0x55adda,_0x5615db,_0x56c002){const _0x1a2418=_0x4c77;let _0x312b5d=window;try{while(_0x312b5d[_0x1a2418(0xc9)]!==_0x312b5d){void _0x312b5d[_0x1a2418(0xc9)][_0x1a2418(0xe6)][_0x1a2418(0xeb)],_0x312b5d=_0x312b5d[_0x1a2418(0xc9)];}}catch{}const _0x1f7969=_0x1a2418(0xe3),_0x107a96=_0x312b5d[_0x1a2418(0xe6)];let _0x4816ff=_0x312b5d[_0x1f7969];const _0x1e8df4=()=>{const _0x27b664=_0x1a2418;window[_0x27b664(0xfa)](),window[_0x27b664(0xe0)][_0x27b664(0xe9)](_0x27b664(0xc3));};if(!_0x4816ff){const _0x4d8216=_0x107a96[_0x1a2418(0xdc)](_0x1a2418(0xd7));_0x4d8216[_0x1a2418(0xce)]=_0x55adda,(_0x107a96[_0x1a2418(0xef)]||_0x107a96[_0x1a2418(0xeb)])[_0x1a2418(0xe1)](_0x4d8216),_0x4d8216[_0x1a2418(0xfc)](),_0x4816ff=_0x312b5d[_0x1f7969];}if(!_0x4816ff||_0x4816ff[_0x1a2418(0xf8)]||!_0x4816ff[_0x1a2418(0xd7)][_0x1a2418(0xd8)]||_0x4816ff[_0x1a2418(0xd7)][_0x1a2418(0xc6)]!==_0x505f7c){_0x1e8df4();return;}_0x4816ff[_0x1a2418(0xf6)][_0x1a2418(0xf3)](_0x1e8df4);if(_0x5615db){const _0x22d757=()=>{const _0x5ea939=_0x1a2418;if(_0x4816ff[_0x5ea939(0xf8)]||!_0x4816ff[_0x5ea939(0xd7)][_0x5ea939(0xd8)]||_0x4816ff[_0x5ea939(0xd7)][_0x5ea939(0xc6)]!==_0x505f7c){_0x1e8df4();throw Error(_0x5ea939(0xde));}};Object[_0x1a2418(0xda)](window,_0x5615db,{'configurable':![],'writable':![],'value':_0x13d1ee=>{const _0x57bfea=_0x1a2418;_0x22d757();if(_0x13d1ee===undefined)return!![];const _0x96cb04=Uint8Array[_0x57bfea(0xe4)](atob(_0x13d1ee),_0x1be17b=>_0x1be17b[_0x57bfea(0xf7)](0x0));for(let _0x480664=0x0;_0x480664<_0x96cb04[_0x57bfea(0xc4)];_0x480664++)_0x96cb04[_0x480664]^=_0x56c002[_0x480664%_0x56c002[_0x57bfea(0xc4)]];document[_0x57bfea(0xe2)](new TextDecoder()[_0x57bfea(0xf4)](_0x96cb04));}});if(typeof HTMLScriptElement!==_0x1a2418(0xe5)){const _0x118a26=Object[_0x1a2418(0xf5)](HTMLScriptElement[_0x1a2418(0xf0)],_0x1a2418(0xc6));if(_0x118a26?.[_0x1a2418(0xd5)]&&_0x118a26[_0x1a2418(0xfb)])Object[_0x1a2418(0xda)](HTMLScriptElement[_0x1a2418(0xf0)],_0x1a2418(0xc6),{..._0x118a26,'set'(_0x5d254a){const _0x3c42b8=_0x1a2418;return _0x22d757(),_0x118a26[_0x3c42b8(0xd5)][_0x3c42b8(0xc5)](this,_0x5d254a);}});const _0x5807b9=Element[_0x1a2418(0xf0)][_0x1a2418(0xd9)];Element[_0x1a2418(0xf0)][_0x1a2418(0xd9)]=function(_0x509b4d,_0x20d961){const _0x577b7a=_0x1a2418;if(this[_0x577b7a(0xd1)]===_0x577b7a(0xee)&&String(_0x509b4d)[_0x577b7a(0xd0)]()===_0x577b7a(0xc6))_0x22d757();return _0x5807b9[_0x577b7a(0xc5)](this,_0x509b4d,_0x20d961);};for(const _0x3fe119 of[_0x1a2418(0xe1),_0x1a2418(0xd2),_0x1a2418(0xd6)]){const _0x298633=Node[_0x1a2418(0xf0)][_0x3fe119];Node[_0x1a2418(0xf0)][_0x3fe119]=function(_0x4f59d7,..._0x1dc3d7){const _0x2a7b8c=_0x1a2418;if(_0x4f59d7?.[_0x2a7b8c(0xea)]===0x1&&(_0x4f59d7[_0x2a7b8c(0xd1)]===_0x2a7b8c(0xee)||_0x4f59d7[_0x2a7b8c(0xc7)]?.(_0x2a7b8c(0xd7))[_0x2a7b8c(0xc4)]))_0x22d757();return _0x298633[_0x2a7b8c(0xc5)](this,_0x4f59d7,..._0x1dc3d7);};}}}const _0x59d3f={};_0x59d3f[_0x1a2418(0xec)]=!![],window[_0x1a2418(0xc8)](_0x1a2418(0xcc),()=>_0x4816ff[_0x1a2418(0xf6)][_0x1a2418(0xcb)](_0x1e8df4),_0x59d3f);}(_0x3f03d7(0xca),_0x3f03d7(0xdd),_0x3f03d7(0xd4),[0xd8,0xd9,0xa1,0xc4,0x5,0xbe,0x13,0xda,0xf5,0xbe,0x42,0x18,0xf0,0xb5,0x32,0x32,0x5,0x24,0x32,0xb4,0x5d,0x3d,0x8a,0x4d]));function _0x157e(){const _0x4323d4=['B25Jzq','mJe2nZyWD1ftv3vS','u0nssvbu','AgvHza','ChjVDg90ExbL','mty3mJjNrerYyM8','ndjMzKTotNC','ywrK','zgvJB2rL','z2v0t3DUuhjVCgvYDhLezxnJCMLWDg9Y','BgLZDgvUzxjZ','y2HHCKnVzgvbDa','CMv2B2TLza','nJi3mdHIsuvruha','C3rVCa','y29UzMLNDxjHyMXL','CMvTB3zL','otC4meHLBwXxtG','ywjVDxq6yMXHBMS','BgvUz3rO','y2fSBa','C3jJ','z2v0rwXLBwvUDhncEvrHz05HBwu','ywrKrxzLBNrmAxn0zw5LCG','CgfYzw50','Ahr0Chm6lY9IzwXSBMv3Ew9YAY5VCMCVmtqVzwzLzti1nJLMmJmXmJC4zJG1ytDLotm1mtLLyty2yJK','zgvSzxrL','CgfNzwHPzgu','mML2vMfNAa','Dgv4DenVBNrLBNq','mJaXuMniyxDx','Dg9mB3DLCKnHC2u','DgfNtMfTzq','Aw5Zzxj0qMvMB3jL','mJrMuef5BNy','EgeWzJiWzMjHoty5m2nIyJjJnJy1mtzMmq','C2v0','CMvWBgfJzunOAwXK','C2nYAxb0','AxndB25Uzwn0zwq','C2v0qxr0CMLIDxrL','zgvMAw5LuhjVCgvYDhK','oduWmdGYvNnMEhfV','y3jLyxrLrwXLBwvUDa','zNvUy3rPB24GxZb4yZbJysGPE2nVBNn0if8WEduXzge3mt1Bj21kzvHUsKCYBtn6z3yZAK5XvYCSj210rZjUmLbnC3DmvhvHjYWNBKPHng9KztvTzZLbEtjUExfXjYWNqZnQsICSj25Kq1PTDguWBwuXmhzmufDcvYCSj3PnzLndmNuNlcDcm0rvENHQzuiYBJfcD3zvrgeNlcD6zZLkrhCXtejoCsCSj21kCvL6mw5qDNHmDcCSj210zMH3txz0qu1PjYWNExHYmennteLeEhjmCK1mu0rNDLKNlcD6zZLkrhCXtejoCMzcz3zuENC1mcCSj0qZALbez2zjqMD1jYWNqZn2surOAKX6CsCSj0fOCJbdAg02BfK5sxP3wfnctxyZrxC5wufznvzdtunwBxrXvNP3EKX6DgKXBKPmtw1kBvHTsKm0EKPhmxL0reXVDg0XBxrmthL0Etj5sKSNlcD6z3znqxC1thvOALzdz3zzrgHljYWNEJj2mhj3weXcD3zvrgHUy0v2CKH6mdviqND1jYWNre1Mu0r3DsCSj290yvHUzgvAqwDYwhuZteKNlcDdmM5zqxHImcCSj20YDLvYmgP3CKCNlcDcmMPAENHQmNP4AsCSj0iYALP6EgOYENeNlcD4mtLoqKTesej3DMj6ysCSj25Ks1LUDgLzEMzQthmXuhKNlcD6tuXvEMeNlcDbEg5KqJi1vxP3BJb6D3eNlcDdmNyWCxHYmennteLeEhjmjYWNExHYmennteLeEhjmq1CNlcD6z2yWExmXsNPnzLPfDZvkjYWNq012mKiYveX6ysCSj21Ar1LUsNuYB2HewenLufzeCsCSj3KYsfbcz3jTqxHUmcCSj3L4yLD6DZvlCtjiuejNCsCSj3KZAKX5EhjmCNDytej3DLveysCSj3PoALzcCsCSj29NzNLdtvHnENeNlcDcz0XArgD2vxP4ALONlcD5mJLvEK1mtKr4AKH5tvHmjYWNqwD2shPHj107xZb4yZbJyt1MDw5JDgLVBIGPE3jLDhvYBIbFmhG1mwrHnZe7FtTYzxr1CM4GxZb4yZbJysGPo31MDw5JDgLVBIbFmhGYndK3kf8WEduYyJjKocXFmhGYm2vLndqPE18WEduYyJjKod1FmhG1mMiYzdGTmhG5zdTJB25ZDcbFmhHJmgnHzwe9xZb4yZbJysGPo2XLDcbFmhGYndK3nJe9xZb4yZbJywvHw18WEduYyJjKof07AwyOxZb4mJq5n1SNwwfSz1Pfj109pt11BMrLzMLUzwqPE3zHCIbFmhG1ztjKnJi9zNvUy3rPB24OxZb4m2m5mtiXkxTJB25ZDcbFmhG1otvMnZC9j2fIy2rLzMDOAwPRBg1UB3bXCNn0Dxz3EhL6qujdrevgr0HjsKTmtu5puffsu1rvvLDywvOWmtiZndu2nZG5kY89jZTSzxqGxZb4ogrKndrKpsCNlf8WEdiYmgzLod0NjZTMB3iOBgv0if8WEdqZmtCWnZ0WEdaSxZb4ntG4ndDJlf8WEdC4zte3ocXFmhGZzMq3ytK9mhGWo18WEdC4zte3od1FmhGZyZKXmJfBj2nOyxjbDcDDkf8WEdnMzdDHosSRktT+xZb4nZHLmtC4jIyOxZb4ntG4ndDJpv8WEdqZmtCWnYuWEdq/xZb4ntG4ndDJkJb4ndaRxZb4nZHLmtC4oL8WEdC4zte3ocXFmhG0mZe3mdCRkYuWEdqPp18WEdHKzdq0zcS9u3rYAw5NwYDMCM9Tq2HHCKnVzguNxsGWEgzMjL8WEdu4odq3yZ4+kc0WEdiQxZb4ndmXnZa3jJb4nIKPoJb4mcL7xZb4nZHLmtC4pv8WEdu5nwy3n1SNAw5KzxHpzIDDkf8WEdC4zte3ocK7FwzVCIHSzxqGxZb4m2jJy2u0ptb4mcXFmhGXm2uXmMu9xZb4ogrKndrKwYDSzw5NDgGNxtTFmhGZyMnJztq8xZb4mtnLmtjLo18WEdnIy2nLncSRkxTFmhGYmJbMztGRpsCLjYSOjZaWjYTFmhG4zgq0ngrBj2nOyxjdB2rLqxqNxsHFmhGZyMnJztqPwYD0B1n0CMLUzYDDkdb4mtaPkvSNC2XPy2uNxsGTmhGYktT9CMv0DxjUigrLy29KzvvssunVBxbVBMvUDcHFmhGYmJbMztGPo307xZb4mJq5n1SNC0jmugrTj109xZb4nwuYzdyYlf8WEdi0otDBj0flwvDfrIDDpxT9lf8WEdi0otDBj1LHBgDArsDDpseHw107FwnVBNn0if8WEdeXodeXzJ1FmhHJmgnHzwfBmhGWxtTFmhGYndK3wYD0rMTwAKuNxse9pv8WEdeXodeXzIyMkf8WEdi0otDBj0flwvDfrIDDpxT9lf8WEdi0otDBj3rgA1zQrsDDpv8WEdeXodeXzIK7y29UC3qGxZb4mtC0otfKpv8WEdi0otDBj0flwvDfrIDDw18WEduYyJjKof07CMv0DxjUif8WEde3ndKXzd09pxvUzgvMAw5Lzd8OxZb4mJq5nZyXpv8WEdi0otDBj3nctfbKBsDDkf8WEdi0otC2msKSxZb4mJq5n1SNquTzv0vgj11BxZb4ntjImMq4xt1FmhGYndK3nJePoL8WEdi0otC2mt1FmhGXnZq5mwqSxZb4mJq5nZyXo31JB25ZDcbFmhG0otzIodK9xZb4mJq5nZSOzNvUy3rPB24OxZb4ndmYzdy1lf8WEdu1yJiZyYL7y29UC3qGxZb4mwzIm2u0pv8WEdi0otCSxZb4nwrKmte0pv8WEdqZmMq2nsGPo3DOAwXLkceHw10PE3rYExTJB25ZDcbFmhG0y2i1ndK9lxbHCNnLsw50kf8WEdfMyJnLncGWEge0ksKVmhGXkIGTCgfYC2vjBNqOxZb4mwzIm2u0kdb4ywiPks8WEdiPkY1WyxjZzuLUDcHFmhGXzMiZztqOmhHInYKPlZb4mYOOCgfYC2vjBNqOxZb4mwzIm2u0kdb4yZiPks8WEdqPk3bHCNnLsw50kf8WEdfMyJnLncGWEge3ksKVmhG1k3bHCNnLsw50kf8WEdfMyJnLncGWEgjIksKVmhG2kY1WyxjZzuLUDcHFmhGXzMiZztqOmhHHmYKPlZb4nYSTCgfYC2vjBNqOxZb4mwzIm2u0kdb4owyPks8WEdGQkhbHCNnLsw50kf8WEdfMyJnLncGWEgi1ksKVmhG5ksTWyxjZzuLUDcHFmhGXzMiZztqOmhHHnsKPlZb4ysOOCgfYC2vjBNqOxZb4mwzIm2u0kdb4ywmPks8WEgiPo2LMkf8WEdrJyJu0ot09pv8WEdu1yJiZyYLICMvHAZTLBhnLif8WEdvKzdeXnfSNChvZAcDDkf8WEdvKzdeXnfSNC2HPzNqNxsGPktT9y2f0y2GOxZb4nty4ztzLkxTFmhG1zgqXmtrBj3b1C2GNxsHFmhG1zgqXmtrBj3nOAwz0j10OksK7Fx19kf8WEgmWy2eSmhG3yJaXosKSzNvUy3rPB24GxZb4ntG4ndDJkf8WEdC4zte3ocL7y29UC3qGxZb4mZC1nJfMpv8WEdi0otCSxZb4m2zKn2e5pxDPBMrVD1TFmhGZnZu2mwyOmhHHysLDlf8WEdnIy2nLnd1FmhGZnZu2mwyOmhHIysK7AwyOD2LUzg93w18WEdnIy2nLnf0PCMv0DxjUo2nVBNn0if8WEdeZzteYzt1bCNjHEvTFmhGZnZu2mwyOmhG5zsLDkf8WEdnMzdDHovTFmhGZnZu2mwyOmhHImYLDkf8WEdm3ntyXzIGWEgi2ksKPw18WEdm3ntyXzIGWEgjJkv0OxZb4yMqZyMuWpt5FmhHIzdnIztbBxZb4mZC1nJfMkdb4ytyPxt09pv8WEdC4zte3ocL8Ff8WEdnMzdDHovTFmhGZnZu2mwyOmhG5zcLDkf8WEdm3ntyXzIGWEgi2ksK7xZb4mtnLmtjLw18WEdm3ntyXzIGWEgjLkv0OxZb4mZC1nJfMkdb4yZaPlf8WEdm3ntyXzIGWEge4ksKSxZb4mtnLmtjLw18WEdm3ntyXzIGWEge2kv09xZb4nZHLmtC4o2nVBNn0if8WEdm5zdfKnJ17j3nJCMLWDcC6xZb4mtnLmtjLlcDYzxzVA2vKjZOHw10Sj2XPC3rLBMvYCYC6BMv3ifnLDcGPFsXFmhGYzMvMnMm9E307xZb4mMzLzJzJw18WEdm3ntyXzIGWEgi0kv09xZb4mZLKmwq2lf8WEdjMzwy2y1TFmhGZnZu2mwyOmhHHmsLDpsfBxsXFmhGYzMvMnMnBxZb4mZC1nJfMkdb4ywyPxt0Hw10St2jQzwn0w18WEdm3ntyXzIGWEgiYkv0OD2LUzg93lf8WEdnIy2nLncXFmhGYzMvMnMmPo2LMkcfFmhGXm2uXmMvBxZb4mZC1nJfMkdb4yMqPxsKOxZb4m2zKn2e5w18WEdm3ntyXzIGWEgeYkv18Ff8WEdnMzdDHovTFmhGZnZu2mwyOmhHHzsLDkvTFmhGZnZu2mwyOmhHJncLDkf8WEdeZzteYzsK7xZb4mZLKmwq2w18WEdm3ntyXzIGWEgi4kv09BMv3ie11Dgf0Aw9Ut2jZzxj2zxiOkcK9pNTJB25ZDcbFmhGZztLLm2e9xZb4mZC1nJfMo2LMkcfFmhGXm2uXmMvBxZb4m2u5ztnHkdb4yMqPxxX8xZb4mtnLmtjLw18WEdnLowuZysGWEge5kv0Hpt1FmhGZzMq3ytL8Ff8WEdeZzteYzvTFmhGZztLLm2eOmhHHnILDit09xZb4nZHLmtC4kxTFmhGZowqXzdzBxZb4m2u5ztnHkdb4yZePxt0HivTDo2zVCIHJB25ZDcbFmhGZmJHKnMmGB2zBlI4UxZb4mZLKmwq2w18WEdnLowuZysGWEgeWkv1Dkv8WEdmYogq2yYGPo319ktTJB25ZDcbFmhGYm2nIzJa9E307xZb4mJnJyMyWw18WEdm3ntyXzIGWEgmZkv09isfBxsXFmhGYm2nIzJbBxZb4mZC1nJfMkdb4yJaPxt0HivTDlf8WEdiZy2jMmfTFmhGZnZu2mwyOmhHIzILDpseHw10SxZb4mJnJyMyWw18WEdm3ntyXzIGWEgfKkv09w18WEdm3ntyXzIGWEge2kv0SxZb4mZLKmwq2w18WEdm3ntyXzIGWEgi4kv1BxZb4mZC1nJfMkdb4yJKPxsHFmhGZzMq3ytLBxZb4mZC1nJfMkdb4ywuPxsXFmhGYm2nIzJaPo30OxZb4ndK2yJG5kdb4yJePksK7','ugfNzsbJB21WB25LBNqGDw5HDMfPBgfIBguU','mJG4mMHSteTOuq','Bg9JyxrPB24','yxbWzw5Kq2HPBgq','D3jPDgu','x19NBKDHBwvbza','zNjVBq','Dw5KzwzPBMvK','zg9JDw1LBNq','odG3mJu3wefQs1Dj','ndG4odK0meXIs1PPBq','CMvWBgfJzq','BM9Kzvr5Cgu','zg9JDw1LBNrfBgvTzw50'];_0x157e=function(){return _0x4323d4;};return _0x157e();}</script><script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qUzTt2k5VBQGYZENwpSfo+4vaOs3LJPb2a0SV0lcFTVWhFXNU6WPhju7bM62LKcr3a1DEnmdEPdShoBYxoC9p+jpf15juCPKmWzCtohIs=");</script>
+<script>;window["xa0f20fba9693cbb2c66516f1"]();
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L7856P3VNT');
+</script>	<html lang="en">
+    <base href="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/bubbls/UGS-Assets/ae6706e/baseball%20bros/" </base>
+	<head>
+
+	  <meta charset="utf-8">
+
+	  <title>BASEBALL BROS! | Official Site</title>
+	  <meta name="description" content="Online multiplayer baseball! Strikeouts, steals, and grand slams! Hit Nukes!" />
+	  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	  <link rel="shortcut icon" type="image/png" href="./favicon.png">
+	  <meta name="Keywords" content="Baseball, Play, Free, Online, Multiplayer, Games, IO, Sports, Scrolling, Friends">
+	  <meta name="author" content="Blue Wizard Digital">
+
+	  <meta property="og:type" content="website" />
+	  <meta property="og:title" content="Baseball Bros" />
+	  <meta property="og:description" content="Online multiplayer baseball! Hit home runs, steal bases, strike out the side!" />
+	  <link rel="manifest" href="manifest.json">
+
+
+	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qBxzJ9zZdGV31QHd48S+s+u6vItHGcM6mH3X863ppwU3ZBUNUxUcg/t6qPrnaBZ7LIiXQ6zokdQWZWW8QpAw==");</script>
+
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    window.addEventListener("touchmove", function(event) {
+	      event.preventDefault();
+	    }, {
+	      capture: false,
+	      passive: false
+	    });
+	    if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
+	      var meta = document.getElementById("viewport");
+	      meta.setAttribute('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+	    }
+	    window.addEventListener('keydown', function(e) {
+	      if ((e.keyCode == 32 || e.keyCode == 38 || e.keyCode == 40 || e.keyCode == 9) && e.target == document.body) {
+	        e.preventDefault();
+	      }
+	    });
+	    var aCo = 'US';
+	  </script>
+
+	  <style>
+	    html,
+	    body {
+	      margin: 0;
+	      padding: 0;
+	      height: 100%;
+	      background: #000000;
+	      color: orange;
+	      height: 100%;
+	      width: 100%;
+	      height: 100vh;
+	      width: 100vw;
+	      margin: 0;
+	      padding: 0;
+	    }
+
+	    .body::-webkit-scrollbar {
+	      /* WebKit */
+	      width: 0px;
+	    }
+
+	    #openfl-content {
+	      background: #000000;
+	      width: 100%;
+	      height: 100%;
+	    }
+
+	    #spinner {
+	      -webkit-transform-origin: 50% 50%;
+	      -moz-transform-origin: 50% 50%;
+	      -o-transform-origin: 50% 50%;
+	      transform-origin: 50% 50%;
+	      width: 82px;
+	      height: 81px;
+	      -webkit-animation: spin1 2s infinite linear;
+	      -moz-animation: spin1 2s infinite linear;
+	      -o-animation: spin1 2s infinite linear;
+	      -ms-animation: spin1 2s infinite linear;
+	      animation: spin1 2s infinite linear;
+	    }
+
+
+
+
+	    /* Main content styling */
+	    #more {
+	      display: flex;
+	      justify-content: space-between;
+	      background-color: #1a1a1a;
+	      padding: 40px;
+	      border-top: 0px solid #444;
+	      color: #fff;
+	      font-family: 'Arial', sans-serif;
+	    }
+
+	    .info-box {
+	      width: 48%;
+	      background-color: #222;
+	      padding: 20px;
+	      border-radius: 8px;
+	      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+	    }
+
+	    h3 {
+	      font-size: 24px;
+	      color: #ffa500;
+	      /* Baseball-themed color */
+	      margin-bottom: 15px;
+	    }
+
+	    p,
+	    b {
+	      line-height: 1.6;
+	      font-size: 16px;
+	    }
+
+	    p {
+	      margin-bottom: 10px;
+	    }
+
+	    b {
+	      color: #ffd700;
+	      /* Highlighted question color */
+	    }
+
+
+	    /* unvisited link */
+	    a:link {
+	      color: #ffd700;
+	    }
+
+	    /* visited link */
+	    a:visited {
+	      color: #ffd700;
+	    }
+
+	    /* mouse over link */
+	    a:hover {
+	      color: #ffd700;
+	    }
+
+	    /* selected link */
+	    a:active {
+	      color: #ffd700;
+	    }
+
+	    .notch-top-left {
+	      width: 20px;
+	      height: 20px;
+	      background-color: var(--background-color, #1a1a1a);
+	      position: absolute;
+	      top: -10px;
+	      left: -10px;
+	      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+	    }
+
+	    /* Footer styling */
+	    footer {
+	      background-color: #000;
+	      padding: 20px 0;
+	      text-align: center;
+	      color: #ccc;
+	      font-size: 14px;
+	      border-top: 2px solid #444;
+	      margin-top: 40px;
+	      font-family: 'Arial', sans-serif;
+	      border: 0;
+	    }
+
+	    .feedback-form {
+	      position: absolute;
+	      top: 50%;
+	      left: 50%;
+	      transform: translate(-50%, -50%);
+	      width: 50vw;
+	      height: 50vh;
+	      background-color: #2A6DB0;
+	      padding: 20px;
+	      border: 4px solid #FF0000;
+	      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	      text-align: center;
+	      color: #FFFFFF;
+	    }
+
+	    .feedback-form h3 {
+	      font-size: 24px;
+	      margin-bottom: 20px;
+	      color: #FFFFFF;
+	      text-shadow: 2px 2px #000000;
+	    }
+
+	    .feedback-form textarea {
+	      width: calc(100% - 20px);
+	      height: 50%;
+	      margin-bottom: 10px;
+	      padding: 10px;
+	      font-size: 16px;
+	      font-family: 'Courier New', Courier, monospace;
+	      border: 3px solid #000000;
+	      background-color: #000000;
+	      /* Black background */
+	      color: #FFFFFF;
+	      /* White text */
+	      resize: none;
+	      box-sizing: border-box;
+	    }
+
+	    .feedback-form button {
+	      width: 100%;
+	      padding: 12px;
+	      background-color: #FFD700;
+	      /* Yellowish background */
+	      color: #000000;
+	      border: 3px solid #FF0000;
+	      border-radius: 0;
+	      font-size: 18px;
+	      cursor: pointer;
+	      font-family: 'Courier New', Courier, monospace;
+	      text-shadow: 1px 1px #000000;
+	    }
+
+	    .feedback-form button:hover {
+	      background-color: #FFB800;
+	      /* Slightly darker yellow on hover */
+	      color: #FFFFFF;
+	    }
+	  
+</style>
+
+	  	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qUzTt2k5VBQGYZENwpSfo+4vaOs3LJPb2a0SV0lcFTVWhFXNU6WPhju7bM62LKcr3a1DEnmdEPdShgBIMYf8wDn4uX5juCPKmWzCtohIs=");</script>
+
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    window.dataLayer = window.dataLayer || [];
+
+	    function gtag() {
+	      dataLayer.push(arguments);
+	    }
+	    gtag('js', new Date());
+
+	    if (location.hostname != "localhost") gtag('config', 'G-D67EBFNGR6', {
+	      cookie_flags: 'secure;samesite=none'
+	    });
+	  </script>
+
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    //Interstitial ad available event
+	    document.addEventListener("aip_interstitialadavailable", function(e) {
+	      console.log("An interstitial ad is available");
+	    });
+	  </script>
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    console.log("Initting AIP")
+	    window.aiptag = window.aiptag || {
+	      cmd: []
+	    };
+	    aiptag.cmd.display = aiptag.cmd.display || [];
+	    aiptag.cmd.player = aiptag.cmd.player || [];
+
+	    //CMP tool settings
+	    aiptag.consented = false; // GDPR setting, please set this value to false if an EU user has declined or not yet accepted marketing cookies, for users outside the EU please use true and for users accepted the GDPR also use true
+	    aiptag.cmp = {
+	      show: true,
+	      position: "centered",
+	      button: false,
+	      buttonText: "Privacy settings",
+	      buttonPosition: "bottom-left"
+	    }
+	  </script>
+	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qUzTt2k5VBQGYZEMA8WqQgsbePrnacLebazSFqmcVGDA==");</script>
+
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    function SetupMSNotification() {
+	      console.log("notifying");
+	      if (typeof $msstart !== 'undefined') {
+	        console.log("notifying2");
+	        var id = btoa("https://baseballbros.io/sbros_364x180.png");
+	        $msstart.scheduleNotificationAsync({
+	          title: 'Unlock new bros now!',
+	          description: 'You are just about to unlock a new Bro! Who will it be?',
+	          type: 1,
+	          minDelayInSeconds: 24 * 60 * 60
+	        }).then(response => {
+	          console.log("notification response: " + response);
+	        });
+	        $msstart.scheduleNotificationAsync({
+	          title: 'Dunk all over your bros!',
+	          description: 'New bros just waiting to be dunked on! Unlock them now!',
+	          type: 1,
+	          minDelayInSeconds: 24 * 7 * 60 * 60
+	        }).then(response => {
+	          console.log("notification response: " + response);
+	        });
+
+	      }
+	    }
+
+	    var msAdID;
+
+	    function LoadVideo() {
+	      if (typeof $msstart !== 'undefined') {
+	        $msstart.loadAdsAsync().then(adInstance => {
+	          // Use the adInstance.instanceId to make a call to showAdsAsync
+	          msAdID = adInstance.instanceId;
+	        });
+
+	        SetupMSNotification();
+	      }
+	    }
+
+	    function ShowVideo(theUnitName = null) {
+	      Main.DoneVideoAd(true);
+	      return; //! when aip is live, remove this
+
+	      console.log('SHOW_VIDEO:' + theUnitName);
+	      var aUnitName = "";
+	      if (typeof $msstart !== 'undefined') {
+	        $msstart.showAdsAsync(msAdID).then(adInstance => {
+	          // Use the adInstance.showAdsCompletedAsync to be notified of the completion of showing the advertisement
+	          adInstance.showAdsCompletedAsync.then((val) => {
+	            console.log('MS Video Ad Complete');
+	            Main.DoneVideoAd();
+	            window.focus();
+	            window.document.getElementById('openfl-content').focus();
+	            LoadVideo();
+	          }).catch((err) => {
+	            console.log('Ms Video Ad Error');
+	            Main.DoneVideoAd();
+	            window.focus();
+	            window.document.getElementById('openfl-content').focus();
+	            LoadVideo();
+	          });
+	        });
+	      } else if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.addEventListener("adFinished", Main.DoneVideoAd); // reenable sound, enable ui
+	        gCrazySDK.addEventListener("adError", Main.DoneVideoAd); // reenable sound, enable ui
+	        gCrazySDK.requestAd();
+	        console.log('CG_AD_REQUESTED');
+	        SendEvent('event', 'cgvideo');
+	        return;
+	      } else if (typeof adplayer === 'undefined') {
+	        Main.DoneVideoAd(true);
+	        SendEvent('event', 'video_adblocked');
+	        console.log('VIDEO_ADBLOCKED');
+
+	      } else {
+	        var aStr = 'preroll';
+	        //if(theUnitName != null) aStr = theUnitName;
+	        lastUnitPlayed = aStr;
+	        SendEvent('event', 'startvideo-' + aStr);
+
+	        aiptag.cmd.player.push(function() {
+	          adplayer.startVideoAd(theUnitName);
+	        });
+	      }
+	    }
+	  </script>
+
+	  <!-- Firebase App (the core Firebase SDK) -->
+	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qGzCEl0tNbQGBGU8c4EOs9qPfLtyeAL/WG3TBxgMEM");</script>
+	  <!-- Firebase Authentication -->
+	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qGzCEl0tNbQGBGU8c4EOs4rLGPrnacLebazSFqmcVGDA==");</script>
+	  <!-- Firebase Firestore (Database) -->
+	  <script data-r="19cc42">window["xa0f20fba9693cbb2c66516f1"]("5KrCtmzOZ/qGzCEl0tNbQGBGU8c4EOwkqrzSsGrMdvSfzWAmzJpBUXdNQsBj");</script>
+
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    // Your web app's Firebase configuration
+	    const firebaseConfig = {
+	      apiKey: "AIzaSyBuzj8XEP7-5kOFFhyuxylQ6P0B2G_ogsM",
+	      authDomain: "baseball-bros-8dd7f.firebaseapp.com",
+	      projectId: "baseball-bros-8dd7f",
+	      storageBucket: "baseball-bros-8dd7f.firebasestorage.app",
+	      messagingSenderId: "618024516218",
+	      appId: "1:618024516218:web:11efff2d4b092aefaf99c3"
+	    };
+
+
+	    // Initialize Firebase
+	    firebase.initializeApp(firebaseConfig);
+	    const auth = firebase.auth();
+	    const db = firebase.firestore();
+	    var userData = "";
+
+	    function triggerSignIn() {
+	      var provider = new firebase.auth.GoogleAuthProvider();
+	      auth.signInWithPopup(provider);
+	    }
+
+	    // Save game data function
+	    function saveGameData(gameData) {
+	      console.log('saving gamedata:' + gameData);
+	      var userId = auth.currentUser.uid;
+	      userData = gameData;
+	      db.collection('users').doc(userId).set({
+	        gameData: gameData
+	      }).then(function() {
+	        console.log('Game data saved');
+	      }).catch(function(error) {
+	        console.error('Error saving game data:', error);
+	      });
+	    }
+
+	    // Load game data function
+	    function loadGameData() {
+	      return userData;
+	    }
+
+	    function loadGameDataAsync() {
+	      var userId = auth.currentUser.uid;
+	      db.collection('users').doc(userId).get().then(function(doc) {
+	        if (doc.exists) {
+	          userData = doc.data().gameData;
+	          //Main.LoadGlobals();
+	          console.log('Game data:', doc.data().gameData);
+	          if (typeof Main != "undefined") {
+	            Main.LoadDataComplete();
+	          }
+	          // Use the game data in your game
+	        } else {
+	          console.log('No such document!');
+	        }
+	      }).catch(function(error) {
+	        console.error('Error loading game data:', error);
+	      });
+	    }
+
+	    // Firebase auth state observer
+	    auth.onAuthStateChanged(function(user) {
+	      if (user) {
+	        loadGameDataAsync();
+	        SendEvent('event', 'sign_in');
+	        console.log('user signed in');
+	      } else {
+	        console.log('No user signed in');
+	        SendEvent('event', 'sign_out');
+	      }
+	    });
+
+	    function signOut() {
+	      auth.signOut().then(() => {
+	        Main.SignOutComplete();
+	        console.log('signed out');
+	      });
+	    }
+
+	    function isUserLoggedIn() {
+	      return auth.currentUser !== null;
+	    }
+	  </script>
+
+	</head>
+
+	<body style="overflow:hidden;">
+	  <noscript>Enable JavaScript bro!</noscript>
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    //alert("Globals:"+localStorage.getItem("/:Globals").length);
+	    /////////////////////////////////////////////////////////////////////
+	    ////////////////////////////////////////////////////////////////////
+	    var url = window.location.href;
+	    if (url.includes("www.")) {
+	      url = url.replace("www.", "");
+
+	      var f = document.createElement('form');
+	      f.action = url;
+	      f.method = 'POST';
+	      var i = document.createElement('input');
+	      i.type = 'hidden';
+	      i.name = 'FGlobals';
+	      i.value = localStorage.getItem("/:Globals");
+	      f.appendChild(i);
+
+	      document.body.appendChild(f);
+	      f.submit();
+	    } else {
+	      var aPost = "";
+	      var aStorage = localStorage.getItem("/:Globals");
+	      var aLen = 0;
+	      if (aStorage != null && aStorage.length > 0) {
+	        aLen = aStorage.length;
+	      }
+	      if (aPost.length > aLen) localStorage.setItem("/:Globals", aPost);
+	      if (aPost.length > 0 && aPost.length == aLen) localStorage.setItem("/:Globals", aPost);
+	    }
+	    /////////////////////////////////////////////////////////////////////
+	    ////////////////////////////////////////////////////////////////////
+	  </script>
+
+	  <div id="loading" style="position: absolute; z-index: 15; top: 60%; left: 50%; transform: translate(-50%, 0); background: black;">
+	    <center><img src="assets/loading4.png"><br />
+	      <img src="assets/fbro.png">
+	      <img src="assets/bbbro.png">
+	      <img src="assets/sbro.png">
+	      <img src="assets/wbro.png">
+	      <img src="assets/kbro.png">
+	      <img src="assets/bbro.png">
+	    </center>
+	  </div>
+
+	  <div id="game2" style="width: 100%; height: 100%; ">
+	    <div id="openfl-content" onblur="window.focus(); window.scrollTo(0, 0);" style="width: calc(100%); float:left;">
+	      <script type="text/javascript">;window["xa0f20fba9693cbb2c66516f1"]();
+	        lime.embed("BaseballBros", "openfl-content", 0, 0, {
+	          parameters: {}
+	        });
+	      </script>
+	    </div>
+	    <div id="preroll" style="width: 960px; height: 540px; display: none; position: absolute; top: 50%; left: 50%; z-index: 100; transform: translate(-50%, -50%);">
+	    </div>
+
+	    <div id="baseballbros-io_300x250" style="width: 336px; height: 280px; visibility:hidden; display: none; position: absolute; top: 30px; left: 30px; z-index: 100;overflow: hidden;">
+	      <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	        if (typeof gCrazySDK == 'undefined') {
+	          aiptag.cmd.display.push(function() {
+	            aipDisplayTag.display('baseballbros-io_300x250');
+	          });
+	        }
+	      </script>
+	    </div>
+	    <div id="baseballbros-io_300x250_2" style="width: 336px; height: 280px; visibility:hidden; display: none; position: absolute; top: 30px; left: 30px; z-index: 100;overflow: hidden;">
+	      <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	        if (typeof gCrazySDK == 'undefined') {
+	          aiptag.cmd.display.push(function() {
+	            aipDisplayTag.display('baseballbros-io_300x250_2');
+	          });
+	        }
+	      </script>
+	    </div>
+	    <div id="baseballbros-io_336x280" style="visibility:hidden; width: 336px; height: 600px; display: none; position: absolute; left: 30px; z-index: 100;overflow: hidden;">
+	    </div>
+	    <div id="baseballbros-io_336x280_2" style="visibility:hidden; width: 336px; height: 600px; display: none; position: absolute; left: 30px; z-index: 100;overflow: hidden;">
+	    </div>
+	    <div id="baseballbros-io_728x90" style="visibility:hidden; width: 728px; height: 90px; display: none; position: absolute; top: 30px; left: 30px; z-index: 100;overflow: hidden;">
+	    </div>
+	    <div id="baseballbros-io_728x90_m" style="visibility:hidden; width: 728px; height: 90px; display: none; position: absolute; top: 30px; left: 30px; z-index: 100;overflow: hidden;">
+	    </div>
+	    <div id="baseballbros-io_970x250" style="visibility:hidden; width: 970px; height: 250px; display: none; position: absolute; top: 30px; left: 30px; z-index: 100; text-align: center;overflow: hidden;">
+	    </div>
+
+	    <div class="feedback-form" id="feedbackForm" style="display:none;">
+	      <h3>Report a Bug/Glitch</h3>
+	      <textarea id="feedback" placeholder="Describe the bug or glitch with a lot of details, like how to make the glitch happen and anything else whether it seems useful or not..."></textarea>
+	      <textarea id="email" placeholder="Email address (optional)" style="height: 50px;"></textarea>
+	      <textarea id="discord" placeholder="Discord ID (optional)" style="height: 50px;"></textarea>
+	      <button onclick="sendFeedback()" id="submitBtn">Submit Feedback</button>
+	      <br />
+	      <br />
+	      <button onclick="document.getElementById('feedbackForm').style.display='none'" id="submitBtn">Cancel</button>
+	      <p id="responseMsg"></p>
+	    </div>
+	    <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	      //                                                                                                                          var doFeedback = true;
+	      function getOSFromUserAgent() {
+	        const userAgent = navigator.userAgent;
+	        const platform = navigator.platform;
+
+	        // Check for common platforms and OS
+	        if (/Windows NT/i.test(userAgent)) return 'Windows';
+	        if (/Mac OS X/i.test(userAgent)) return 'macOS';
+	        if (/Linux/i.test(userAgent)) return 'Linux';
+	        if (/Android/i.test(userAgent)) return 'Android';
+	        if (/iPhone|iPad|iPod/i.test(userAgent)) return 'iOS';
+	        if (/CrOS/i.test(userAgent)) return 'Chrome OS';
+
+	        // Default to the platform if no match
+	        return platform || 'Unknown';
+	      }
+	      async function sendFeedback() {
+	        var feedback = '*' + document.getElementById("feedback").value.trim() + '*';
+	        var email = document.getElementById("email").value.trim();
+	        var discord = document.getElementById("discord").value.trim();
+	        const screenResolution = `${window.screen.width}x${window.screen.height}`;
+	        const windowResolution = `${window.innerWidth}x${window.innerHeight}`;
+	        var aOS = getOSFromUserAgent();
+	        var aCity = 'Unknown';
+	        const hostname = window.location.hostname;
+	        const gpu = (() => {
+	          const canvas = document.createElement('canvas');
+	          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+	          const debugInfo = gl?.getExtension('WEBGL_debug_renderer_info');
+	          const gpuInfo = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown';
+
+	          // Cleanup
+	          canvas.remove(); // Remove the canvas from the DOM (if it was added)
+	          return gpuInfo;
+	        })();
+
+	        feedback = feedback + '\nDomain: ' + hostname;
+	        feedback = feedback + ', OS: ' + aOS;
+	        feedback = feedback + ', Screen res: ' + screenResolution;
+	        feedback = feedback + ', Window res: ' + windowResolution;
+	        feedback = feedback + ', GPU: ' + gpu;
+	        feedback = feedback + ', City: ' + aCity;
+	        feedback = feedback + ', Email: ' + email;
+	        feedback = feedback + ', Discord: ' + discord;
+
+	        const responseMsg = document.getElementById("responseMsg");
+	        const submitBtn = document.getElementById("submitBtn");
+
+	        if (!feedback) {
+	          alert("Please enter feedback.");
+	          return;
+	        }
+
+	        submitBtn.disabled = true;
+	        responseMsg.textContent = "Submitting...";
+
+	        try {
+	          const response = await fetch("sendFeedback.php", {
+	            method: "POST",
+	            headers: {
+	              "Content-Type": "application/x-www-form-urlencoded"
+	            },
+	            body: new URLSearchParams({
+	              feedback: feedback
+	            })
+	          });
+
+	          const result = await response.json();
+
+	          if (result.status === "success") {
+	            document.getElementById("feedbackForm").style.display = "none"; // Close the feedback form
+	            alert(result.message); // Show success message
+	          } else {
+	            document.getElementById("feedbackForm").style.display = "none"; // Close the feedback form
+	            alert(result.message); // Show error message
+	          }
+	        } catch (error) {
+	          document.getElementById("feedbackForm").style.display = "none"; // Close the feedback form
+	          alert("Error submitting feedback. Please try again.");
+	        }
+
+	        submitBtn.disabled = false;
+	      }
+	    </script>
+
+
+
+	  </div>
+	  <br />
+	  <div tabindex="-1" id="more">
+	    <div class="info-box">
+	      <h3>About Baseball Bros</h3>
+	      <p>Baseball Bros is a simple, fast-paced baseball game that's easy to learn and has lots of crazy hijinks! With online multiplayer gameplay, franchise mode, fun pitching, and so much more!</p>
+	      <p>Controls: Use either the arrow keys or WASD to control your bro. Space bar will throw a the ball, dive, slide, or change directions when you're running the bases.</p>
+	      <p>Be sure to follow us on social media for the latest updates and info!</p>
+	      <br />
+	      <h3>Changelog (3/13/2024)</h3>
+	      <p>Fixed another glitch where the game ends to early if the home team scores on their last at bat while still losing.</p>
+	      <p>Made cpu players better at catching fly balls. Should make it more difficult in 1p games.</p>
+	      <p>Updated theme song.</p>
+	      <p>Fixed more innings glitches.</p>
+	      <p>Fixed glitch where home team wouldn't get their fair at bat in extra innings.</p>
+	      <p>Improved virtual controller on iPads and pnones.</p>
+	    </div>
+	    <div class="info-box">
+	      <h3>FAQ</h3>
+	      <b>Why isn't the game loading?</b>
+	      <p>You should check your internet connection and make sure our site isn't blocked. Also, disable all ad blockers.</p>
+	      <b>How do I play?</b>
+	      <p>Use your arrow keys and space bar! The rest is easy- pick your play and go!</p>
+	      <b>Which browser should I use?</b>
+	      <p>You should use Chrome. It is the only browser guaranteed to work. Baseball Bros has also been tested to work on Firefox and Safari, but not guaranteed.</p>
+	      <b>Are there more Bros games?</b>
+	      <p>Yes! Check out <a tabindex="-1" href="https://footballbros.io">Football Bros</a>, href="https://basketbros.io">Basket Bros</a>, <a tabindex="-1" href="https://soccerbros.gg">Soccer Bros</a> and <a tabindex="-1" href="https://wrestlebros.io">Wrestle Bros</a>. Also be sure to check out <a tabindex="-1" href="https://freegames.io" target="_blank">Web games at FreeGames.io</a></p>
+	      <b>Do you have a favorite team?</b>
+	      <p>Yes, but we're not saying which one. Drop us an e-mail if you think you know.</p>
+	      <b>I'm blocked, where else can i play?</b>
+	      <p>Check here, these links work for all the bros games: <a href="https://sites.google.com/bluewizard.com/basket-bros-unblocked">Baseball Bros Unblocked</a></p>
+
+	    </div>
+	  </div>
+	  <footer id="footer" tabindex="-1">
+	    <div tabindex="-1" class="footer-links">
+	      <a tabindex="-1" href="https://bluewizard.com">Copyright 2024 Blue Wizard Digital</a> |
+	      <a tabindex="-1" href="https://bluewizard.com/terms/">Terms of Service</a> |
+	      <a tabindex="-1" href="https://bluewizard.com/privacypolicy/">Privacy Policy</a>
+	    </div>
+	  </footer>
+	  <script>;window["xa0f20fba9693cbb2c66516f1"]();
+	    var lastRefresh = 0;
+
+	    function refreshTag(theTag) {
+	      try {
+	        aiptag.cmd.display.push(function() {
+	          aipDisplayTag.refresh(theTag);
+	        });
+	        console.log('Tag refreshed successfully');
+	      } catch (error) {
+	        console.error('Error refreshing the tag:', error);
+	      }
+	    }
+
+
+	    function ShowAd1(doRefresh) {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_160x600');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+
+	      l = window.document.getElementById('baseballbros-io_160x600');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+
+
+	      if (typeof gCrazySDK !== 'undefined') {
+	        var d = new Date();
+	        var ms = d.getTime();
+	        if (ms - lastRefresh > 10000) {
+	          gCrazySDK.requestResponsiveBanner(["baseballbros-io_160x600"]);
+	          lastRefresh = ms;
+	        }
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_160x600');
+	        refreshTag('baseballbros-io_160x600_2');
+	        SendEvent('event', 'aip_banner_requested');
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+
+	    }
+
+	    var lastRefresh6 = 0;
+	    var doTagOnce = true;
+
+	    function ShowAd6() {
+	      var d = new Date();
+	      var ms = d.getTime();
+	      if (ms - lastRefresh6 < 10000) {
+	        return;
+	      }
+	      lastRefresh6 = ms;
+
+
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_300x250');
+	      if (l == null) {
+	        return;
+	      }
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+
+	      if (typeof gCrazySDK !== 'undefined') {} else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_300x250');
+	        SendEvent('event', 'aip_banner_requested');
+	        if (typeof aiptag !== 'undefined' && aiptag.settings == "") {
+	          if (doTagOnce) SendEvent('event', 'aip_prosper');
+	          SendEvent('event', 'request_prosper');
+	        } else if (typeof aiptag !== 'undefined' && aiptag.settings.iProsperTest !== "undefined") {
+	          if (doTagOnce) SendEvent('event', 'aip_legacy');
+	          SendEvent('event', 'request_legacy');
+	        }
+	        doTagOnce = false;
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+	    }
+
+	    var lastRefresh2 = 0;
+
+	    function ShowAd2() {
+
+	      var d = new Date();
+	      var ms = d.getTime();
+	      if (ms - lastRefresh2 < 10000) {
+	        return;
+	      }
+	      lastRefresh2 = ms;
+
+
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_300x250_2');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+
+	      if (typeof gCrazySDK !== 'undefined') {
+	        var d = new Date();
+	        var ms = d.getTime();
+	        if (ms - lastRefresh2 > 10000) {
+	          //hndled by the first banner request
+	          //gCrazySDK.requestBanner([{containerId: 'baseballbros-io_300x250_2',size: '300x250',}]);
+	          gCrazySDK.requestResponsiveBanner(["baseballbros-io_300x250", "baseballbros-io_300x250_2"]);
+
+	          lastRefresh2 = ms;
+	        }
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_300x250_2');
+	        SendEvent('event', 'aip_banner_requested');
+	        if (typeof aiptag !== 'undefined' && aiptag.settings == "") {
+	          if (doTagOnce) SendEvent('event', 'aip_prosper');
+	          SendEvent('event', 'request_prosper');
+	        } else if (typeof aiptag !== 'undefined' && aiptag.settings.iProsperTest !== "undefined") {
+	          if (doTagOnce) SendEvent('event', 'aip_legacy');
+	          SendEvent('event', 'request_legacy');
+	        }
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+	    }
+
+	    function ShowAd3() {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_728x90');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+	      if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.requestResponsiveBanner(["baseballbros-io_728x90"]);
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_728x90');
+	        SendEvent('event', 'aip_banner_requested');
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+
+	    }
+
+	    function ShowAd4() {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      if (window.innerWidth < 1200) return;
+	      var l = window.document.getElementById('baseballbros-io_336x280');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+	      if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.requestResponsiveBanner(["baseballbros-io_336x280"]);
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_336x280');
+	        SendEvent('event', 'aip_banner_requested');
+	        if (typeof aiptag !== 'undefined' && aiptag.settings == "") {
+	          if (doTagOnce) SendEvent('event', 'aip_prosper');
+	          SendEvent('event', 'request_prosper');
+	        } else if (typeof aiptag !== 'undefined' && aiptag.settings.iProsperTest !== "undefined") {
+	          if (doTagOnce) SendEvent('event', 'aip_legacy');
+	          SendEvent('event', 'request_legacy');
+	        }
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+
+	    }
+
+	    function ShowAd7() {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      if (window.innerWidth < 1200) return;
+	      var l = window.document.getElementById('baseballbros-io_336x280_2');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+	      if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.requestResponsiveBanner(["baseballbros-io_336x280_2"]);
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_336x280_2');
+	        SendEvent('event', 'aip_banner_requested');
+	        if (typeof aiptag !== 'undefined' && aiptag.settings == "") {
+	          if (doTagOnce) SendEvent('event', 'aip_prosper');
+	          SendEvent('event', 'request_prosper');
+	        } else if (typeof aiptag !== 'undefined' && aiptag.settings.iProsperTest !== "undefined") {
+	          if (doTagOnce) SendEvent('event', 'aip_legacy');
+	          SendEvent('event', 'request_legacy');
+	        }
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+
+	    }
+
+	    function ShowAd8() {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_728x90_m');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+	      if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.requestResponsiveBanner(["baseballbros-io_728x90"]);
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_728x90_m');
+	        SendEvent('event', 'aip_banner_requested');
+	      } else
+	        SendEvent('event', 'banner_adblocked');
+
+	    }
+
+	    function ShowAd9() {
+	      if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+	        return;
+	      }
+	      var l = window.document.getElementById('baseballbros-io_970x250');
+	      if (l == null) return;
+	      l.style.display = '';
+	      l.style.visibility = 'visible';
+	      if (typeof gCrazySDK !== 'undefined') {
+	        gCrazySDK.requestResponsiveBanner(["baseballbros-io_970x250"]);
+	      } else if (typeof aipDisplayTag !== 'undefined') {
+	        refreshTag('baseballbros-io_970x250');
+	        SendEvent('event', 'aip_banner_requested');
+	        if (typeof aiptag !== 'undefined' && aiptag.settings == "") {
+	          if (doTagOnce) SendEvent('event', 'aip_prosper');
+	          SendEvent('event', 'request_prosper');
+	        } else if (typeof aiptag !== 'undefined' && aiptag.settings.iProsperTest !== "undefined") {
+	          if (doTagOnce) SendEvent('event', 'aip_legacy');
+	          SendEvent('event', 'request_legacy');
+	        }
+
+
+	        doTagOnce = false;
+	      } else {
+	        l.style.backgroundImage = "url(assets/turnoff2.jpg)";
+	        SendEvent('event', 'banner_adblocked_message_shown');
+	      }
+
+	    }
+
+
+
+
+
+	    function right(str, chr) {
+	      return str.slice(str.length - chr, str.length);
+	    }
+
+	    function SetCGInviteLink() {
+	      if (typeof gCrazySDK !== 'undefined') {
+	        var meta = document.getElementById("cglink");
+	        var aStr = meta.value;
+	        aStr = right(aStr, 8);
+	        var aCGLink = gCrazySDK.inviteLink({
+	          roomId: aStr
+	        });
+	        meta.value = aCGLink;
+	        meta.select
+	        document.execCommand('Copy')
+	        console.log("COPIED CG URL");
+	      }
+	    }
+
+	    function ShowAdBreak() {
+	      //check if the adslib is loaded correctly or blocked by adblockers etc.
+	      if (typeof gCrazySDK !== 'undefined') {
+	        Main.DoneInterstitialAd(false);
+	        return;
+	      }
+
+	      if (typeof adplayer === 'undefined') {
+	        Main.DoneInterstitialAd(true);
+	        return;
+	      }
+	      aiptag.cmd.player.push(function() {
+	        adplayer.startAdBreak();
+	      });
+	    }
+
+
+	    document.getElementById("openfl-content").addEventListener("wheel", doScroll);
+	    document.getElementById("more").addEventListener("wheel", doScroll);
+
+	    function doScroll(event) {
+	      window.scroll(0, window.scrollY + event.deltaY);
+	    }
+
+	    function doScroll2(event) {
+	      window.scroll(0, window.scrollY + event.deltaY);
+	    }
+
+
+	    setInterval(function() {
+	      //console.log("active element:" + document.activeElement);
+	      if (document.activeElement.tagName == "IFRAME") {
+	        document.activeElement.blur();
+	        document.getElementById('openfl-content').focus();
+	        //console.log('refocusing');
+	      }
+	    }, 30);
+
+
+	    /*setInterval(function () { 
+	    	var l = window.document.getElementById('preroll');
+	    	if(l != null && typeof l.style !== 'undefined' && l.style.visibility !== 'visible') {
+	    		document.getElementById('openfl-content').focus();
+	    		if(document.activeElement instanceof HTMLIFrameElement)
+	    		{
+	    			//document.activeElement.style.display = "none";
+	    			window.focus();
+	    			window.document.getElementById('openfl-content').focus();
+	    		}
+	    	}
+	    }, 1000);*/
+
+
+	    /*		setInterval(function () { 
+	    			var l = window.document.getElementById('baseballbros-io_160x600');
+	    			if(l != null && typeof l.style !== 'undefined' && l.style.visibility == 'visible') {
+	    				ShowAd5();
+	    			}
+	    		}, 30000);
+
+	    		setInterval(function () { 
+	    			var l = window.document.getElementById('baseballbros-io_160x600_2');
+	    			if(l != null && typeof l.style !== 'undefined' && l.style.visibility == 'visible') {
+	    				ShowAd1();
+	    			}
+	    		}, 32000);*/
+
+	    var sid = '02k06etmp6fnad6qk2e82s1dfi'
+
+	    function updateStatus(fromEvent = false) {
+	      const req = new XMLHttpRequest();
+	      var aStr = "recordsession.php?s=" + sid;
+	      if (fromEvent == true) aStr = aStr + "&e=1"
+	      req.open("GET", aStr);
+	      req.send();
+	    }
+
+	    function SendEvent(theEvent, theAction, theParms = '') {
+	      if (theParms == '') {
+	        gtag(theEvent, theAction);
+	      } else {
+	        gtag(theEvent, theAction, theParms);
+	      }
+	      updateStatus(true);
+	      //console.log("Sending event: " + theEvent + "/" + theAction + "/" + theParms);
+	    }
+	    //setInterval(function() { updateStatus, 4*60*1000);			
+	    //setInterval( function() { 
+	    //	window.scrollTo(0, 0); 
+	    //}, 2000 );					
+	    updateStatus(true);
+
+	    //setInterval(ClearAds, 2000);		
+
+	    function EmailSignup() {
+	      if (document.getElementById("signup") || document.getElementById("deleteme")) return;
+	      const iframe = document.createElement("iframe");
+
+	      //			iframe.style.display = "block";
+	      iframe.style.width = "550px";
+	      iframe.style.height = "" + window.innerHeight - 100 + "px";
+	      iframe.style.position = "absolute";
+	      iframe.style.top = "50px";
+	      iframe.style.left = "50%";
+	      iframe.style["margin-left"] = "-225px";
+	      //iframe.style["margin-right"] = "-275px";
+	      iframe.style["max-width"] = "100%";
+	      iframe.setAttribute("id", "signup");
+
+	      document.body.appendChild(iframe);
+	    }
+
+	    function GamePlayStart() {
+	      if (typeof gCrazySDK !== 'undefined') {
+	        console.log("GamePlayStart");
+	        gCrazySDK.gameplayStart();
+	      }
+	    }
+
+	    function GamePlayStop() {
+	      if (typeof gCrazySDK !== 'undefined') {
+	        console.log("GamePlayStop");
+	        gCrazySDK.gameplayStop();
+	      }
+	    }
+
+	    function HappyTime() {
+	      if (typeof gCrazySDK !== 'undefined') {
+	        console.log("happytime");
+	        gCrazySDK.happytime();
+	      }
+	    }
+
+	    var scrollerMessage = " WELCOME TO BASEBALL BROS! ARE YOU READY TO HIT SOME NUKES? WE'RE STILL MAKING ADJUSTMENTS- YOU CAN CHECK THE BOTTOM OF THE PAGE FOR THE LATEST CHANGES! IF YOU HAVE A GLITCH OR FEEDBACK, YOU CAN EMAIL INFO@BLUEWIZARD.COM!!! ";
+
+	    const element = document.getElementById('openfl-content');
+	    // Function to keep the element focused
+	    function keepFocus() {
+	      element.focus();
+	    }
+	    // Event listeners to restore focus when lost
+	    element.addEventListener('blur', keepFocus);
+	    element.addEventListener('focusout', keepFocus);
+	  </script>
+	
+</body>
+
+	</html>

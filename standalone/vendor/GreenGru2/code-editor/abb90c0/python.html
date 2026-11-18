@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/code-editor/abb90c0/">
+    <title>gn python editor</title>
+    <link rel="stylesheet" href="styles/editor.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/highlightjs/cdn-release/791ba94/build/styles/dark.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/highlightjs/cdn-release/791ba94/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+</head>
+<body>
+    <div id="editor-container">
+        <h1><a onclick="gohome()" style="color: inherit; text-decoration: none;">gn code editor (python)</a></h1>
+
+        <div class="code-section">
+            <h3>Python</h3>
+            <pre><code class="language-python" id="pythoncode" contenteditable="true">print("gn-math is awesome")</code></pre>
+        </div>
+        <footer>
+            <p>Made for: <a href="https://gn-math.github.io" target="_blank">gn-math.github.io</a></p>
+        </footer>
+    </div>
+
+    <div id="iframe-container">
+        <div class="preview-header">
+            <h3>Preview</h3>
+            <button onclick="runCode()">Run Code</button>
+            <button onclick="output.textContent = 'Output cleared\n'">Clear Output</button>
+        </div>
+        <pre><code id="output">Output will be here</code></pre>
+    </div>
+
+    <script src="scripts/shared.js"></script>
+    <script src="scripts/pythoneditor.js"></script>
+</body>
+</html>
