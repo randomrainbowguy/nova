@@ -3,7 +3,20 @@
   const CONFIG = window.NOVA_CONFIG || {};
   const BASE = window.NOVA_BASE || "";
   const MOVIES_DOC = CONFIG.moviesDoc || "";
-  const MIRROR = /^https:\/\/(fastly|gcore)\.jsdelivr\.net\//.test(BASE) ? new URL(BASE).origin : "";
+  // Everything loads from raw.githubusercontent.com, never jsDelivr. ROOT is the repo at the commit this hub
+  // came from. Links written against jsDelivr (games copied into this repo, covers, other people's game
+  // repos) are turned into the same file on raw.githubusercontent.com.
+  const ROOT = BASE.replace(/standalone\/$/, "");
+  const toRaw = (s) => String(s || "")
+    .replace(/https:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/gh\/([^/@"'\s]+)\/([^/@"'\s]+)(?:@([^/"'\s]+))?\//g,
+      (m, u, r, ref) => `https://raw.githubusercontent.com/${u}/${r}/${ref || "HEAD"}/`)
+    // npm packages games use (Ruffle for Flash, Bootstrap) are copied into this repo: standalone/lib/npm/
+    .replace(/https:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/npm\//g, BASE + "lib/npm/");
+  const localize = (s) => {
+    s = toRaw(s);
+    return ROOT ? s.replace(/https:\/\/raw\.githubusercontent\.com\/randomrainbowguy\/nova\/[^/"'\s]+\//g, ROOT) : s;
+  };
+  window.NOVA_RAW_ONLY = true;   // tells game-sanitize.js to make raw.githubusercontent.com scripts/CSS/wasm work
   let GAMES = [];
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -212,10 +225,7 @@
   /* ── library (games.json lives in the repo next to this file) ── */
   try {
     GAMES = await fetch(BASE + "games.json", { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
-    if (MIRROR) {
-      const swap = (u) => String(u || "").replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/");
-      GAMES.forEach((g) => { g.url = swap(g.url); g.image = swap(g.image); });
-    }
+    GAMES.forEach((g) => { g.image = localize(g.image); g.url = localize(g.url); });
   } catch (err) {
     $("grid").innerHTML = `<div class="empty">Couldn't load the game list (${esc(err.message)}). Check your connection and reload.</div>`;
     return;
@@ -369,11 +379,13 @@ ${code.replace(/<\/(script)/gi, "<\\/$1")}
 })();<\/script>`;
   function prepare(html, url, id, fakeIdb) {
     let out;
+    html = localize(html);   // before the sanitizer, so it sees the raw.githubusercontent.com addresses
     if (window.sanitizeGameHtml) out = window.sanitizeGameHtml(html, url);
     else {
       const base = `<base href="${url.slice(0, url.lastIndexOf("/") + 1)}">`;
       out = /<head[^>]*>/i.test(out = html) ? html.replace(/<head([^>]*)>/i, `<head$1>${base}`) : base + html;
     }
+    if (BASE) out = localize(out);
     // The game runs from a blob: URL, which may not count as secure even when this page does,
     // so always add the shims (they only fill in what's missing).
     const shims = fakeIdbShim(fakeIdb) + storageShim(id) + CRYPTO_SHIM + rewriteBase(url);
@@ -398,9 +410,7 @@ ${code.replace(/<\/(script)/gi, "<\\/$1")}
     pageView(g.name, "/play/" + g.id);
     track("play_game", { game_name: g.name, game_id: String(g.id) });
     const token = {};
-    // If the launcher had to use a jsDelivr mirror (cdn.jsdelivr.net blocked), load games through it too.
-    const url = g.url.startsWith("nova:") ? BASE + g.url.slice(5)   // a game kept in this repo
-      : MIRROR ? g.url.replace(/^https:\/\/cdn\.jsdelivr\.net\//, MIRROR + "/") : g.url;
+    const url = g.url.startsWith("nova:") ? BASE + g.url.slice(5) : g.url;   // "nova:" = a game kept in this repo
     loaded = fetch(url).then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); }).then((h) => FAKE_IDB.then((fake) => prepare(h, url, g.id, fake)));
     loaded.token = token;
     const mine = loaded;

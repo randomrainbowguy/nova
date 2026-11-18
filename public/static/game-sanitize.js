@@ -137,6 +137,121 @@
   var CSS = "#sidebarad1,#sidebarad2,.sidebar-frame,ins.adsbygoogle,iframe[src*='googlesyndication'],iframe[src*='doubleclick'],div[id^='google_ads_iframe'],div[id^='aswift_']{display:none!important}";
 
 
+  // ── raw.githubusercontent.com only (the standalone hub sets window.NOVA_RAW_ONLY) ──
+  // raw.githubusercontent.com sends .js/.css/.html as text/plain and .wasm as application/octet-stream, with
+  // "nosniff", so the browser won't run a <script src>, apply a <link rel=stylesheet> or stream-compile wasm
+  // from it. Images, audio, fetch() and XHR work (it sends Access-Control-Allow-Origin: *). So:
+  //  - rawTags() turns <script src> / <link rel=stylesheet> tags that may point there into a call to
+  //    __novaS / __novaL, which download the file synchronously and write it back as a blob: script
+  //    (keeping order, attributes and onload) or an inline <style> (with url()s made absolute).
+  //  - RAW_SHIM does the same for scripts and stylesheets that games add later from JS, for pages written
+  //    with document.write, and makes WebAssembly.*Streaming fall back to the ArrayBuffer path.
+  // rawTags is also copied into the shim (toString), so it must stay self-contained ES5.
+  function rawTags(html) {
+    var RAW = /^https?:\/\/raw\.githubusercontent\.com\//i, OTHER = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+    var J = function (v) { return JSON.stringify(v).replace(/</g, "\\u003c"); };
+    var attr = function (a, n) { var m = new RegExp("(?:^|\\s)" + n + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i").exec(a); return m ? { all: m[0], v: (m[1] != null ? m[1] : m[2] != null ? m[2] : m[3]).replace(/&amp;/g, "&") } : null; };
+    // only tags that are real HTML, not text inside a <script> or a comment
+    var outside = function (i) {
+      if (i <= 0) return true;
+      i = i - 1;   // the tag itself may be a <script>
+      var so = Math.max(html.lastIndexOf("<script", i), html.lastIndexOf("<SCRIPT", i));
+      var sc = Math.max(html.lastIndexOf("</script", i), html.lastIndexOf("</SCRIPT", i));
+      var co = html.lastIndexOf("<!--", i), cc = html.lastIndexOf("-->", i);
+      return so <= sc && co <= cc;
+    };
+    var want = function (u) { u = u.replace(/^\s+/, ""); return !!u && (RAW.test(u) || !OTHER.test(u)); };
+    return html.replace(/<script\b([^>]*)>\s*<\/script\s*>|<link\b([^>]*)>/gi, function (m, sa, la, i) {
+      if (!outside(i)) return m;
+      if (sa != null) {
+        var src = attr(sa, "src"), type = attr(sa, "type");
+        if (!src || !want(src.v) || (type && !/^\s*(?:text\/javascript|application\/javascript|text\/ecmascript|application\/ecmascript)?\s*$/i.test(type.v))) return m;
+        return "<script>__novaS(" + J(src.v) + "," + J(sa.replace(src.all, " ")) + ")<\/script>";
+      }
+      var rel = attr(la, "rel"), href = attr(la, "href");
+      if (!rel || !/(?:^|\s)stylesheet(?:\s|$)/i.test(rel.v) || /alternate/i.test(rel.v) || !href || !want(href.v)) return m;
+      return "<script>__novaL(" + J(href.v) + "," + J(la.replace(href.all, " ").replace(rel.all, " ").replace(/\/\s*$/, "")) + ")<\/script>";
+    });
+  }
+
+  var RAW_SHIM = "(" + function (rawTags) {
+    if (window.__novaS) return;
+    var RAW = /^https?:\/\/raw\.githubusercontent\.com\//i, d = document;
+    var abs = function (u) { try { return new URL(String(u), d.baseURI).href; } catch (e) { return ""; } };
+    var esc = function (v) { return String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); };
+    var get = function (u) {
+      try { var x = new XMLHttpRequest(); x.open("GET", u, false); x.send(); return x.status >= 200 && x.status < 300 ? x.responseText : null; }
+      catch (e) { return null; }
+    };
+    var jsBlob = function (code) { return URL.createObjectURL(new Blob([code], { type: "text/javascript" })); };
+    // url(...) and @import in a stylesheet resolve against the stylesheet, so make them absolute
+    var fixCss = function (css, from) {
+      var a = function (u) { try { return new URL(u, from).href; } catch (e) { return u; } };
+      return css.replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/gi, function (m, q, u) { return /^(?:data|blob|#)/i.test(u) ? m : "url(" + q + a(u) + q + ")"; })
+        .replace(/@import\s+(["'])([^"']+)\1/gi, function (m, q, u) { return "@import " + q + a(u) + q; });
+    };
+    var write = d.write;
+    var W = function (s) { write.call(d, s); };
+    var CLOSE = "</" + "script>";
+    window.__novaS = function (src, attrs) {
+      var u = abs(src);
+      var code = RAW.test(u) ? get(u) : null;
+      if (code == null) { W("<script" + attrs + ' src="' + esc(u || src) + '">' + CLOSE); return; }   // not raw, or failed: the normal way
+      W("<script" + attrs + ' data-nova-src="' + esc(u) + '" src="' + jsBlob(code) + '">' + CLOSE);
+    };
+    window.__novaL = function (href, attrs) {
+      var u = abs(href);
+      var css = RAW.test(u) ? get(u) : null;
+      if (css == null) { W('<link rel="stylesheet"' + attrs + ' href="' + esc(u || href) + '">'); return; }
+      W("<style" + attrs.replace(/\s(?:crossorigin|integrity|as|type)(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/gi, "") + ' data-nova-href="' + esc(u) + '">' +
+        fixCss(css, u).replace(/<\/(style)/gi, "<\\/$1") + "</style>");
+    };
+    // pages that write themselves with document.write go through the same rewrite
+    d.write = function () { return write.call(d, rawTags(Array.prototype.join.call(arguments, ""))); };
+    d.writeln = function () { return write.call(d, rawTags(Array.prototype.join.call(arguments, "")) + "\n"); };
+
+    // scripts / stylesheets added from JS: download, then point the element at a blob: copy. Scripts with
+    // async = false keep their order. script.src still reads the real address (loaders use it to find files).
+    var SP = HTMLScriptElement.prototype, sd = Object.getOwnPropertyDescriptor(SP, "src");
+    var LP = HTMLLinkElement.prototype, ld = Object.getOwnPropertyDescriptor(LP, "href");
+    var sa = Element.prototype.setAttribute, ga = Element.prototype.getAttribute;
+    var chain = Promise.resolve();
+    var text = function (u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }); };
+    var setScript = function (el, v) {
+      var u = abs(v);
+      if (!RAW.test(u) || /module/i.test(ga.call(el, "type") || "")) return sd.set.call(el, v);
+      sa.call(el, "data-nova-src", u);
+      var got = text(u).then(jsBlob, function () { return u; });
+      if (el.async === false) { got = chain.then(function () { return got; }); chain = got.then(function () {}, function () {}); }
+      got.then(function (b) { if (ga.call(el, "data-nova-src") === u) sd.set.call(el, b); });
+    };
+    var setLink = function (el, v) {
+      var u = abs(v);
+      if (!RAW.test(u) || !(/stylesheet/i.test(ga.call(el, "rel") || "") || /\.css(?:[?#]|$)/i.test(u))) return ld.set.call(el, v);
+      sa.call(el, "data-nova-href", u);
+      text(u).then(function (css) { return URL.createObjectURL(new Blob([fixCss(css, u)], { type: "text/css" })); }, function () { return u; })
+        .then(function (b) { if (ga.call(el, "data-nova-href") === u) ld.set.call(el, b); });
+    };
+    Object.defineProperty(SP, "src", { configurable: true, enumerable: sd.enumerable,
+      get: function () { return ga.call(this, "data-nova-src") || sd.get.call(this); }, set: function (v) { setScript(this, v); } });
+    Object.defineProperty(LP, "href", { configurable: true, enumerable: ld.enumerable,
+      get: function () { return ga.call(this, "data-nova-href") || ld.get.call(this); }, set: function (v) { setLink(this, v); } });
+    var setAttr = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (n, v) {
+      var k = String(n).toLowerCase();
+      if (k === "src" && this instanceof HTMLScriptElement) return setScript(this, v);
+      if (k === "href" && this instanceof HTMLLinkElement) return setLink(this, v);
+      return setAttr.call(this, n, v);
+    };
+    // the streaming wasm APIs insist on Content-Type: application/wasm
+    var Wa = window.WebAssembly;
+    if (Wa) {
+      var buf = function (src) { return Promise.resolve(src).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.arrayBuffer(); }); };
+      if (Wa.instantiateStreaming) Wa.instantiateStreaming = function (src, imports) { return buf(src).then(function (b) { return Wa.instantiate(b, imports); }); };
+      if (Wa.compileStreaming) Wa.compileStreaming = function (src) { return buf(src).then(function (b) { return Wa.compile(b); }); };
+    }
+  }.toString() + ")(" + rawTags.toString() + ");";
+
   // Stand-in for the YouTube Playables SDK (ytgame.js). The real SDK waits for the YouTube host page to
   // answer (loadData() never resolves outside YouTube), so ~60 "youtube-playables" ports hang on a blank
   // screen. This keeps the same API, saves to localStorage and reports "no ad".
@@ -289,6 +404,7 @@
 
   function baseFor(url) {
     var folder = url.slice(0, url.lastIndexOf("/") + 1);
+    if (window.NOVA_RAW_ONLY) return folder;   // the raw shim makes raw.githubusercontent.com work as is
     // raw.githubusercontent.com/<u>/<r>/(refs/heads/)?<branch>/<path>  ->  cdn.jsdelivr.net/gh/<u>/<r>@<branch>/<path>
     var m = folder.match(/^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/(?:refs\/heads\/)?([^/]+)\/(.*)$/i);
     if (m) folder = "https://cdn.jsdelivr.net/gh/" + m[1] + "/" + m[2] + "@" + m[3] + "/" + m[4];
@@ -312,6 +428,8 @@
   window.sanitizeGameHtml = function (html, url) {
     try { html = removeTrackers(html); } catch (e) { /* never block the game on a sanitizer bug */ }
     for (var r = 0; r < REWRITES.length; r++) html = html.replace(REWRITES[r][0], REWRITES[r][1]);
+    var raw = !!window.NOVA_RAW_ONLY;
+    if (raw) { try { html = rawTags(html); } catch (e) {} }
     var headTag = findOutside(html, /<head(?:\s[^>]*)?>/);
     var headEnd = findOutside(html, /<\/head\s*>|<body[\s>]/);
     // does the file already set its own <base href> in its head? (the first <base> wins, so don't add ours)
@@ -324,6 +442,14 @@
     var at;
     if (headTag) at = headTag.index + headTag[0].length;
     else { var d = html.match(/^(?:\s|<!--[\s\S]*?-->)*<!doctype[^>]*>/i); at = d ? d[0].length : 0; }
-    return html.slice(0, at) + add + html.slice(at);
+    html = html.slice(0, at) + add + html.slice(at);
+    // The raw shim goes first of all (right after any doctype), before any <script> that may need it.
+    if (raw) {
+      var dt = html.match(/^(?:\s|<!--[\s\S]*?-->)*<!doctype[^>]*>/i), p = dt ? dt[0].length : 0;
+      var first = html.search(/<script[\s>]/i);
+      if (first !== -1 && first < p) p = 0;   // a script before the doctype (copied-game stubs): go before it
+      html = html.slice(0, p) + "<script>" + RAW_SHIM + "<\/script>" + html.slice(p);
+    }
+    return html;
   };
 })();
