@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				1,
+				0
+			],
+			"anim": "idle",
+			"fps": 40,
+			"name": "Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				3
+			],
+			"anim": "singLEFT",
+			"fps": 40,
+			"name": "Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-13,
+				-75
+			],
+			"anim": "singDOWN",
+			"fps": 40,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-7,
+				114
+			],
+			"anim": "singUP",
+			"fps": 40,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-30,
+				-23
+			],
+			"anim": "singRIGHT",
+			"fps": 40,
+			"name": "Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				54,
+				-9
+			],
+			"anim": "singLEFT-alt",
+			"fps": 40,
+			"name": "WhLe",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-13,
+				-86
+			],
+			"anim": "singDOWN-alt",
+			"fps": 40,
+			"name": "WhDo",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-8,
+				112
+			],
+			"anim": "singUP-alt",
+			"fps": 40,
+			"name": "WhUp",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-30,
+				-30
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 40,
+			"name": "WhRi",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Sad_Mouse",
+	"position": [
+		0,
+		150
+	],
+	"healthicon": "p1",
+	"flip_x": false,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1.3
+}

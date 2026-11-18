@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				151,
+				208
+			],
+			"anim": "idle",
+			"fps": 40,
+			"name": "Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				189,
+				205
+			],
+			"anim": "singLEFT",
+			"fps": 40,
+			"name": "Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				178,
+				223
+			],
+			"anim": "singDOWN",
+			"fps": 40,
+			"name": "Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				255,
+				268
+			],
+			"anim": "singUP",
+			"fps": 40,
+			"name": "Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				173,
+				202
+			],
+			"anim": "singRIGHT",
+			"fps": 40,
+			"name": "Right",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/VeryHappy_Mouse",
+	"position": [
+		20,
+		160
+	],
+	"healthicon": "p4",
+	"flip_x": false,
+	"healthbar_colors": [
+		38,
+		38,
+		38
+	],
+	"camera_position": [
+		-190,
+		-210
+	],
+	"sing_duration": 6.1,
+	"scale": 1.3
+}

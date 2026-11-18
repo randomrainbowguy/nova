@@ -1,0 +1,90 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				1,
+				-12
+			],
+			"loop": false,
+			"fps": 40,
+			"anim": "idle",
+			"indices": [],
+			"name": "Idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				149,
+				-6
+			],
+			"anim": "singLEFT",
+			"fps": 40,
+			"name": "Left",
+			"indices": [
+				0,
+				1
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				10,
+				-101
+			],
+			"anim": "singDOWN",
+			"fps": 40,
+			"name": "Down",
+			"indices": [
+				0,
+				1
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				74,
+				197
+			],
+			"anim": "singUP",
+			"fps": 40,
+			"name": "Up",
+			"indices": [
+				0,
+				1
+			]
+		},
+		{
+			"loop": false,
+			"offsets": [
+				136,
+				212
+			],
+			"anim": "singRIGHT",
+			"fps": 40,
+			"name": "Right",
+			"indices": [
+				0,
+				1
+			]
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/ReallyHappy_Mouse",
+	"position": [
+		20,
+		160
+	],
+	"healthicon": "p3",
+	"flip_x": false,
+	"healthbar_colors": [
+		84,
+		84,
+		84
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 1.00000000000001,
+	"scale": 1.3
+}
