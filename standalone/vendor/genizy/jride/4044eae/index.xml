@@ -1,0 +1,26 @@
+<Module>
+<ModulePrefs title="jetpack joyride" />
+<Content type="html"><![CDATA[
+<!DOCTYPE html>  
+<html>
+    <head>  
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <title> Jetpack Joyride </title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/jride/aa4ee5d/css/styles.css">
+        <meta name="viewport" content="user-scalable=no"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/jride/aa4ee5d/h5Sdk.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/jride/aa4ee5d/engine/phaser-3.24.1.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/jride/aa4ee5d/game3.js"></script>
+    </head>
+     <body>
+        <div class="fontLoader" style="font-family: jetpackia;">-</div>
+        <img id="rotate_image" src="https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/vendor/genizy/jride/aa4ee5d/img/HB_ic_rotateScreen.png" alt="rotate_screen" class="center">
+        <div id="content">
+            <div id="phaser-canvas"></div>
+        </div>        
+    <style id="injectStyles">html, body{ background: none !important; }</style>
+</body>
+</html>   
+]]></Content>
+</Module>
