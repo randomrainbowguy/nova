@@ -260,6 +260,53 @@
       if (k === "href" && this instanceof HTMLLinkElement) return setLink(this, v);
       return setAttr.call(this, n, v);
     };
+    // Web workers: importScripts() refuses text/plain too. Workers made from a raw.githubusercontent.com
+    // file or a blob: (games build those) get a prelude that downloads raw scripts and runs them itself.
+    var prelude = function (base, lib) {
+      var RAW = /^https?:\/\/raw\.githubusercontent\.com\//i, JSD = /^https?:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/(gh|npm)\/(.*)$/i;
+      var map = function (u) {
+        try { u = new URL(String(u), base).href; } catch (e) { return String(u); }
+        var m = JSD.exec(u); if (!m) return u;
+        if (m[1].toLowerCase() === "npm") return lib ? lib + m[2] : u;
+        var g = /^([^/@]+)\/([^/@]+)(?:@([^/]+))?\/(.*)$/.exec(m[2]);
+        return g ? "https://raw.githubusercontent.com/" + g[1] + "/" + g[2] + "/" + (g[3] || "HEAD") + "/" + g[4] : u;
+      };
+      var IS = self.importScripts;
+      self.importScripts = function () {
+        for (var i = 0; i < arguments.length; i++) {
+          var u = map(arguments[i]);
+          if (!RAW.test(u)) { IS.call(self, u); continue; }
+          var x = new XMLHttpRequest(); x.open("GET", u, false); x.send();
+          if (x.status < 200 || x.status >= 300) throw new Error("importScripts: HTTP " + x.status + " " + u);
+          (0, eval)(x.responseText + "\n//# sourceURL=" + u);
+        }
+      };
+      var F = self.fetch;
+      if (F) self.fetch = function (a, b) { if (typeof a === "string") a = map(a); return F.call(self, a, b); };
+      var XO = self.XMLHttpRequest && XMLHttpRequest.prototype.open;
+      if (XO) XMLHttpRequest.prototype.open = function (m, u) { var a = Array.prototype.slice.call(arguments); a[1] = map(u); return XO.apply(this, a); };
+      var Wa = self.WebAssembly;
+      if (Wa) {
+        var buf = function (src) { return Promise.resolve(src).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.arrayBuffer(); }); };
+        if (Wa.instantiateStreaming) Wa.instantiateStreaming = function (src, imp) { return buf(src).then(function (b) { return Wa.instantiate(b, imp); }); };
+        if (Wa.compileStreaming) Wa.compileStreaming = function (src) { return buf(src).then(function (b) { return Wa.compile(b); }); };
+      }
+    };
+    var NW = window.Worker;
+    if (NW) {
+      window.Worker = function (u, o) {
+        var s = String(u), blob = /^blob:/i.test(s), a = blob ? s : abs(s);
+        if ((blob || RAW.test(a)) && !(o && o.type === "module")) {
+          var code = get(a);
+          if (code != null) {
+            var pre = "(" + prelude.toString() + ")(" + JSON.stringify(blob ? d.baseURI : a) + "," + JSON.stringify(lib || "") + ");\n";
+            return new NW(URL.createObjectURL(new Blob([pre + code], { type: "text/javascript" })), o);
+          }
+        }
+        return new NW(u, o);
+      };
+      window.Worker.prototype = NW.prototype;
+    }
     // the streaming wasm APIs insist on Content-Type: application/wasm
     var Wa = window.WebAssembly;
     if (Wa) {
