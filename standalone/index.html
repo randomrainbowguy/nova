@@ -631,7 +631,7 @@
         parts.forEach(function (p, i) {
           var inl = p.css ? "<style>" + bodies[i].replace(/<\/(style)/gi, "<\\/$1") + "</style>"
             // A script's text goes in as an escaped string (no "<" left) that runs as a script element, so
-            // nothing in it ("<!--", "</script>") can confuse the HTML parser.
+            // nothing in it (comment openers, closing script tags) can confuse the HTML parser.
             : '<script>(function(){var s=document.createElement("script");s.text=' +
               JSON.stringify(bodies[i]).replace(/</g, "\\u003c") + ';document.currentScript.after(s)})()<\/script>';
           text = text.split(p.tag).join(inl);
