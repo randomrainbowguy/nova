@@ -19,6 +19,12 @@
   const params = new URLSearchParams(location.search);
   const url = params.get("url");
   const sanitize = params.get("sanitize") !== "0" && typeof window.sanitizeGameHtml === "function";
+  // &vendor=<address of standalone/>: games copied into the repo (tools/vendor) are written against the
+  // @overnight jsDelivr address; load their files from here instead (same as hub.js's localize()).
+  const vendor = params.get("vendor") || "";
+  const localize = (s) => !vendor ? s : s
+    .replace(/https:\/\/cdn\.jsdelivr\.net\/gh\/randomrainbowguy\/nova@[^/]+\/standalone\//g, vendor)
+    .replace(/https:\/\/raw\.githubusercontent\.com\/randomrainbowguy\/nova\/[^/]+\/standalone\//g, vendor);
   const frame = document.getElementById("game-frame");
   const status = document.getElementById("game-status");
   window.__harness = { state: "fetching", sanitize };
@@ -30,7 +36,7 @@
     .then((r) => { window.__harness.httpStatus = r.status; if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
     .then((html) => {
       window.__harness.bytes = html.length;
-      return sanitize ? window.sanitizeGameHtml(html, url) : withBase(html);
+      return localize(sanitize ? window.sanitizeGameHtml(html, url) : withBase(html));
     })
     .then((html) => {
       const blobUrl = URL.createObjectURL(new Blob([html], { type: "text/html" }));

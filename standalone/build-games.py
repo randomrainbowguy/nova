@@ -4,6 +4,9 @@
 
 Applies tools/gametest/decisions.json (fixed links, removed broken games), skips Pro early-access
 games, and points the emulator at EmulatorJS in this repo (served by jsDelivr).
+Games copied into this repo by tools/vendor (standalone/vendor/manifest.json, verified "ok") load from
+here ("nova:games/<n>.html") and come first, ordered by how much they are played; a Nova game that has
+a copy keeps its id, the rest get ids from 200000 + their freebuisness number.
 Only game info goes in the file - no accounts or anything private.
 """
 import json
@@ -16,6 +19,8 @@ from datetime import datetime, timedelta, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 DB = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "nova.db")
 EMU_URL = "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/public/emulator/index.html"
+# Covers of copied games, written the way tools/vendor writes URLs (the hub swaps this for its own address).
+VENDOR_URL = "https://cdn.jsdelivr.net/gh/randomrainbowguy/nova@overnight/standalone/"
 # Upstream repos rename and delete files (freebuisness renamed most of theirs on 2026-10-11), so every
 # link is pinned to the commit the games were tested at (tools/gametest). Their changes can't break us.
 PINS = {
@@ -66,13 +71,28 @@ def main():
     with open(os.path.join(HERE, "prefer-corduroy.json"), encoding="utf-8") as f:
         corduroy = {int(k): v["file"] for k, v in json.load(f)["games"].items()}
     replace = {r["id"]: r["new_url"] for r in decisions["replace"]}
+    # Games copied into this repo (tools/vendor), by freebuisness number; only the ones that passed the check.
+    vendored = {}
+    mpath = os.path.join(HERE, "vendor", "manifest.json")
+    if os.path.exists(mpath):
+        with open(mpath, encoding="utf-8") as f:
+            vendored = {int(k): v for k, v in json.load(f)["games"].items() if v.get("verified") == "ok" and v.get("html")}
+    def fb_number(url):
+        m = re.search(r"freebuisness/html@[^/]+/(\d+)", url or "")
+        return int(m.group(1)) if m else None
     games = []
+    seen_nums = set()
     for r in rows:
         if r["id"] in remove:
             continue
         url = replace.get(r["id"], r["url"])
+        num = fb_number(r["url"]) or fb_number(url)
+        hits = 0
         if r["id"] in local:
             url = "nova:" + local[r["id"]]
+        elif num in vendored:
+            url, hits = "nova:" + vendored[num]["html"], vendored[num]["hits"]
+            seen_nums.add(num)
         elif r["id"] in corduroy:
             url = f"https://raw.githubusercontent.com/CorduroyBrick49/Games/main/{corduroy[r['id']]}"
         elif r["id"] in g4_match:
@@ -86,13 +106,28 @@ def main():
                      r"https://raw.githubusercontent.com/freebuisness/html/\1/", url or "")
         if not url.startswith("nova:") and re.sub(r"^https?://", "", url or "").split("/")[0].lower() not in RAW_HOSTS:
             continue  # the hub only runs games that load from a code repo
+        image = pin(r["image"])
+        if num in vendored and vendored[num].get("cover"):
+            image = VENDOR_URL + vendored[num]["cover"]
         games.append({"id": r["id"], "name": r["name"], "description": r["description"] or "",
                       "genres": [g.strip() for g in (r["genres"] or "").split(",") if g.strip()],
-                      "image": pin(r["image"]), "url": pin(url), "rank": len(games),
+                      "image": image, "url": pin(url), "rank": len(games), "_recent": r["recent"], "_hits": hits, "_plays": r["plays"],
                       **({"walled": True} if r["id"] in walled else {})})
     for i, n in enumerate(g4["new"]):  # games only in g4m3sss; ids above any Nova game id
         games.append({"id": 100000 + i, "name": n["name"], "description": "", "genres": [], "image": n.get("image", ""),
-                      "url": g4_base + n["file"], "rank": len(games)})
+                      "url": g4_base + n["file"], "rank": len(games), "_recent": 0, "_hits": 0, "_plays": 0})
+    for num, v in vendored.items():  # copied games Nova didn't have yet
+        if num in seen_nums:
+            continue
+        games.append({"id": 200000 + num, "name": v["name"], "description": "", "genres": [],
+                      "image": VENDOR_URL + v["cover"] if v.get("cover") else "", "url": "nova:" + v["html"],
+                      "rank": len(games), "_recent": 0, "_hits": v["hits"], "_plays": 0})
+    # Order: what Nova's players opened lately, then by plays everywhere (jsDelivr hits), then Nova plays.
+    games.sort(key=lambda g: (-g["_recent"], -g["_hits"], -g["_plays"], g["name"].lower()))
+    for i, g in enumerate(games):
+        g["rank"] = i
+        for k in ("_recent", "_hits", "_plays"):
+            del g[k]
     out = os.path.join(HERE, "games.json")
     with open(out, "w", encoding="utf-8") as f:
         json.dump(games, f, ensure_ascii=False, separators=(",", ":"))

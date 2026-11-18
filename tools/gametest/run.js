@@ -5,8 +5,11 @@
 //   node run.js [--ids 55,397] [--sanitize 0|1] [--concurrency 8] [--out results.json]
 //               [--shots DIR] [--override 55=https://...] [--urls file.json] [--db ../../nova.db]
 //               [--scale 2] [--port 8765] [--sanitizer path/to/alternative-game-sanitize.js]
+//               [--vendor http://localhost:8765/standalone/]
 //
 // --urls file.json : JSON array of {id,name,url} to test instead of reading the DB.
+// --vendor URL     : for games copied into the repo (tools/vendor): load their files from URL (the
+//                    server serves ../../standalone at /standalone/) instead of jsDelivr.
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright-core");
@@ -26,6 +29,7 @@ const SHOTS = path.resolve(args.shots || path.join(HERE, "shots"));
 const PORT = Number(args.port || 8765);
 const W = 800, H = 500;
 const SCALE = Number(args.scale || 1);   // --scale 2 doubles every wait (for slow/large games)
+const VENDOR = args.vendor || "";
 
 function loadGames() {
   let games;
@@ -133,12 +137,20 @@ async function testGame(browser, g) {
   page.on("console", (m) => { if (m.type() === "error") { const t = m.text().slice(0, 300); if (!NOISE.test(t)) errors.push(t); } });
   page.on("requestfailed", (r) => { const u = r.url(); if (!NOISE.test(u) && !u.startsWith("data:")) failed.push(`${r.failure()?.errorText || "failed"} ${u.slice(0, 200)}`); });
   page.on("response", (r) => { const u = r.url(); if (r.status() >= 400 && !NOISE.test(u)) failed.push(`HTTP ${r.status()} ${u.slice(0, 200)}`); });
+  // With --vendor: every request that still goes to a code repo (a URL the copy missed), and every
+  // missing file under the vendor address, so tools/vendor/verify.py can copy what is missing.
+  const leaks = new Set(), missing = new Set();
+  const REPO_HOST = /^https?:\/\/(cdn\.jsdelivr\.net\/gh\/|(?:rawcdn|bbcdn|raw)\.githack\.com\/|raw\.githubusercontent\.com\/|cdn\.statically\.io\/gh\/|github\.com\/[^/]+\/[^/]+\/(?:raw|blob)\/)/i;
+  if (VENDOR) {
+    page.on("request", (r) => { const u = r.url(); if (REPO_HOST.test(u) && !/randomrainbowguy\/nova/i.test(u)) leaks.add(u.slice(0, 500)); });
+    page.on("response", (r) => { const u = r.url(); if (r.status() === 404 && u.startsWith(VENDOR)) missing.add(u.slice(0, 500)); });
+  }
   page.on("framenavigated", (f) => { if (f === page.mainFrame() && !f.url().startsWith(`http://localhost:${PORT}/`)) topNav = f.url(); });
 
   const res = { id: g.id, name: g.name, url: g.url, status: "ok", reason: "", errors: [] };
   const shots = [];
   try {
-    await page.goto(`http://localhost:${PORT}/?sanitize=${SANITIZE ? 1 : 0}&url=${encodeURIComponent(g.url)}`, { waitUntil: "domcontentloaded", timeout: 20000 });
+    await page.goto(`http://localhost:${PORT}/?sanitize=${SANITIZE ? 1 : 0}&url=${encodeURIComponent(g.url)}${VENDOR ? "&vendor=" + encodeURIComponent(VENDOR) : ""}`, { waitUntil: "domcontentloaded", timeout: 20000 });
     let h = null;
     for (let i = 0; i < 60; i++) { h = await page.evaluate(() => window.__harness).catch(() => null); if (h && h.state !== "fetching") break; await sleep(250); }
     if (!h || h.state !== "loaded") {
@@ -170,6 +182,7 @@ async function testGame(browser, g) {
   else if (res.status === "ok") { res.status = "error"; res.reason = "could not take screenshots (page hung?)"; }
 
   res.errors = [...pageErrors.map((e) => "pageerror: " + e), ...errors, ...failed].filter((v, i, a) => a.indexOf(v) === i).slice(0, 25);
+  if (VENDOR) { res.leaks = [...leaks].slice(0, 300); res.missing = [...missing].slice(0, 300); }
   const last = shots[shots.length - 1];
   if (last) {
     fs.writeFileSync(path.join(SHOTS, `${g.id}.png`), last.buf);
@@ -232,5 +245,7 @@ if (require.main !== module) return;
   fs.writeFileSync(OUT, JSON.stringify(results, null, 1));
   const c = {}; for (const r of results) c[r.status] = (c[r.status] || 0) + 1;
   console.log("summary", JSON.stringify(c), "->", OUT);
-  await browser.close(); server.close();
+  server.close();
+  await Promise.race([browser.close(), sleep(5000)]);   // Chrome sometimes never answers; don't hang on it
+  process.exit(0);   // and don't wait for idle keep-alive connections either
 })();

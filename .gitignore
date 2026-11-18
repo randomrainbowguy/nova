@@ -13,3 +13,5 @@ node_modules/
 .dev.vars
 scripts/nova-data.sql
 tools/**/node_modules/
+
+tools/vendor/.cache/
