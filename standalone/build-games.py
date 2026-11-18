@@ -58,7 +58,9 @@ def main():
     remove = {r["id"] for r in decisions["remove"]}
     # Games kept in this repo (standalone/games/). "nova:" means "next to games.json"; the hub fills
     # in the address, so they load from the same commit as everything else.
-    local = {698: "games/2351.html"}
+    # 397 Geometry Dash: the original freebuisness 868.html web port, with its game files from
+    # randomrainbowguy/geometry-dash-wasm (a fork made before the upstream repo deleted them).
+    local = {698: "games/2351.html", 397: "games/geometry-dash.html"}
     # Games with a site lock that blacks them out on about:blank; the hub runs these walled off.
     walled = {698}
     # freebuisness is no longer used: games that have a copy in g4m3sss load from there, the rest are
