@@ -148,7 +148,7 @@
   //    with document.write, and makes WebAssembly.*Streaming fall back to the ArrayBuffer path.
   // rawTags is also copied into the shim (toString), so it must stay self-contained ES5.
   function rawTags(html) {
-    var RAW = /^https?:\/\/raw\.githubusercontent\.com\//i, OTHER = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
+    var RAW = /^(?:https?:)?\/\/(?:raw\.githubusercontent\.com|(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net)\//i, OTHER = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
     var J = function (v) { return JSON.stringify(v).replace(/</g, "\\u003c"); };
     var attr = function (a, n) { var m = new RegExp("(?:^|\\s)" + n + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))", "i").exec(a); return m ? { all: m[0], v: (m[1] != null ? m[1] : m[2] != null ? m[2] : m[3]).replace(/&amp;/g, "&") } : null; };
     // only tags that are real HTML, not text inside a <script> or a comment
@@ -174,10 +174,27 @@
     });
   }
 
-  var RAW_SHIM = "(" + function (rawTags) {
+  var rawShim = function (rawTags, lib) {
     if (window.__novaS) return;
     var RAW = /^https?:\/\/raw\.githubusercontent\.com\//i, d = document;
-    var abs = function (u) { try { return new URL(String(u), d.baseURI).href; } catch (e) { return ""; } };
+    // jsDelivr links built at run time: GitHub ones -> raw.githubusercontent.com, npm ones -> the hub's copies
+    var JSD = /^https?:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/(gh|npm)\/(.*)$/i;
+    var jsd = function (u) {
+      var m = JSD.exec(u); if (!m) return u;
+      if (m[1].toLowerCase() === "npm") return lib ? lib + m[2] : u;
+      var g = /^([^/@]+)\/([^/@]+)(?:@([^/]+))?\/(.*)$/.exec(m[2]);
+      return g ? "https://raw.githubusercontent.com/" + g[1] + "/" + g[2] + "/" + (g[3] || "HEAD") + "/" + g[4] : u;
+    };
+    var abs = function (u) { try { return jsd(new URL(String(u), d.baseURI).href); } catch (e) { return ""; } };
+    try {
+      var F = window.fetch;
+      if (F) window.fetch = function (a, b) {
+        try { if (typeof a === "string" || a instanceof URL) a = abs(a) || a; else if (a && a.url && abs(a.url) !== a.url) a = new Request(abs(a.url), a); } catch (e) {}
+        return F.call(this, a, b);
+      };
+      var XO = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function (m, u) { var a = Array.prototype.slice.call(arguments); try { a[1] = abs(u) || u; } catch (e) {} return XO.apply(this, a); };
+    } catch (e) {}
     var esc = function (v) { return String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); };
     var get = function (u) {
       try { var x = new XMLHttpRequest(); x.open("GET", u, false); x.send(); return x.status >= 200 && x.status < 300 ? x.responseText : null; }
@@ -250,7 +267,8 @@
       if (Wa.instantiateStreaming) Wa.instantiateStreaming = function (src, imports) { return buf(src).then(function (b) { return Wa.instantiate(b, imports); }); };
       if (Wa.compileStreaming) Wa.compileStreaming = function (src) { return buf(src).then(function (b) { return Wa.compile(b); }); };
     }
-  }.toString() + ")(" + rawTags.toString() + ");";
+  };
+  var rawShimFor = function (lib) { return "(" + rawShim.toString() + ")(" + rawTags.toString() + "," + JSON.stringify(lib || "") + ");"; };
 
   // Stand-in for the YouTube Playables SDK (ytgame.js). The real SDK waits for the YouTube host page to
   // answer (loadData() never resolves outside YouTube), so ~60 "youtube-playables" ports hang on a blank
@@ -448,7 +466,7 @@
       var dt = html.match(/^(?:\s|<!--[\s\S]*?-->)*<!doctype[^>]*>/i), p = dt ? dt[0].length : 0;
       var first = html.search(/<script[\s>]/i);
       if (first !== -1 && first < p) p = 0;   // a script before the doctype (copied-game stubs): go before it
-      html = html.slice(0, p) + "<script>" + RAW_SHIM + "<\/script>" + html.slice(p);
+      html = html.slice(0, p) + "<script>" + rawShimFor(window.NOVA_LIB).replace(/<\/(script)/gi, "<\\/$1") + "<\/script>" + html.slice(p);
     }
     return html;
   };

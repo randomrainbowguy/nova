@@ -8,15 +8,16 @@
   // repos) are turned into the same file on raw.githubusercontent.com.
   const ROOT = BASE.replace(/standalone\/$/, "");
   const toRaw = (s) => String(s || "")
-    .replace(/https:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/gh\/([^/@"'\s]+)\/([^/@"'\s]+)(?:@([^/"'\s]+))?\//g,
+    .replace(/(?:https?:)?\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/gh\/([^/@"'\s]+)\/([^/@"'\s]+)(?:@([^/"'\s]+))?\//g,
       (m, u, r, ref) => `https://raw.githubusercontent.com/${u}/${r}/${ref || "HEAD"}/`)
     // npm packages games use (Ruffle for Flash, Bootstrap) are copied into this repo: standalone/lib/npm/
-    .replace(/https:\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/npm\//g, BASE + "lib/npm/");
+    .replace(/(?:https?:)?\/\/(?:cdn|fastly|gcore|testingcf)\.jsdelivr\.net\/npm\//g, BASE + "lib/npm/");
   const localize = (s) => {
     s = toRaw(s);
     return ROOT ? s.replace(/https:\/\/raw\.githubusercontent\.com\/randomrainbowguy\/nova\/[^/"'\s]+\//g, ROOT) : s;
   };
-  window.NOVA_RAW_ONLY = true;   // tells game-sanitize.js to make raw.githubusercontent.com scripts/CSS/wasm work
+  window.NOVA_RAW_ONLY = true;
+  window.NOVA_LIB = BASE + "lib/npm/";   // jsDelivr npm links games build at run time go here   // tells game-sanitize.js to make raw.githubusercontent.com scripts/CSS/wasm work
   let GAMES = [];
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
